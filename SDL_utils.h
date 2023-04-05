@@ -1,8 +1,7 @@
-#ifndef SDL_UT_H_INCLUDED
-#define SDL_UT_H_INCLUDED
+#ifndef SDL_UTILS_H_INCLUDED
+#define SDL_UTILS_H_INCLUDED
 
-#include <iostream>
-#include <SDL.h>
+#include "CommonFuntions.h"
 
 void logSDLError(std::ostream& os, const std::string &msg, bool fatal = false);
 
@@ -14,4 +13,4 @@ void quitSDL(SDL_Window* window, SDL_Renderer* renderer);
 void waitUntilKeyPressed();
 
 
-#endif // SDL_UT_H_INCLUDED
+#endif // SDL_UTILS_H_INCLUDED
