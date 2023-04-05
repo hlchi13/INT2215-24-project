@@ -12,7 +12,9 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-pedantic" />
 					<Add option="-g" />
+					<Add directory="include" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -22,6 +24,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -31,10 +34,15 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="SDL_utils.cpp" />
-		<Unit filename="SDL_utils.h" />
+		<Unit filename="BaseObject.cpp" />
+		<Unit filename="BaseObject.h" />
+		<Unit filename="Cat.cpp" />
+		<Unit filename="Cat.h" />
+		<Unit filename="CommonFuntions.cpp" />
+		<Unit filename="CommonFuntions.h" />
+		<Unit filename="LTexture.cpp" />
+		<Unit filename="LTexture.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="texture.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
