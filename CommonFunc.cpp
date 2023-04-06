@@ -1,4 +1,4 @@
-#include "CommonFuntions.h"
+#include "CommonFunc.h"
 
 SDL_Texture* CommonFunc::LoadImage(std::string path, SDL_Renderer* ren)
 {

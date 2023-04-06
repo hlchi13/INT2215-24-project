@@ -39,6 +39,15 @@ void BaseObject::Render(SDL_Renderer* des, const SDL_Rect* clip)
 	SDL_RenderCopy(des, p_object, clip, &renderquad);
 
 }
+void BaseObject::ShowBackground(SDL_Renderer* des)
+{
+    rect_screen.x = 0;
+    rect_screen.y = 0;
+    rect_screen.w = SCREEN_WIDTH;
+    rect_screen.h = SCREEN_HEIGHT;
+
+    SDL_RenderCopy(des, p_object,NULL, &rect_screen);
+}
 void BaseObject::Free() {
     if (p_object != NULL)
     {

@@ -1,7 +1,7 @@
 #ifndef SDL_UTILS_H_INCLUDED
 #define SDL_UTILS_H_INCLUDED
 
-#include "CommonFuntions.h"
+#include "CommonFunc.h"
 
 void logSDLError(std::ostream& os, const std::string &msg, bool fatal = false);
 

@@ -1,5 +1,5 @@
-#ifndef COMMONFUNTIONS_H_INCLUDED
-#define COMMONFUNTIONS_H_INCLUDED
+#ifndef COMMONFUNC_H_INCLUDED
+#define COMMONFUNC_H_INCLUDED
 
 #include <SDL.h>
 #include <SDL_image.h>
@@ -17,7 +17,7 @@
 using namespace std;
 static SDL_Window* g_window = NULL;
 static SDL_Renderer* g_screen = NULL;
-//static SDL_Texture* g_background;
+static SDL_Texture* g_background1;
 static SDL_Texture* g_intro;
 static SDL_Texture* g_gameover;
 static SDL_Event g_event;
@@ -28,7 +28,7 @@ static SDL_Rect rect_screen;
 const int BKGROUND_WIDTH = 1920;
 const int BKGROUND_HEIGHT = 3240;
 
-const int SCREEN_WIDTH = 900;
+const int SCREEN_WIDTH = 600;
 const int SCREEN_HEIGHT = 400;
 const int SCREEN_BPP = 32;
  // 7 la so PIXEL screen bi day xuong .
@@ -48,4 +48,4 @@ namespace CommonFunc
 	void ApplySurface(SDL_Renderer *renderer, SDL_Texture *src, int x, int y, int w, int h);
 	void CleanUp();
 }
-#endif // COMMONFUNTIONS_H_INCLUDED
+#endif // COMMONFUNC_H_INCLUDED
