@@ -2,21 +2,15 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include "SDL_utils.h"
-<<<<<<< Updated upstream
 
 using namespace std;
 
-const int SCREEN_WIDTH = 1000;
-const int SCREEN_HEIGHT = 600;
-const char* WINDOW_TITLE = "Cat and Shark";
-=======
-#include "CommonFuntions.h"
+#include "CommonFunc.h"
 #include "BaseObject.h"
 #include "Cat.h"
 using namespace std;
 
 BaseObject g_background;
->>>>>>> Stashed changes
 
 void close()
 {
@@ -76,33 +70,28 @@ int main(int argc, char* argv[])
 	if (LoadBackGround() == false)
 		return -1;
 
-<<<<<<< Updated upstream
-    SDL_RenderPresent(renderer);
-    SDL_RenderClear(renderer);
-=======
-    bool is_quit = false;
+    bool is_quit = true;
 
     Cat cat_obj;
     cat_obj.SetRect(100,100);
-    cat_obj.LoadImg("cat.png", g_screen);
+    cat_obj.LoadImg("catsheet.png", g_screen);
     cat_obj.SetAnimation();
->>>>>>> Stashed changes
 
-    while(!is_quit) {
+    while(is_quit) {
 
         while(SDL_PollEvent(&g_event))
         {
             if (g_event.type == SDL_QUIT)
             {
-                is_quit = true;
+                is_quit = false;
 
             }
             cat_obj.HandleInputAction(g_event);
         }
-        SDL_SetRenderDrawColor(g_screen, RENDER_DRAW_COLOR, RENDER_DRAW_COLOR, RENDER_DRAW_COLOR, RENDER_DRAW_COLOR);
+
 		SDL_RenderClear(g_screen);
 
-		g_background.Render(g_screen, NULL);
+		g_background.ShowBackground(g_screen);
 
         cat_obj.ShowAnimation(g_screen);
         cat_obj.HandleMove();

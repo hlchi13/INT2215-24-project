@@ -94,6 +94,7 @@ void Cat::HandleInputAction(SDL_Event event)
 
 void Cat::HandleMove()
 {
+
     rect_.x += x_val;
 
     if (rect_.x < 0||rect_.x + CAT_WIDTH >= SCREEN_WIDTH - 60)
@@ -167,7 +168,7 @@ void Cat::SetAnimation()
 void Cat::ShowAnimation(SDL_Renderer* des)
 {
     if (status_ == WALK_RIGHT) {
-        LoadImg("cat.png", des);
+        LoadImg("catsheet.png", des);
     }
 	if (input_type_.left_ == 1 || input_type_.right_ == 1)
 	{
