@@ -73,7 +73,7 @@ int main(int argc, char* argv[])
     bool is_quit = true;
 
     Cat cat_obj;
-    cat_obj.SetRect(100,100);
+    cat_obj.SetRect(10,10);
     cat_obj.LoadImg("catsheet.png", g_screen);
     cat_obj.SetAnimation();
 

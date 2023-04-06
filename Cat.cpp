@@ -15,7 +15,7 @@ Cat::Cat()
 	input_type_.down_ = 0;
 	input_type_.up_ = 0;
 	input_type_.down_ = 0;
-	status_ = -1;
+	count_injured_times = 0;
 }
 
 Cat::~Cat()
@@ -50,22 +50,20 @@ void Cat::HandleInputAction(SDL_Event event)
         switch(event.key.keysym.sym) {
             case SDLK_UP:
                 input_type_.up_ = 1;
-                y_val -= height_frame_/4;
+                y_val -= 10;
                 break;
             case SDLK_DOWN:
                 input_type_.down_ = 1;
-                y_val += height_frame_/4;
+                y_val += 10;
                 break;
             case SDLK_LEFT:
-                status_ = WALK_LEFT;
                 input_type_.left_ = 1;
-                x_val -= 0.8;
+                x_val -= 10;
                 break;
 
             case SDLK_RIGHT:
-                status_ = WALK_RIGHT;
                 input_type_.right_ = 1;
-                x_val +=0.8;
+                x_val += 10;
                 break;
             default:
                 break;
@@ -74,19 +72,18 @@ void Cat::HandleInputAction(SDL_Event event)
     else if(event.type == SDL_KEYUP) {
         switch(event.key.keysym.sym) {
             case SDLK_UP:
-                y_val += height_frame_/4;
+
                 break;
             case SDLK_DOWN:
-                y_val -= height_frame_/4;
+
                 break;
             case SDLK_LEFT:
-                input_type_.left_= 0;
-                x_val += width_frame_/4;
+
                 break;
 
             case SDLK_RIGHT:
-                input_type_.right_ = 0;
-                x_val -= width_frame_/4;
+
+
                 break;
         }
     }
@@ -94,18 +91,14 @@ void Cat::HandleInputAction(SDL_Event event)
 
 void Cat::HandleMove()
 {
-
-    rect_.x += x_val;
-
-    if (rect_.x < 0||rect_.x + CAT_WIDTH >= SCREEN_WIDTH - 60)
-    {
-        rect_.x -= x_val;//gan lai vi tri ban dau
-    }
-    rect_.y += y_val;
-    if (rect_.y < 5 || rect_.y + CAT_HEIGHT >= SCREEN_HEIGHT - 5)
-    {
-        rect_.y -= y_val;
-    }
+    rect_.x = x_val;
+    rect_.y = y_val;
+    if (rect_.x < 0) rect_.x = 0;
+    if (rect_.y < 0) rect_.y = 0;
+    if (rect_.x + 64 > SCREEN_WIDTH)
+        rect_.x = SCREEN_WIDTH - 64;
+    if (rect_.y + 48 > SCREEN_HEIGHT)
+        rect_.y = SCREEN_HEIGHT - 48;
 }
 
 void Cat::SetAnimation()
@@ -167,21 +160,12 @@ void Cat::SetAnimation()
 
 void Cat::ShowAnimation(SDL_Renderer* des)
 {
-    if (status_ == WALK_RIGHT) {
-        LoadImg("catsheet.png", des);
-    }
-	if (input_type_.left_ == 1 || input_type_.right_ == 1)
-	{
-		frame_++;
-	}
-	else
-	{
-		frame_ = 0;
-	}
-	if (frame_ >= 10)
-	{
-		frame_ = 0;
-	}
+
+    LoadImg("catsheet.png", des);
+
+	frame_ ++;
+    if (frame_>=10)
+        frame_ = 0;
 
     SDL_Rect* current_clip = &frame_forward[frame_];// trang thai hien tai o frame thu frame_
 

@@ -11,11 +11,6 @@ class Cat : public BaseObject
 public:
     Cat();
     ~Cat();
-    enum WalkType
-	{
-		WALK_RIGHT = 0,
-		WALK_LEFT = 1,
-	};
     bool LoadImg(std::string path, SDL_Renderer* render);
     void HandleInputAction(SDL_Event event);
     void HandleMove();
@@ -43,7 +38,7 @@ private:
     Input input_type_;
 
     int frame_ = 0;
-    int status_;
+    int count_injured_times;
 
 };
 
