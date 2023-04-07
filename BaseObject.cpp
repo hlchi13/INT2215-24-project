@@ -60,7 +60,5 @@ void BaseObject::Free() {
 
 void BaseObject::Show(SDL_Renderer* src)
 {
-    if (p_object!=NULL)
-        CommonFunc::ApplySurface(src, p_object, rect_.x, rect_.y, SCREEN_WIDTH, SCREEN_HEIGHT);
-
+    BaseObject::Render(src, &rect_);
 }
