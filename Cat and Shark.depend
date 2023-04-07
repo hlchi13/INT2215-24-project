@@ -19,7 +19,7 @@
 
 1678458823 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\project-int2215-24\texture.cpp
 
-1680790285 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\main.cpp
+1680835587 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\main.cpp
 	<iostream>
 	<SDL.h>
 	<SDL_image.h>
@@ -27,6 +27,7 @@
 	"CommonFunc.h"
 	"BaseObject.h"
 	"Cat.h"
+	"Shark.h"
 
 1680764557 c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\sdl_utils.h
 	"CommonFunc.h"
@@ -37,7 +38,7 @@
 
 1678627201 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\texture.cpp
 
-1680791364 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\cat.cpp
+1680833459 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\cat.cpp
 	"Cat.h"
 
 1680700300 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\commonfuntions.cpp
@@ -75,10 +76,10 @@
 1680764459 c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\baseobject.h
 	"CommonFunc.h"
 
-1680789553 c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\cat.h
+1680833449 c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\cat.h
 	"BaseObject.h"
 
-1680788969 c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\commonfunc.h
+1680833449 c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\commonfunc.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_mixer.h>
@@ -94,10 +95,10 @@
 1680764482 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\commonfunc.cpp
 	"CommonFunc.h"
 
-1680766053 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\shark.cpp
+1680869087 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\shark.cpp
 	"Shark.h"
 
-1680788570 c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\shark.h
+1680832241 c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\shark.h
 	"CommonFunc.h"
 	"BaseObject.h"
 

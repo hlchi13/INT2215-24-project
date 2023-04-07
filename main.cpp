@@ -8,6 +8,7 @@ using namespace std;
 #include "CommonFunc.h"
 #include "BaseObject.h"
 #include "Cat.h"
+#include "Shark.h"
 using namespace std;
 
 BaseObject g_background;
@@ -77,6 +78,11 @@ int main(int argc, char* argv[])
     cat_obj.LoadImg("catsheet.png", g_screen);
     cat_obj.SetAnimation();
 
+    Shark *shark_obj = new Shark();
+
+    shark_obj->LoadImg("sharksheet.png", g_screen);
+    shark_obj->SetAnimation();
+
     while(is_quit) {
 
         while(SDL_PollEvent(&g_event))
@@ -90,11 +96,14 @@ int main(int argc, char* argv[])
         }
 
 		SDL_RenderClear(g_screen);
-
-		g_background.ShowBackground(g_screen);
+        g_background.ShowBackground(g_screen);
 
         cat_obj.ShowAnimation(g_screen);
         cat_obj.HandleMove();
+
+        shark_obj->ShowSharkAnimation(g_screen);
+        shark_obj->HandleMove();
+
         SDL_RenderPresent(g_screen);
     }
 

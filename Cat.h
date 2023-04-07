@@ -22,20 +22,16 @@ private:
     float x_val; // khoang cach giua 2 vi tri
     float y_val;
 
-    int x_pos; // position
-    int y_pos;
-
     SDL_Texture* fly_up;
     SDL_Texture* fly_down;
     SDL_Texture* fly_forward;
     SDL_Texture* fly_backward;
 
-    SDL_Rect frame_forward[10];
+    SDL_Rect frame_idle[10];
 
 
     int width_frame_;
     int height_frame_;
-    Input input_type_;
 
     int frame_ = 0;
     int count_injured_times;
