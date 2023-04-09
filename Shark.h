@@ -4,8 +4,8 @@
 #include "CommonFunc.h"
 #include "BaseObject.h"
 
-#define SHARK_WIDTH  64
-#define SHARK_HEIGHT 64
+#define F_SHARK_WIDTH  64
+#define F_SHARK_HEIGHT 64
 class Shark : public BaseObject
 {
 public:
@@ -14,12 +14,12 @@ public:
     void SetAnimation();
     void ShowSharkAnimation (SDL_Renderer* des);
     void HandleMove();
+    void ShowShark(SDL_Renderer* des);
 private:
     SDL_Rect frame_shark[7];
     int frame_;
 
-    int x_val;
-    int y_val;
+    float x_val;
 
 };
 

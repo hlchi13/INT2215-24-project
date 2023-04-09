@@ -22,17 +22,16 @@ static SDL_Event g_event;
 static SDL_Rect rect_background;
 static SDL_Rect rect_screen;
 
-const int BKGROUND_WIDTH = 1920;
-const int BKGROUND_HEIGHT = 3240;
+static Mix_Music* g_music = NULL;
+static Mix_Chunk* hurt = NULL;
+static Mix_Chunk* intro = NULL;
+static Mix_Chunk* g_over = NULL;
 
 const int SCREEN_WIDTH = 900;
 const int SCREEN_HEIGHT = 600;
 const int SCREEN_BPP = 32;
- // 7 la so PIXEL screen bi day xuong .
-const int PIXEL = 7 ;
-const int PIXEL_LIM = (2*BKGROUND_HEIGHT/3)%PIXEL ;
-const int PIXEL_START = BKGROUND_HEIGHT/3 + (2*BKGROUND_HEIGHT/3)%PIXEL - PIXEL ;
 const int RENDER_DRAW_COLOR = 0xff;
+const int FRAME_PER_SECOND = 25;
 
 namespace CommonFunc
 {

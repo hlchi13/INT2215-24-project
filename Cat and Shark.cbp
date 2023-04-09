@@ -40,6 +40,7 @@
 		<Unit filename="Cat.h" />
 		<Unit filename="CommonFunc.cpp" />
 		<Unit filename="CommonFunc.h" />
+		<Unit filename="Game.h" />
 		<Unit filename="LTexture.cpp" />
 		<Unit filename="LTexture.h" />
 		<Unit filename="Shark.cpp" />
