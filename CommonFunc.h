@@ -33,7 +33,7 @@ const int RENDER_DRAW_COLOR = 0xff;
 const int FRAME_PER_SECOND = 25;
 const int SHARK_NUM = 6;
 
-const MAX_INJURED_TIMES = 3;
+const int MAX_INJURED_TIMES = 3;
 
 const int AVOID_SHARK_SCORE = 100;
 const int HURT_SCORE = - 200;
