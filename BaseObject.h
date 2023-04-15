@@ -12,7 +12,7 @@ public:
     void SetRect (const int& x, const int& y) {rect_.x = x; rect_.y = y;};
     void Render(SDL_Renderer* des, const SDL_Rect* clip);
     SDL_Rect GetRect() { return rect_;	}
-	SDL_Texture * GetObject() {  return p_object; }
+	SDL_Texture* GetObject() {  return p_object; }
 	void ShowBackground(SDL_Renderer* des);
 	void Show(SDL_Renderer* src);
 	void Free();

@@ -4,6 +4,8 @@
 #include "BaseObject.h"
 
 #define MAX_HURT 3
+#define CAT_WIDTH 96
+#define CAT_HEIGHT 72
 class Cat : public BaseObject
 {
 public:
@@ -11,32 +13,25 @@ public:
     ~Cat();
     void HandleInputAction(SDL_Event event);
     void HandleMove();
-    SDL_Rect GetRectFrame();
     void SetAnimation();
     void ShowAnimation(SDL_Renderer* des);
-    void ShowHurtAnimation(SDL_Renderer* des);
-    void DoPlayer();
+    void ShowInjuredAnimation(SDL_Renderer* des);
+    bool GetShowInjured() {return is_shown_injured;};
+    void SetShownInjured(bool x) {is_shown_injured = x;};
 private:
     float x_val; // khoang cach giua 2 vi tri
     float y_val;
 
-    SDL_Texture* fly_up;
-    SDL_Texture* fly_down;
-    SDL_Texture* fly_forward;
-    SDL_Texture* fly_backward;
-
     SDL_Rect frame_idle[10];
-    SDL_Rect frame_injured[6];
-
-    int width_frame_;
-    int height_frame_;
+    SDL_Rect frame_injured[10];
 
     int cat_w;
     int cat_h;
 
     int frame_ = 0;
-    int hurt_ = 0;
-    int count_hurt_times;
+    int frame_injured_ = 0;
+    int count_injured_times = 0;
+    bool is_shown_injured = false;
 
 };
 

@@ -3,6 +3,7 @@
 
 #include "CommonFunc.h"
 #include "BaseObject.h"
+#include "LTexture.h"
 #include "Cat.h"
 #include "Shark.h"
 
@@ -53,11 +54,35 @@ bool InitData()
 
 bool LoadBackGround()
 {
-	bool ret = g_background.LoadImg("background.png", g_screen);
+	bool ret = g_background.LoadImg("backgroundd.png", g_screen);
 	if (ret == false)
 		return false;
 	return true;
 }
 
+void CreateAndInitAndPutThreatInList(vector<Shark*> &ThreatsList)
+{
+    srand(time(NULL));
+    for (int i = 0; i < SHARK_NUM; i++) {
+        ThreatsList.push_back(new Shark);
+        //ThreatsList[ThreatsList.size()-1]->LoadImg("sharksheet.png",g_screen);
+        ThreatsList[ThreatsList.size()-1]->SetAnimation();
+        int shark_y = rand() % SCREEN_HEIGHT;
+        ThreatsList[ThreatsList.size()-1]->SetRect(SCREEN_WIDTH *(ThreatsList.size()+1), shark_y);
+        }
+}
 
+void ShowThreatsList(vector<Shark*> ThreatsList, SDL_Rect cat_rect)
+{
+    for(int i=0;i<SHARK_NUM;i++)
+    {
+        ThreatsList[i]-> set_x_val(10);
+        ThreatsList[i]->ShowSharkAnimation(g_screen);
+        if (CommonFunc::CheckCollision(cat_rect, ThreatsList[i]->GetRect())) {
+            cout << "YES";
+        }
+        ThreatsList[i]->HandleMove();
+        SDL_Delay(10);
+    }
+}
 #endif // GAME_H_INCLUDED

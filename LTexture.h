@@ -9,6 +9,9 @@ public:
     LTexture(SDL_Renderer* gRenderer, SDL_Rect rect_);
     ~LTexture();
     bool loadFile (std::string path);
+    void free();
+    void setColor( Uint8 red, Uint8 green, Uint8 blue );
+    void setAlpha( Uint8 alpha );
     void renderCopy ();
     int getWidth() {return width;};
     int getHeight() {return height;};

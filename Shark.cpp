@@ -4,10 +4,13 @@ Shark::Shark()
 {
     frame_ = 0;
 
-    rect_.x = SCREEN_WIDTH + 10;
-    rect_.y = rand()% 500;
-    rect_.w = F_SHARK_WIDTH;
-    rect_.h = F_SHARK_HEIGHT;
+    rect_.x = 0;
+    rect_.y = SCREEN_HEIGHT/2;
+
+    x_val = 0;
+    y_val = 0;
+    shark_w = 2.5*F_SHARK_WIDTH;
+    shark_h = 2.5*F_SHARK_HEIGHT;
 
 }
 
@@ -61,20 +64,25 @@ void Shark::ShowSharkAnimation(SDL_Renderer* des)
     if (frame_>=7) frame_= 0;
 
     SDL_Rect* current_clip = &frame_shark[frame_];
-    SDL_Rect shark_rect = { rect_.x, rect_.y, F_SHARK_WIDTH*2,F_SHARK_WIDTH*2 }; // o toa do nao voi chieu dai chieu rong
+    SDL_Rect shark_rect = { rect_.x, rect_.y, shark_w,shark_h }; // o toa do nao voi chieu dai chieu rong
     SDL_RenderCopy(des, p_object, current_clip, &shark_rect);
-    SDL_Delay(100);
+    SDL_Delay(50/7);
 }
 
 void Shark::HandleMove()
 {
-    rect_.x -= 10;
-    if (rect_.x < - 2*F_SHARK_WIDTH) rect_.x = SCREEN_WIDTH;
+    rect_.x -= x_val;
+    rect_.y += y_val;
+    if (rect_.x < -shark_w)
+    {
+        rect_.x = SCREEN_WIDTH + x_val*2;
+        rect_.y = rand() % (SCREEN_HEIGHT -shark_h );
+    }
 }
 
 void Shark::ShowShark(SDL_Renderer* des)
 {
     LoadImg("shark1.png", des);
-    SDL_Rect shark_rect = { rect_.x, rect_.y, F_SHARK_WIDTH*2,F_SHARK_WIDTH*2 }; // o toa do nao voi chieu dai chieu rong
+    SDL_Rect shark_rect = { rect_.x, rect_.y, shark_w, shark_h }; // o toa do nao voi chieu dai chieu rong
     SDL_RenderCopy(des, p_object, NULL, &shark_rect);
 }

@@ -14,12 +14,21 @@ int main(int argc, char* argv[])
 
     bool is_quit = true;
 
+    srand(time(NULL));
+    // main player
     Cat cat_obj;
-    cat_obj.SetRect(0, SCREEN_HEIGHT/2 - 64/2);
-    cat_obj.SetAnimation();
+    cat_obj.LoadImg("cat_idle.png", g_screen);
 
-    Shark shark_obj;
-    shark_obj.SetAnimation();
+
+    vector<Shark*> ThreatsList;
+    srand(time(NULL));
+    for (int i = 0; i < SHARK_NUM; i++) {
+        ThreatsList.push_back(new Shark);
+        //ThreatsList[ThreatsList.size()-1]->LoadImg("sharksheet.png",g_screen);
+        int shark_y = rand() % 400;
+        ThreatsList[i]->SetRect(SCREEN_WIDTH + 400*i, shark_y);
+        ThreatsList[i]->SetAnimation();
+        }
 
     while(is_quit) {
 
@@ -33,19 +42,28 @@ int main(int argc, char* argv[])
             }
             cat_obj.HandleInputAction(g_event);
         }
-
+        SDL_RenderPresent(g_screen);
 		SDL_RenderClear(g_screen);
         g_background.ShowBackground(g_screen);
-
-        shark_obj.ShowSharkAnimation(g_screen);
-        shark_obj.HandleMove();
 
         cat_obj.ShowAnimation(g_screen);
         cat_obj.HandleMove();
 
-        SDL_RenderPresent(g_screen);
-    }
+        for(int i=0;i < SHARK_NUM;i++)
+        {
 
+            ThreatsList[i]-> set_x_val(10);
+            ThreatsList[i]->ShowSharkAnimation(g_screen);
+            ThreatsList[i]->HandleMove();
+
+            bool check_coll = CommonFunc::CheckCollision(cat_obj.GetRect(), ThreatsList[i]->GetRect());
+            if (check_coll) {
+
+            }
+
+        }
+    }
+    //delete [] shark_obj;
     close();
     return 0;
 }
