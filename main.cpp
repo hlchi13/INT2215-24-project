@@ -58,8 +58,12 @@ int main(int argc, char* argv[])
 
             bool check_coll = CommonFunc::CheckCollision(cat_obj.GetRect(), ThreatsList[i]->GetRect());
             if (check_coll) {
+                cat_obj.SetShownInjured(true);
+            } else cat_obj.SetShownInjured(false);
 
-            }
+            if(cat_obj.GetShowInjured()== false) continue;
+            else cat_obj.ShowInjuredAnimation(g_screen);
+
 
         }
     }

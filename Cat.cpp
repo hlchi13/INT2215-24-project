@@ -8,9 +8,11 @@ Cat::Cat()
 
     cat_w = 64*1.5;
     cat_h = 48*1.5;
+    rect_.w = CAT_WIDTH;
+    rect_.h = CAT_HEIGHT;
 	count_injured_times = 0;
 
-	frame_idle[0].x = 0;
+        frame_idle[0].x = 0;
 		frame_idle[0].y = 0;
 		frame_idle[0].w = 64;
 		frame_idle[0].h = 48;
@@ -167,12 +169,14 @@ void Cat::ShowInjuredAnimation(SDL_Renderer* des)
     LoadImg("cat_hurt1.png", des);
 
 	frame_injured_ ++;
-    if (frame_injured_>=10)
-        frame_injured_ = 0;
 
     SDL_Rect cat_rect = { rect_.x, rect_.y, cat_w,cat_h };
     SDL_RenderCopy(des, p_object, &frame_injured[frame_injured_], &cat_rect);
     count_injured_times++;
+    if (frame_injured_>=10) {
+        frame_injured_ = 0;
+        return ;
+    }
     if (count_injured_times > MAX_INJURED_TIMES) {
         count_injured_times = 0;
         is_shown_injured = false;

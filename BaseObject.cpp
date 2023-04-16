@@ -21,10 +21,9 @@ bool BaseObject::LoadImg(string path, SDL_Renderer* screen){
 	if (load_surface != NULL)
 	{
 		new_texture = SDL_CreateTextureFromSurface(screen, load_surface);
-		if (new_texture != NULL)
+		if (new_texture == NULL)
 		{
-			rect_.w = load_surface->w;
-			rect_.h = load_surface->h;
+			return false;
 		}
 		SDL_FreeSurface(load_surface);
 	}
