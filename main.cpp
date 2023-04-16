@@ -34,11 +34,20 @@ int main(int argc, char* argv[])
 
         while(SDL_PollEvent(&g_event))
         {
-            if (g_event.type == SDL_QUIT || g_event.key.keysym.sym == SDLK_ESCAPE)
-            {
-                is_quit = false;
-                break;
-
+            switch (g_event.type) {
+                case SDL_QUIT:
+                    is_quit = false;
+                    break;
+                case SDL_KEYDOWN:
+                    if (g_event.key.keysym.sym == SDLK_ESCAPE) {
+                        is_quit = false;
+                    } else if (g_event.key.keysym.sym == SDLK_SPACE)
+                    {
+                        if (!Mix_PlayingMusic()) {
+                            Mix_PlayMusic(m_background, 0);
+                        }
+                    }
+                    break;
             }
             cat_obj.HandleInputAction(g_event);
         }
@@ -58,13 +67,8 @@ int main(int argc, char* argv[])
 
             bool check_coll = CommonFunc::CheckCollision(cat_obj.GetRect(), ThreatsList[i]->GetRect());
             if (check_coll) {
-                cat_obj.SetShownInjured(true);
-            } else cat_obj.SetShownInjured(false);
-
-            if(cat_obj.GetShowInjured()== false) continue;
-            else cat_obj.ShowInjuredAnimation(g_screen);
-
-
+                cat_obj.ShowInjuredAnimation(g_screen);
+            } else break;
         }
     }
     //delete [] shark_obj;

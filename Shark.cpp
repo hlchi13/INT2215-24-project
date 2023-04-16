@@ -73,8 +73,9 @@ void Shark::HandleMove()
 {
     rect_.x -= x_val;
     rect_.y += y_val;
+
     rect_.w = shark_w;
-    rect_.h = shark_w;
+    rect_.h = shark_h;
     if (rect_.x < -shark_w)
     {
         rect_.x = SCREEN_WIDTH + x_val*2;

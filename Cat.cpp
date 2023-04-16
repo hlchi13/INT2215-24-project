@@ -6,8 +6,8 @@ Cat::Cat()
 	x_val = 0;
 	y_val = 0; // vi tri ban dau cua cat
 
-    cat_w = 64*1.5;
-    cat_h = 48*1.5;
+    cat_w = CAT_WIDTH;
+    cat_h = CAT_HEIGHT;
     rect_.w = CAT_WIDTH;
     rect_.h = CAT_HEIGHT;
 	count_injured_times = 0;
@@ -93,7 +93,7 @@ Cat::Cat()
 		frame_injured[5].w = 64;
 		frame_injured[5].h = 48;
 
-		frame_injured[6].x = 6*64;
+		/**frame_injured[6].x = 6*64;
 		frame_injured[6].y = 0;
 		frame_injured[6].w = 64;
 		frame_injured[6].h = 48;
@@ -111,7 +111,7 @@ Cat::Cat()
 		frame_injured[9].x = 9*64;
 		frame_injured[9].y = 0;
 		frame_injured[9].w = 64;
-		frame_injured[9].h = 48;
+		frame_injured[9].h = 48; */
 }
 Cat::~Cat()
 {
@@ -166,14 +166,14 @@ void Cat::ShowAnimation(SDL_Renderer* des)
 
 void Cat::ShowInjuredAnimation(SDL_Renderer* des)
 {
-    LoadImg("cat_hurt1.png", des);
+    LoadImg("cat_hurt.png", des);
 
 	frame_injured_ ++;
 
     SDL_Rect cat_rect = { rect_.x, rect_.y, cat_w,cat_h };
     SDL_RenderCopy(des, p_object, &frame_injured[frame_injured_], &cat_rect);
     count_injured_times++;
-    if (frame_injured_>=10) {
+    if (frame_injured_>=6) {
         frame_injured_ = 0;
         return ;
     }

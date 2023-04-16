@@ -21,10 +21,10 @@ static SDL_Event g_event;
 static SDL_Rect rect_background;
 static SDL_Rect rect_screen;
 
-static Mix_Music* g_music = NULL;
-static Mix_Chunk* hurt = NULL;
-static Mix_Chunk* intro = NULL;
-static Mix_Chunk* g_over = NULL;
+static Mix_Music* m_background = NULL;
+static Mix_Music* game_intro = NULL;
+static Mix_Chunk* injured = NULL;
+static Mix_Chunk* game_over = NULL;
 
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 500;
@@ -45,7 +45,6 @@ const int SPEED_THREAT1 = 10;
 const int SPEED_THREAT2 = 15;
 const int SPEED_THREAT3 = 20;
 const int SPEED_THREAT4 = 30;
-
 
 
 namespace CommonFunc

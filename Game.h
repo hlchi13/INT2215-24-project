@@ -27,7 +27,7 @@ void close()
 bool InitData()
 {
 	bool success = true;
-	int ret = SDL_Init(SDL_INIT_VIDEO);
+	int ret = SDL_Init(SDL_INIT_EVERYTHING);
 	if (ret < 0) return false;
 
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1");
@@ -44,9 +44,17 @@ bool InitData()
 		else
 		{
 			SDL_SetRenderDrawColor(g_screen, RENDER_DRAW_COLOR, RENDER_DRAW_COLOR, RENDER_DRAW_COLOR, RENDER_DRAW_COLOR);
+			SDL_RenderSetLogicalSize(g_screen, SCREEN_WIDTH, SCREEN_HEIGHT);
 			int imgFlags = IMG_INIT_PNG;
 			if (!(IMG_Init(imgFlags) && imgFlags))
 				success = false;
+            if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048)== -1)
+            {
+                Mix_GetError();
+                success = false;
+            }
+            m_background = Mix_LoadMUS("game_background.mp3");
+            game_intro = Mix_LoadMUS("game_intro.mp3");
 		}
 	}
 	return success;
