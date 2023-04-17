@@ -29,7 +29,7 @@ private:
     int cat_h;
 
     int frame_ = 0;
-    int frame_injured_ = 0;
+    int frame_injured_;
     int count_injured_times = 0;
     bool is_shown_injured = false;
 

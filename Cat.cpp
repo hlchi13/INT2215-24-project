@@ -4,10 +4,13 @@ Cat::Cat()
 {
 	frame_ = 0;
 	x_val = 0;
-	y_val = 0; // vi tri ban dau cua cat
+	y_val = SCREEN_HEIGHT/2 - CAT_HEIGHT/2; // vi tri ban dau cua cat
 
     cat_w = CAT_WIDTH;
     cat_h = CAT_HEIGHT;
+
+    rect_.x = 0;
+    rect_.y = SCREEN_HEIGHT/2 - CAT_HEIGHT/2;
     rect_.w = CAT_WIDTH;
     rect_.h = CAT_HEIGHT;
 	count_injured_times = 0;
@@ -93,7 +96,7 @@ Cat::Cat()
 		frame_injured[5].w = 64;
 		frame_injured[5].h = 48;
 
-		/**frame_injured[6].x = 6*64;
+		frame_injured[6].x = 6*64;
 		frame_injured[6].y = 0;
 		frame_injured[6].w = 64;
 		frame_injured[6].h = 48;
@@ -111,7 +114,7 @@ Cat::Cat()
 		frame_injured[9].x = 9*64;
 		frame_injured[9].y = 0;
 		frame_injured[9].w = 64;
-		frame_injured[9].h = 48; */
+		frame_injured[9].h = 48;
 }
 Cat::~Cat()
 {
@@ -154,6 +157,7 @@ void Cat::HandleMove()
 
 void Cat::ShowAnimation(SDL_Renderer* des)
 {
+    LoadImg("img_cat_idle.png", des);
 	frame_ ++;
     if (frame_>=10)
         frame_ = 0;
@@ -161,25 +165,25 @@ void Cat::ShowAnimation(SDL_Renderer* des)
     SDL_Rect* current_clip = &frame_idle[frame_];// trang thai hien tai o frame thu frame
     SDL_Rect cat_rect = { rect_.x, rect_.y, cat_w,cat_h }; // o toa do nao voi chieu dai chieu rong
     SDL_RenderCopy(des, p_object, current_clip, &cat_rect);
-    SDL_Delay(50/10);
+    frame_injured_ = frame_;
 }
 
 void Cat::ShowInjuredAnimation(SDL_Renderer* des)
 {
-    LoadImg("cat_hurt.png", des);
+    if (LoadImg("cat_hurt1.png", des)){
 
-	frame_injured_ ++;
-
+    frame_injured_++;
     SDL_Rect cat_rect = { rect_.x, rect_.y, cat_w,cat_h };
     SDL_RenderCopy(des, p_object, &frame_injured[frame_injured_], &cat_rect);
     count_injured_times++;
-    if (frame_injured_>=6) {
-        frame_injured_ = 0;
+    if (frame_injured_>=10) {
+        ShowAnimation(des);
         return ;
     }
     if (count_injured_times > MAX_INJURED_TIMES) {
         count_injured_times = 0;
         is_shown_injured = false;
+    }
     }
 }
 

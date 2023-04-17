@@ -6,7 +6,7 @@
 #include "LTexture.h"
 #include "Cat.h"
 #include "Shark.h"
-
+#include "Bonus.h"
 BaseObject g_background;
 
 void close()
@@ -43,14 +43,12 @@ bool InitData()
 		if (g_screen == NULL) success = false;
 		else
 		{
-			SDL_SetRenderDrawColor(g_screen, RENDER_DRAW_COLOR, RENDER_DRAW_COLOR, RENDER_DRAW_COLOR, RENDER_DRAW_COLOR);
 			SDL_RenderSetLogicalSize(g_screen, SCREEN_WIDTH, SCREEN_HEIGHT);
 			int imgFlags = IMG_INIT_PNG;
 			if (!(IMG_Init(imgFlags) && imgFlags))
 				success = false;
             if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048)== -1)
             {
-                Mix_GetError();
                 success = false;
             }
             m_background = Mix_LoadMUS("game_background.mp3");
@@ -62,13 +60,13 @@ bool InitData()
 
 bool LoadBackGround()
 {
-	bool ret = g_background.LoadImg("backgroundd.png", g_screen);
+	bool ret = g_background.LoadImg("background.png", g_screen);
 	if (ret == false)
 		return false;
 	return true;
 }
 
-void CreateAndInitAndPutThreatInList(vector<Shark*> &ThreatsList)
+/**void CreateAndInitAndPutThreatInList(vector<Shark*> &ThreatsList)
 {
     srand(time(NULL));
     for (int i = 0; i < SHARK_NUM; i++) {
@@ -92,5 +90,5 @@ void ShowThreatsList(vector<Shark*> ThreatsList, SDL_Rect cat_rect)
         ThreatsList[i]->HandleMove();
         SDL_Delay(10);
     }
-}
+}*/
 #endif // GAME_H_INCLUDED

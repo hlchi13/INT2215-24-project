@@ -3,7 +3,7 @@
 #include"Game.h"
 using namespace std;
 
-
+int score = 0;
 int main(int argc, char* argv[])
 {
 
@@ -17,13 +17,14 @@ int main(int argc, char* argv[])
     srand(time(NULL));
     // main player
     Cat cat_obj;
-    cat_obj.LoadImg("cat_idle.png", g_screen);
+    Cat cat_injured;
 
+    Bonus fish;
 
     vector<Shark*> ThreatsList;
     srand(time(NULL));
     for (int i = 0; i < SHARK_NUM; i++) {
-        ThreatsList.push_back(new Shark);
+        ThreatsList.push_back(new Shark());
         //ThreatsList[ThreatsList.size()-1]->LoadImg("sharksheet.png",g_screen);
         int shark_y = rand() % 400;
         ThreatsList[i]->SetRect(SCREEN_WIDTH + 400*i, shark_y);
@@ -51,12 +52,14 @@ int main(int argc, char* argv[])
             }
             cat_obj.HandleInputAction(g_event);
         }
-        SDL_RenderPresent(g_screen);
 		SDL_RenderClear(g_screen);
         g_background.ShowBackground(g_screen);
 
         cat_obj.ShowAnimation(g_screen);
         cat_obj.HandleMove();
+
+        fish.ShowBonus(g_screen);
+        fish.HandleMove();
 
         for(int i=0;i < SHARK_NUM;i++)
         {
@@ -67,11 +70,19 @@ int main(int argc, char* argv[])
 
             bool check_coll = CommonFunc::CheckCollision(cat_obj.GetRect(), ThreatsList[i]->GetRect());
             if (check_coll) {
-                cat_obj.ShowInjuredAnimation(g_screen);
-            } else break;
+                cat_injured.SetRect(cat_obj.GetRect().x, cat_obj.GetRect().y);
+                cat_injured.SetShownInjured(true);
+            } else
+            {
+                cat_injured.SetShownInjured(false);
+                }
+            if (cat_injured.GetShowInjured()== true)
+            {
+                cat_injured.ShowInjuredAnimation(g_screen);
+            }
         }
+        SDL_RenderPresent(g_screen);
     }
-    //delete [] shark_obj;
     close();
     return 0;
 }

@@ -36,6 +36,7 @@
 		</Compiler>
 		<Unit filename="BaseObject.cpp" />
 		<Unit filename="BaseObject.h" />
+		<Unit filename="Bonus.h" />
 		<Unit filename="Cat.cpp" />
 		<Unit filename="Cat.h" />
 		<Unit filename="CommonFunc.cpp" />

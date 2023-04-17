@@ -5,7 +5,7 @@
 #include "BaseObject.h"
 
 #define F_SHARK_WIDTH  64
-#define F_SHARK_HEIGHT 64
+#define F_SHARK_HEIGHT 37
 
 class Shark : public BaseObject
 {

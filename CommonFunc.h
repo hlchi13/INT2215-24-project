@@ -28,15 +28,12 @@ static Mix_Chunk* game_over = NULL;
 
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 500;
-const int SCREEN_BPP = 32;
-const int RENDER_DRAW_COLOR = 0xff;
-const int FRAME_PER_SECOND = 25;
 const int SHARK_NUM = 6;
 
-const int MAX_INJURED_TIMES = 3;
+const int MAX_INJURED_TIMES = 5;
 
-const int AVOID_SHARK_SCORE = 100;
-const int HURT_SCORE = - 200;
+const int AVOID_SHARK_SCORE = 1;
+const int INJURED_SCORE = - 200;
 const int GET_BONUS_YELLOW_SCORE = 20;
 const int GET_BONUS_RED_SCORE = 40;
 const int GET_BONUS_BLUE_SCORE = 60;
