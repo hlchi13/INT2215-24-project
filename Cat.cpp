@@ -15,106 +15,106 @@ Cat::Cat()
     rect_.h = CAT_HEIGHT;
 	count_injured_times = 0;
 
-        frame_idle[0].x = 0;
-		frame_idle[0].y = 0;
-		frame_idle[0].w = 64;
-		frame_idle[0].h = 48;
+    frame_idle[0].x = 0;
+    frame_idle[0].y = 0;
+    frame_idle[0].w = 64;
+    frame_idle[0].h = 48;
 
-		frame_idle[1].x = 64;
-		frame_idle[1].y = 0;
-		frame_idle[1].w = 64;
-		frame_idle[1].h = 48;
+    frame_idle[1].x = 64;
+    frame_idle[1].y = 0;
+    frame_idle[1].w = 64;
+    frame_idle[1].h = 48;
 
-		frame_idle[2].x = 2*64;
-		frame_idle[2].y = 0;
-		frame_idle[2].w = 64;
-		frame_idle[2].h = 48;
+    frame_idle[2].x = 2*64;
+    frame_idle[2].y = 0;
+    frame_idle[2].w = 64;
+    frame_idle[2].h = 48;
 
-		frame_idle[3].x = 3*64;
-		frame_idle[3].y = 0;
-		frame_idle[3].w = 64;
-		frame_idle[3].h = 48;
+    frame_idle[3].x = 3*64;
+    frame_idle[3].y = 0;
+    frame_idle[3].w = 64;
+    frame_idle[3].h = 48;
 
-		frame_idle[4].x = 4*64;
-		frame_idle[4].y = 0;
-		frame_idle[4].w = 64;
-		frame_idle[4].h = 48;
+    frame_idle[4].x = 4*64;
+    frame_idle[4].y = 0;
+    frame_idle[4].w = 64;
+    frame_idle[4].h = 48;
 
-		frame_idle[5].x = 5*64;
-		frame_idle[5].y = 0;
-		frame_idle[5].w = 64;
-		frame_idle[5].h = 48;
+    frame_idle[5].x = 5*64;
+    frame_idle[5].y = 0;
+    frame_idle[5].w = 64;
+    frame_idle[5].h = 48;
 
-		frame_idle[6].x = 6*64;
-		frame_idle[6].y = 0;
-		frame_idle[6].w = 64;
-		frame_idle[6].h = 48;
+    frame_idle[6].x = 6*64;
+    frame_idle[6].y = 0;
+    frame_idle[6].w = 64;
+    frame_idle[6].h = 48;
 
-		frame_idle[7].x = 7*64;
-		frame_idle[7].y = 0;
-		frame_idle[7].w = 64;
-		frame_idle[7].h = 48;
+    frame_idle[7].x = 7*64;
+    frame_idle[7].y = 0;
+    frame_idle[7].w = 64;
+    frame_idle[7].h = 48;
 
-		frame_idle[8].x = 8*64;
-		frame_idle[8].y = 0;
-		frame_idle[8].w = 64;
-		frame_idle[8].h = 48;
+    frame_idle[8].x = 8*64;
+    frame_idle[8].y = 0;
+    frame_idle[8].w = 64;
+    frame_idle[8].h = 48;
 
-		frame_idle[9].x = 9*64;
-		frame_idle[9].y = 0;
-		frame_idle[9].w = 64;
-		frame_idle[9].h = 48;
+    frame_idle[9].x = 9*64;
+    frame_idle[9].y = 0;
+    frame_idle[9].w = 64;
+    frame_idle[9].h = 48;
 
 
-		frame_injured[0].x = 0;
-		frame_injured[0].y = 0;
-		frame_injured[0].w = 64;
-		frame_injured[0].h = 48;
+    frame_injured[0].x = 0;
+    frame_injured[0].y = 0;
+    frame_injured[0].w = 64;
+    frame_injured[0].h = 48;
 
-		frame_injured[1].x = 0+64;
-		frame_injured[1].y = 0;
-		frame_injured[1].w = 64;
-		frame_injured[1].h = 48;
+    frame_injured[1].x = 0+64;
+    frame_injured[1].y = 0;
+    frame_injured[1].w = 64;
+    frame_injured[1].h = 48;
 
-		frame_injured[2].x = 2*64;
-		frame_injured[2].y = 0;
-		frame_injured[2].w = 64;
-		frame_injured[2].h = 48;
+    frame_injured[2].x = 2*64;
+    frame_injured[2].y = 0;
+    frame_injured[2].w = 64;
+    frame_injured[2].h = 48;
 
-		frame_injured[3].x = 3*64;
-		frame_injured[3].y = 0;
-		frame_injured[3].w = 64;
-		frame_injured[3].h = 48;
+    frame_injured[3].x = 3*64;
+    frame_injured[3].y = 0;
+    frame_injured[3].w = 64;
+    frame_injured[3].h = 48;
 
-		frame_injured[4].x = 4*64;
-		frame_injured[4].y = 0;
-		frame_injured[4].w = 64;
-		frame_injured[4].h = 48;
+    frame_injured[4].x = 4*64;
+    frame_injured[4].y = 0;
+    frame_injured[4].w = 64;
+    frame_injured[4].h = 48;
 
-		frame_injured[5].x = 5*64;
-		frame_injured[5].y = 0;
-		frame_injured[5].w = 64;
-		frame_injured[5].h = 48;
+    frame_injured[5].x = 5*64;
+    frame_injured[5].y = 0;
+    frame_injured[5].w = 64;
+    frame_injured[5].h = 48;
 
-		frame_injured[6].x = 6*64;
-		frame_injured[6].y = 0;
-		frame_injured[6].w = 64;
-		frame_injured[6].h = 48;
+    frame_injured[6].x = 6*64;
+    frame_injured[6].y = 0;
+    frame_injured[6].w = 64;
+    frame_injured[6].h = 48;
 
-		frame_injured[7].x = 7*64;
-		frame_injured[7].y = 0;
-		frame_injured[7].w = 64;
-		frame_injured[7].h = 48;
+    frame_injured[7].x = 7*64;
+    frame_injured[7].y = 0;
+    frame_injured[7].w = 64;
+    frame_injured[7].h = 48;
 
-		frame_injured[8].x = 8*64;
-		frame_injured[8].y = 0;
-		frame_injured[8].w = 64;
-		frame_injured[8].h = 48;
+    frame_injured[8].x = 8*64;
+    frame_injured[8].y = 0;
+    frame_injured[8].w = 64;
+    frame_injured[8].h = 48;
 
-		frame_injured[9].x = 9*64;
-		frame_injured[9].y = 0;
-		frame_injured[9].w = 64;
-		frame_injured[9].h = 48;
+    frame_injured[9].x = 9*64;
+    frame_injured[9].y = 0;
+    frame_injured[9].w = 64;
+    frame_injured[9].h = 48;
 }
 Cat::~Cat()
 {
