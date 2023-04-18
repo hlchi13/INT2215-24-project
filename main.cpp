@@ -31,6 +31,9 @@ int main(int argc, char* argv[])
         ThreatsList[i]->SetAnimation();
         }
 
+    PlayerPower player;
+    player.Init(g_screen);
+
     while(is_quit) {
 
         while(SDL_PollEvent(&g_event))
@@ -55,6 +58,7 @@ int main(int argc, char* argv[])
 		SDL_RenderClear(g_screen);
         g_background.ShowBackground(g_screen);
 
+        player.Show(g_screen);
         cat_obj.ShowAnimation(g_screen);
         cat_obj.HandleMove();
 
@@ -70,16 +74,16 @@ int main(int argc, char* argv[])
 
             bool check_coll = CommonFunc::CheckCollision(cat_obj.GetRect(), ThreatsList[i]->GetRect());
             if (check_coll) {
+
                 cat_injured.SetRect(cat_obj.GetRect().x, cat_obj.GetRect().y);
                 cat_injured.SetShownInjured(true);
+                player.Decrease();
+                //ThreatsList.erase(ThreatsList.begin()+i);
             } else
             {
                 cat_injured.SetShownInjured(false);
                 }
-            if (cat_injured.GetShowInjured()== true)
-            {
-                cat_injured.ShowInjuredAnimation(g_screen);
-            }
+
         }
         SDL_RenderPresent(g_screen);
     }

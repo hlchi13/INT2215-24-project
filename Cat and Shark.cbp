@@ -36,6 +36,7 @@
 		</Compiler>
 		<Unit filename="BaseObject.cpp" />
 		<Unit filename="BaseObject.h" />
+		<Unit filename="Bonus.cpp" />
 		<Unit filename="Bonus.h" />
 		<Unit filename="Cat.cpp" />
 		<Unit filename="Cat.h" />
@@ -44,6 +45,8 @@
 		<Unit filename="Game.h" />
 		<Unit filename="LTexture.cpp" />
 		<Unit filename="LTexture.h" />
+		<Unit filename="PlayerPower.cpp" />
+		<Unit filename="PlayerPower.h" />
 		<Unit filename="Shark.cpp" />
 		<Unit filename="Shark.h" />
 		<Unit filename="main.cpp" />

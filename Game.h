@@ -7,6 +7,7 @@
 #include "Cat.h"
 #include "Shark.h"
 #include "Bonus.h"
+#include "PlayerPower.h"
 BaseObject g_background;
 
 void close()
@@ -46,8 +47,8 @@ bool InitData()
         {
             return false;
         }
-        m_background = Mix_LoadMUS("game_background.mp3");
-        game_intro = Mix_LoadMUS("game_intro.mp3");
+        m_background = Mix_LoadMUS("sound_background.mp3");
+        game_intro = Mix_LoadMUS("sound_intro.mp3");
 
     }
 	return true;
@@ -55,7 +56,7 @@ bool InitData()
 
 bool LoadBackGround()
 {
-	bool ret = g_background.LoadImg("background.png", g_screen);
+	bool ret = g_background.LoadImg("img_background.png", g_screen);
 	if (ret == false)
 		return false;
 	return true;

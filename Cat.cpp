@@ -3,8 +3,6 @@
 Cat::Cat()
 {
 	frame_ = 0;
-	x_val = 0;
-	y_val = SCREEN_HEIGHT/2 - CAT_HEIGHT/2; // vi tri ban dau cua cat
 
     cat_w = CAT_WIDTH;
     cat_h = CAT_HEIGHT;
@@ -14,6 +12,9 @@ Cat::Cat()
     rect_.w = CAT_WIDTH;
     rect_.h = CAT_HEIGHT;
 	count_injured_times = 0;
+
+	x_val = rect_.x;
+	y_val = rect_.y;
 
     frame_idle[0].x = 0;
     frame_idle[0].y = 0;
@@ -141,12 +142,43 @@ void Cat::HandleInputAction(SDL_Event event)
                 break;
         }
     }
+    /**if (event.type == SDL_KEYUP) {
+        switch(event.key.keysym.sym) {
+            case SDLK_UP:
+                y_val += cat_h/4;
+                break;
+            case SDLK_DOWN:
+                y_val -= cat_h/4;
+                break;
+            case SDLK_LEFT:
+                x_val += cat_w/5;
+                break;
+            case SDLK_RIGHT:
+                x_val -= cat_w/5;
+                break;
+            default:
+                break;
+        }
+    }*/
 }
 
 void Cat::HandleMove()
 {
     rect_.x = x_val;
     rect_.y = y_val;
+    /**if (rect_.x < 0) {
+        rect_.x = 0;
+    }
+    if (rect_.x + cat_w > SCREEN_WIDTH) {
+        rect_.x = SCREEN_WIDTH - cat_w;
+    }
+    rect_.y = y_val;
+    if (rect_.y < 0) {
+        rect_.y = 0;
+    }
+    if (rect_.y + cat_h > SCREEN_HEIGHT) {
+            rect_.y = SCREEN_HEIGHT - cat_h;
+    }*/
     if (rect_.x < 0) rect_.x = 0;
     if (rect_.y < 10) rect_.y = 10 ;
     if (rect_.x + cat_w > SCREEN_WIDTH - 50)
@@ -170,16 +202,16 @@ void Cat::ShowAnimation(SDL_Renderer* des)
 
 void Cat::ShowInjuredAnimation(SDL_Renderer* des)
 {
-    if (LoadImg("cat_hurt1.png", des)){
+    if (LoadImg("img_cat_hurt.png", des)){
 
     frame_injured_++;
     SDL_Rect cat_rect = { rect_.x, rect_.y, cat_w,cat_h };
     SDL_RenderCopy(des, p_object, &frame_injured[frame_injured_], &cat_rect);
     count_injured_times++;
-    if (frame_injured_>=10) {
+    /**if (frame_injured_>=10) {
         ShowAnimation(des);
         return ;
-    }
+    }*/
     if (count_injured_times > MAX_INJURED_TIMES) {
         count_injured_times = 0;
         is_shown_injured = false;

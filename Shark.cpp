@@ -56,7 +56,7 @@ void Shark::SetAnimation()
 }
 void Shark::ShowSharkAnimation(SDL_Renderer* des)
 {
-    LoadImg("img_sharksheet1.png", des);
+    LoadImg("img_sharksheet.png", des);
     frame_++;
     if (frame_>=7) frame_= 0;
 
