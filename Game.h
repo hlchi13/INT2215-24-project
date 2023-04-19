@@ -22,6 +22,7 @@ void close()
 
 	Mix_CloseAudio();
 	IMG_Quit();
+	TTF_Quit();
 	SDL_Quit();
 }
 
@@ -47,19 +48,70 @@ bool InitData()
         {
             return false;
         }
-        m_background = Mix_LoadMUS("sound_background.mp3");
-        game_intro = Mix_LoadMUS("sound_intro.mp3");
-
+        background_ = Mix_LoadWAV("sound_background.mp3");
+        intro_ = Mix_LoadWAV("sound_intro.mp3");
+        injured_ = Mix_LoadWAV("sound_injured.wav");
+        cat_bullet = Mix_LoadWAV("sound_meow.mp3");
+        success_eat = Mix_LoadWAV("sound_eat_fish.mp3");
+        if (background_ == NULL || intro_ == NULL || injured_ == NULL||cat_bullet == NULL)
+        {
+            cout << "Fail to load sound";
+            return false;
+        }
+        if (TTF_Init() == -1) return false;
+        g_font = TTF_OpenFont("PressStart2P.ttf", 18);
+        if (g_font == NULL) {
+            cout << "Fail to load font";
+            return false;
+        }
     }
 	return true;
 }
 
-bool LoadBackGround()
+void InitIntroAndEnd(LTexture &intro, LTexture &gModulatedTexture)
 {
-	bool ret = g_background.LoadImg("img_background.png", g_screen);
-	if (ret == false)
-		return false;
-	return true;
+    intro.loadFromFile("intro.png");
+
+	gModulatedTexture.loadFromFile( "img_fish1.png" ) ;
+    gModulatedTexture.setColor(0xFF,0,0);
+
+    intro.setColor(255,255,255);
 }
 
+bool LoadBackGround(const int& num)
+{
+    string img_background;
+    switch(num)
+    {
+        case 1:
+            img_background = "img_bg_underwater.png";
+            break;
+        case 2:
+            img_background = "img_bg_sky.jpg";
+            break;
+        case 3:
+            img_background = "img_bg_universe.jpg";
+            break;
+        case 4:
+            img_background = "img_bg_ground.jpg";
+            break;
+    }
+    bool check_loadbg = g_background.LoadImg(img_background, g_screen);
+    if (check_loadbg == false) {
+        cout << "Couldn't find image\n";
+        return false;
+    }
+    return true;
+}
+
+void CreateThreatList (vector<Shark*> &ThreatList)
+{
+    for (int i = 0; i < SHARK_NUM; i++) {
+        ThreatList.push_back(new Shark());
+        //ThreatsList[ThreatsList.size()-1]->LoadImg("sharksheet.png",g_screen);
+        int shark_y = rand() % 400;
+        ThreatList[i]->SetRect(SCREEN_WIDTH + 400*i, shark_y);
+        ThreatList[i]->SetAnimation();
+        }
+}
 #endif // GAME_H_INCLUDED

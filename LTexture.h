@@ -8,7 +8,7 @@ class LTexture
 public:
     LTexture(SDL_Renderer* gRenderer, SDL_Rect rect_);
     ~LTexture();
-    bool loadFile (std::string path);
+    bool loadFromFile (std::string path);
     void free();
     void setColor( Uint8 red, Uint8 green, Uint8 blue );
     void setAlpha( Uint8 alpha );

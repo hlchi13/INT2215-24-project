@@ -19,9 +19,9 @@ void PlayerPower::Init(SDL_Renderer* des)
 {
     LoadImg("img_heart.png", des);
     number = 3;
-    AddPos(0);
-    AddPos(40);
-    AddPos(80);
+    AddPos(SCREEN_WIDTH/2 - HEART_WIDTH/2 - HEART_WIDTH);
+    AddPos(SCREEN_WIDTH/2 - HEART_WIDTH/2);
+    AddPos(SCREEN_WIDTH/2 - HEART_WIDTH/2 + HEART_WIDTH);
 }
 
 void PlayerPower::Show(SDL_Renderer* des)

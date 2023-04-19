@@ -18,19 +18,23 @@ using namespace std;
 static SDL_Window* g_window = NULL;
 static SDL_Renderer* g_screen = NULL;
 static SDL_Event g_event;
-static SDL_Rect rect_background;
 static SDL_Rect rect_screen;
 
-static Mix_Music* m_background = NULL;
-static Mix_Music* game_intro = NULL;
-static Mix_Chunk* injured = NULL;
+static Mix_Chunk* background_ = NULL;
+static Mix_Chunk* intro_ = NULL;
+static Mix_Chunk* injured_ = NULL;
+static Mix_Chunk* success_eat = NULL;
+static Mix_Chunk* cat_bullet = NULL;
 static Mix_Chunk* game_over = NULL;
+
+static TTF_Font* g_font = NULL;
+
+const SDL_Color text_color = {243, 143, 10};// orange
 
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 500;
 const int SHARK_NUM = 6;
-
-const int MAX_INJURED_TIMES = 5;
+const int FPS = 40;
 
 const int AVOID_SHARK_SCORE = 1;
 const int INJURED_SCORE = - 200;

@@ -4,8 +4,8 @@ Bonus::Bonus()
 {
     rect_.x = SCREEN_WIDTH + 10;
     rect_.y = rand()%400 + 20;
-    rect_.w = width_;
-    rect_.h = height_;
+    rect_.w = BONUS_WIDTH;
+    rect_.h = BONUS_HEIGHT;
 
 
     switch(num)

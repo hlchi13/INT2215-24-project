@@ -2,8 +2,8 @@
 #define PLAYERPOWER_H_INCLUDED
 
 #include "BaseObject.h"
-#define HEART_WIDTH 50
-#define HEART_HEIGHT 40
+#define HEART_WIDTH 40
+#define HEART_HEIGHT 25
 class PlayerPower : public BaseObject
 {
 public:

@@ -38,11 +38,15 @@
 		<Unit filename="BaseObject.h" />
 		<Unit filename="Bonus.cpp" />
 		<Unit filename="Bonus.h" />
+		<Unit filename="Bullet.cpp" />
+		<Unit filename="Bullet.h" />
 		<Unit filename="Cat.cpp" />
 		<Unit filename="Cat.h" />
 		<Unit filename="CommonFunc.cpp" />
 		<Unit filename="CommonFunc.h" />
 		<Unit filename="Game.h" />
+		<Unit filename="GameText.cpp" />
+		<Unit filename="GameText.h" />
 		<Unit filename="LTexture.cpp" />
 		<Unit filename="LTexture.h" />
 		<Unit filename="PlayerPower.cpp" />

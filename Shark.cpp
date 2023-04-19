@@ -6,8 +6,9 @@ Shark::Shark()
 
     x_val = 0;
     y_val = 0;
-    shark_w = 2.5*F_SHARK_WIDTH;
-    shark_h = 2.5*F_SHARK_HEIGHT;
+
+    shark_w = 2.5*64;
+    shark_h = 2.5*37;
 
 }
 
@@ -21,38 +22,38 @@ void Shark::SetAnimation()
 {
     frame_shark[0].x = 0;
     frame_shark[0].y = 0;
-    frame_shark[0].w = F_SHARK_WIDTH;
-    frame_shark[0].h = F_SHARK_HEIGHT;
+    frame_shark[0].w = 64;
+    frame_shark[0].h = 37;
 
-    frame_shark[1].x = 0 + F_SHARK_WIDTH;
+    frame_shark[1].x = 64;
     frame_shark[1].y = 0;
-    frame_shark[1].w = F_SHARK_WIDTH;
-    frame_shark[1].h = F_SHARK_HEIGHT;
+    frame_shark[1].w = 64;
+    frame_shark[1].h = 37;
 
-    frame_shark[2].x = 0 + 2*F_SHARK_WIDTH;
+    frame_shark[2].x = 2*64;
     frame_shark[2].y = 0;
-    frame_shark[2].w = F_SHARK_WIDTH;
-    frame_shark[2].h = F_SHARK_HEIGHT;
+    frame_shark[2].w = 64;
+    frame_shark[2].h = 37;
 
-    frame_shark[3].x = 0 + 3*F_SHARK_WIDTH;
+    frame_shark[3].x = 3*64;
     frame_shark[3].y = 0;
-    frame_shark[3].w = F_SHARK_WIDTH;
-    frame_shark[3].h = F_SHARK_HEIGHT;
+    frame_shark[3].w = 64;
+    frame_shark[3].h = 37;
 
-    frame_shark[4].x = 0 + 4*F_SHARK_WIDTH;
+    frame_shark[4].x = 4*64;
     frame_shark[4].y = 0;
-    frame_shark[4].w = F_SHARK_WIDTH;
-    frame_shark[4].h = F_SHARK_HEIGHT;
+    frame_shark[4].w = 64;
+    frame_shark[4].h = 37;
 
-    frame_shark[5].x = 0 + 5*F_SHARK_WIDTH;
+    frame_shark[5].x = 5*64;
     frame_shark[5].y = 0;
-    frame_shark[5].w = F_SHARK_WIDTH;
-    frame_shark[5].h = F_SHARK_HEIGHT;
+    frame_shark[5].w = 64;
+    frame_shark[5].h = 37;
 
-    frame_shark[6].x = 0 + 6*F_SHARK_WIDTH;
+    frame_shark[6].x = 6*64;
     frame_shark[6].y = 0;
-    frame_shark[6].w = F_SHARK_WIDTH;
-    frame_shark[6].h = F_SHARK_HEIGHT;
+    frame_shark[6].w = 64;
+    frame_shark[6].h = 37;
 }
 void Shark::ShowSharkAnimation(SDL_Renderer* des)
 {

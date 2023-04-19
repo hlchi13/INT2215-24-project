@@ -16,7 +16,7 @@ LTexture::~LTexture()
 }
 
 
-bool LTexture::loadFile(std::string path)
+bool LTexture::loadFromFile(std::string path)
 {
     gTexture = CommonFunc::LoadImage (path, gRen);
     return gTexture!=NULL;
