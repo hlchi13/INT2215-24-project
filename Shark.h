@@ -14,6 +14,7 @@ public:
     void HandleMove();
     void ShowShark(SDL_Renderer* des);
 
+    void Reset(const int &x_border);
     void set_x_val(const int &val) {x_val = val;};
     void set_y_val(const int &val) {y_val = val;};
 
@@ -26,6 +27,7 @@ private:
 
     int shark_w;
     int shark_h;
+    int num_of_shark = 0;
 };
 
 #endif // SHARK_H_INCLUDED

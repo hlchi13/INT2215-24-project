@@ -8,6 +8,7 @@
 #include "Shark.h"
 #include "Bonus.h"
 #include "PlayerPower.h"
+#include "Bullet.h"
 BaseObject g_background;
 
 void close()
@@ -53,7 +54,9 @@ bool InitData()
         injured_ = Mix_LoadWAV("sound_injured.wav");
         cat_bullet = Mix_LoadWAV("sound_meow.mp3");
         success_eat = Mix_LoadWAV("sound_eat_fish.mp3");
-        if (background_ == NULL || intro_ == NULL || injured_ == NULL||cat_bullet == NULL)
+        game_over = Mix_LoadWAV("sound_gameover.mp3");
+        if (background_ == NULL || intro_ == NULL || injured_ == NULL||cat_bullet == NULL
+            ||success_eat == NULL|| game_over == NULL)
         {
             cout << "Fail to load sound";
             return false;
@@ -108,7 +111,7 @@ void CreateThreatList (vector<Shark*> &ThreatList)
 {
     for (int i = 0; i < SHARK_NUM; i++) {
         ThreatList.push_back(new Shark());
-        //ThreatsList[ThreatsList.size()-1]->LoadImg("sharksheet.png",g_screen);
+
         int shark_y = rand() % 400;
         ThreatList[i]->SetRect(SCREEN_WIDTH + 400*i, shark_y);
         ThreatList[i]->SetAnimation();

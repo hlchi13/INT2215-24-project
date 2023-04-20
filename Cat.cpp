@@ -252,3 +252,17 @@ void Cat::ShowInjuredAnimation(SDL_Renderer* des)
     }
 }
 
+void Cat::RemoveBullet(const int& idx)
+{
+	int size = bullet_list.size();
+	if (size > 0 && idx < size)
+	{
+		Bullet* p_bullet = bullet_list.at(idx);
+		bullet_list.erase(bullet_list.begin() + idx);
+		if (p_bullet)
+		{
+			delete p_bullet;
+			p_bullet = NULL;
+		}
+	}
+}

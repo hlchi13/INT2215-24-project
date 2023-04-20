@@ -5,7 +5,7 @@ SDL_Texture* CommonFunc::LoadImage(std::string path, SDL_Renderer* ren)
     SDL_Texture* newTexture = nullptr;
     SDL_Surface* loadSurface = IMG_Load(path.c_str());
     if (loadSurface == nullptr) {
-        cout << "Fail to load image" << endl;
+        cout << "SDL_image d" << endl;
     } else
     {
         newTexture = SDL_CreateTextureFromSurface(ren, loadSurface);

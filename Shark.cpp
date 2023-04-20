@@ -64,7 +64,6 @@ void Shark::ShowSharkAnimation(SDL_Renderer* des)
     SDL_Rect* current_clip = &frame_shark[frame_];
     SDL_Rect shark_rect = { rect_.x, rect_.y, shark_w,shark_h }; // o toa do nao voi chieu dai chieu rong
     SDL_RenderCopy(des, p_object, current_clip, &shark_rect);
-    SDL_Delay(50/7);
 }
 
 void Shark::HandleMove()
@@ -76,7 +75,17 @@ void Shark::HandleMove()
     rect_.h = shark_h;
     if (rect_.x < -shark_w)
     {
-        rect_.x = SCREEN_WIDTH + x_val*2;
+        rect_.x = SCREEN_WIDTH + x_val*3;
         rect_.y = rand() % (SCREEN_HEIGHT -shark_h );
     }
+}
+
+void Shark::Reset(const int &x_border)
+{
+    num_of_shark++;
+    if (num_of_shark <= SHARK_NUM/2) {
+        rect_.x = x_border;
+        rect_.y = rand()%400;
+    }
+
 }

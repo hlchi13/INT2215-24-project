@@ -33,8 +33,8 @@ const SDL_Color text_color = {243, 143, 10};// orange
 
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 500;
-const int SHARK_NUM = 6;
-const int FPS = 40;
+const int SHARK_NUM = 30;
+const int FPS = 25;
 
 const int AVOID_SHARK_SCORE = 1;
 const int INJURED_SCORE = - 200;

@@ -1,4 +1,4 @@
-#include <iostream>
+#include <chrono>
 #include "SDL_utils.h"
 #include"Game.h"
 using namespace std;
@@ -7,7 +7,7 @@ int score = 0;
 int main(int argc, char* argv[])
 {
 
-    int num_bg = 4;
+    int num_bg = 2;
     if (InitData() == false)
 		return -1;
 	if (LoadBackGround(num_bg) == false)
@@ -112,6 +112,8 @@ int main(int argc, char* argv[])
             ThreatsList[i]->ShowSharkAnimation(g_screen);
             ThreatsList[i]->HandleMove();
 
+            vector<Bullet*> cat_bullet_list = cat_obj.GetBulletList();
+
             bool check_coll = CommonFunc::CheckCollision(cat_obj.GetRect(), ThreatsList[i]->GetRect());
             if (check_coll) {
 
@@ -126,12 +128,50 @@ int main(int argc, char* argv[])
                 }
 
         }
+        std::vector<Bullet*> bullet_arr = cat_obj.GetBulletList();
+		for (int r = 0; r < (int) bullet_arr.size(); r++)
+		{
+			Bullet* p_bullet = bullet_arr.at(r);
+			if (p_bullet != NULL)
+			{
+				for (int t = 0; t < (int) ThreatsList.size(); t++)
+				{
+					Shark* obj_threat = ThreatsList.at(t);
+					if (obj_threat != NULL)
+					{
+						SDL_Rect tRect = obj_threat->GetRect();
+
+						SDL_Rect bRect = p_bullet->GetRect();
+						bool bCol = CommonFunc::CheckCollision(bRect, tRect);
+
+						if (bCol)
+						{
+
+							cat_obj.RemoveBullet(r);
+							obj_threat->Reset(SCREEN_WIDTH);
+
+						}
+					}
+				}
+			}
+		}
+		 SDL_RenderPresent(g_screen);
         frameTime = SDL_GetTicks() - frameStart;
         if (frameDelay > frameTime) {
             SDL_Delay(frameDelay - frameTime);
         }
-        SDL_RenderPresent(g_screen);
+
     }
+    for (int i = 0; i < (int) ThreatsList.size(); i++)
+	{
+		Shark* p_threat = ThreatsList.at(i);
+		if (p_threat != NULL)
+		{
+			p_threat->Free();
+			p_threat = NULL;
+		}
+	}
+	ThreatsList.clear();
     close();
     return 0;
 }
