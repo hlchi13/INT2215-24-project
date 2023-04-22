@@ -44,7 +44,7 @@
 		<Unit filename="Cat.h" />
 		<Unit filename="CommonFunc.cpp" />
 		<Unit filename="CommonFunc.h" />
-		<Unit filename="Game.h" />
+		<Unit filename="GameFunctions.h" />
 		<Unit filename="GameText.cpp" />
 		<Unit filename="GameText.h" />
 		<Unit filename="LTexture.cpp" />

@@ -1,6 +1,5 @@
 #include <chrono>
-#include "SDL_utils.h"
-#include"Game.h"
+#include"GameFunctions.h"
 using namespace std;
 
 int main(int argc, char* argv[])
@@ -8,6 +7,7 @@ int main(int argc, char* argv[])
 
     if (InitData() == false)
 		return -1;
+    bool is_quit = false;
     srand(time(NULL));
     int frameDelay = 1000/FPS;
     Uint32 frameStart;
@@ -20,7 +20,6 @@ int main(int argc, char* argv[])
     rect_screen.h = SCREEN_HEIGHT;
 
     static LTexture gModulatedTexture(g_screen,rect_screen);
-
 	// Show intro
     int tmp = showIntro();
     if (tmp == 2)
@@ -52,24 +51,19 @@ int main(int argc, char* argv[])
     }
     Mix_HaltChannel(-1);
     is_quit = false;
-
-
     // Game player
     Cat cat_obj;
     Cat cat_injured;
-
     vector<Shark*> ThreatsList;
     CreateThreatList(ThreatsList);
-
-    Cat player;
-
+    Cat heart;
     Bonus fish;
-
     GameText Score, number_life;
 
     Mix_HaltChannel(-1);
     Mix_PlayChannel( -1,background_ , 100 );
-    CatLife(player, textX, number_life, g_screen);
+
+    InitLife(heart, textX, number_life);
     while(!is_quit) {
 
         while(SDL_PollEvent(&g_event))
@@ -89,9 +83,7 @@ int main(int argc, char* argv[])
 		SDL_RenderClear(g_screen);
         g_background.ShowBackground(g_screen);
 
-        number_life.ShowNum(g_font, text_color, g_screen);
-        player.Show(g_screen);
-        textX.Present(g_screen);
+        ShowLife(heart,textX, number_life);
         cat_obj.ControlBullet(g_screen);
         cat_obj.ShowAnimation(g_screen);
         cat_obj.HandleMove();
@@ -146,7 +138,6 @@ int main(int argc, char* argv[])
 
 						if (bCol)
 						{
-
 							cat_obj.RemoveBullet(r);
 							Score.IncreaseValue(KILL_SHARK_SCORE);
 							obj_threat->Reset(SCREEN_WIDTH+20*t);
@@ -180,14 +171,13 @@ int main(int argc, char* argv[])
     pressToEsc.LoadText(g_font_intro, "Press ESC to quit", text_color,g_screen );
     pressToEsc.SetRect(SCREEN_WIDTH/2 - pressToEsc.GetRect().w/2, SCREEN_HEIGHT - 100);
 
-	int i=0,times=0;
     is_quit = false ;
     gModulatedTexture.setColor(243,143,25);
 
     InitEnd(end_, your_score, Score, High_ScoreText, High_Score);
 
     Mix_PlayChannel(-1, game_over, 10);
-    while(times!=3)
+    while(!is_quit)
     {
             while (SDL_PollEvent(&g_event)!=0) {
                 switch (g_event.type)
@@ -205,19 +195,12 @@ int main(int argc, char* argv[])
             };
 
             if (is_quit) break;
-            i++;
             g_background.ShowBackground(g_screen);
+            ShowEnd(end_, your_score, Score, High_ScoreText, High_Score);
 
-            end_.Present(g_screen);
-
-            your_score.Present(g_screen);
             pressToEsc.Present(g_screen);
-            Score.ShowNum(g_font,text_color,g_screen) ;
-            High_ScoreText.Present(g_screen);
-            High_Score.ShowNum(g_font, text_color, g_screen);
             SDL_RenderPresent( g_screen );
             SDL_Delay(35);
-            if(i==255)times++;
     }
 	ThreatsList.clear();
     close();
