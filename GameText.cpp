@@ -1,9 +1,8 @@
 #include"GameText.h"
-bool GameText::loadFromRenderedText(TTF_Font *gFont, std::string textureText, SDL_Color textColor, SDL_Renderer *gRenderer )
+bool GameText::LoadText(TTF_Font *gFont, std::string textureText, SDL_Color textColor, SDL_Renderer *gRenderer )
 {
 	//Render text surface
 	SDL_Surface* textSurface = TTF_RenderText_Solid( gFont, textureText.c_str(), textColor );
-
 	if( textSurface == NULL )
 	{
 		cout << "Unable to render text surface! SDL_ttf Error\n";
@@ -20,7 +19,7 @@ bool GameText::loadFromRenderedText(TTF_Font *gFont, std::string textureText, SD
 		}
 		else
 		{
-			//Get image dimensions
+			//Get text dimensions
 			rect_.w = textSurface->w;
 			rect_.h = textSurface->h;
 		}
@@ -35,7 +34,7 @@ bool GameText::loadFromRenderedText(TTF_Font *gFont, std::string textureText, SD
 void GameText::Present(SDL_Renderer *ren)
 {
     SDL_RenderCopy(ren,p_object,NULL,&rect_);
-};
+}
 
 string GameText::ConvertIntToString(){
     int v = value_ ;
@@ -50,7 +49,7 @@ string GameText::ConvertIntToString(){
 
 void GameText::ShowNum (TTF_Font *gFont, SDL_Color textColor, SDL_Renderer *gRenderer)
 {
-    if (loadFromRenderedText(gFont,ConvertIntToString(),textColor,gRenderer ) )
+    if (LoadText(gFont,ConvertIntToString(),textColor,gRenderer ) )
     {
         SDL_RenderCopy(gRenderer,p_object,NULL,&rect_);;
     }

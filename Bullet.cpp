@@ -19,7 +19,7 @@ Bullet::~Bullet()
 
 void Bullet::HandleMove(const int x_border, const int y_border)
 {
-    rect_.x += 10;
+    rect_.x += 20;
     if (rect_.x + rect_.w > x_border) {
         is_move = false;
     }

@@ -11,13 +11,13 @@ Bonus::Bonus()
     switch(num)
     {
     case 1:
-        random_fish = "img_fish1.png";
+        random_fish = "img//fish1.png";
         break;
     case 2:
-        random_fish = "img_fish2.png";
+        random_fish = "img//fish2.png";
         break;
     case 3:
-        random_fish = "img_fish3.png";
+        random_fish = "img//fish3.png";
         break;
     }
 }

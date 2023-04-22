@@ -49,8 +49,6 @@
 		<Unit filename="GameText.h" />
 		<Unit filename="LTexture.cpp" />
 		<Unit filename="LTexture.h" />
-		<Unit filename="PlayerPower.cpp" />
-		<Unit filename="PlayerPower.h" />
 		<Unit filename="Shark.cpp" />
 		<Unit filename="Shark.h" />
 		<Unit filename="main.cpp" />

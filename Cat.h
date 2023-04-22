@@ -4,9 +4,6 @@
 #include "BaseObject.h"
 #include "Bullet.h"
 
-const int LIVES = 5;
-const int MAX_INJURED = 5;
-
 class Cat : public BaseObject
 {
 public:
@@ -22,14 +19,18 @@ public:
     void SetWidth(const int w, const int h) {rect_.w = w; rect_.h = h;};
 	void ControlBullet(SDL_Renderer* g_renderer);
 	vector <Bullet*> GetBulletList() {  return bullet_list; } ;
-
 	void RemoveBullet(const int& idx);
+
     void ShowInjuredAnimation(SDL_Renderer* des);
     bool GetShowInjured() {return is_shown_injured;};
     void SetShownInjured(bool x) {is_shown_injured = x;};
+
+    int GetLifes() {return life_;};
+    void DecreaseLife(){life_--;};
+    void IncreaseLife(){life_++;};
 private:
-    float x_val; // khoang cach giua 2 vi tri
-    float y_val;
+    int x_pos; // vi tri cua vat sau khi di chuyen
+    int y_pos;
 
     vector <Bullet*> bullet_list;
     SDL_Rect frame_idle[10];
@@ -41,6 +42,7 @@ private:
     int frame_ = 0;
     int frame_injured_;
     int count_injured_times = 0;
+    int life_ = LIFES;
     bool is_shown_injured = false;
 
 };

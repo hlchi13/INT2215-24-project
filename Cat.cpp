@@ -9,12 +9,11 @@ Cat::Cat()
 
     rect_.x = 0;
     rect_.y = SCREEN_HEIGHT/2 - cat_h/2;
-    rect_.w = cat_w;
-    rect_.h = cat_h;
+
 	count_injured_times = 0;
 
-	x_val = rect_.x;
-	y_val = rect_.y;
+	x_pos = rect_.x;
+	y_pos = rect_.y;
 
     frame_idle[0].x = 0;
     frame_idle[0].y = 0;
@@ -127,16 +126,29 @@ void Cat::HandleInputAction(SDL_Event event, SDL_Renderer* src, Mix_Chunk* cat_b
     if (event.type == SDL_KEYDOWN) {
         switch(event.key.keysym.sym) {
             case SDLK_UP:
-                y_val -= cat_h/4;
+                y_pos -= cat_h/4;
                 break;
             case SDLK_DOWN:
-                y_val += cat_h/4;
+                y_pos += cat_h/4;
                 break;
             case SDLK_LEFT:
-                x_val -= cat_w/5;
+                x_pos -= cat_w/5;
                 break;
             case SDLK_RIGHT:
-                x_val += cat_w/5;
+                x_pos += cat_w/5;
+                break;
+            case SDLK_SPACE: {
+                Mix_PlayChannel(-1, cat_bullet, 0);
+
+                Bullet* bullet_ = new Bullet();
+                bool ret = bullet_->LoadImg("img//bullet.png", src);
+                if(ret) {
+                bullet_->SetRect(this->GetRect().x + 60, this->GetRect().y+cat_h/2);
+                bullet_->SetIsMove(true);
+                bullet_list.push_back(bullet_);
+                }
+                else cout << "Fail";
+        }
                 break;
             default:
                 break;
@@ -144,39 +156,11 @@ void Cat::HandleInputAction(SDL_Event event, SDL_Renderer* src, Mix_Chunk* cat_b
     }
     if (event.type == SDL_KEYDOWN) {
         if (event.key.keysym.sym == SDLK_SPACE) {
-            Mix_PlayChannel(-1, cat_bullet, 0);
 
-            Bullet* bullet_ = new Bullet();
-            bool ret = bullet_->LoadImg("img_bullet.png", src);
-            if(ret) {
-            bullet_->SetRect(this->GetRect().x + 60, this->GetRect().y+cat_h/2);
-            bullet_->SetIsMove(true);
-
-            bullet_list.push_back(bullet_);
-            }
-            else cout << "Fail";
 
 
             }
     }
-    /**if (event.type == SDL_KEYUP) {
-        switch(event.key.keysym.sym) {
-            case SDLK_UP:
-                y_val += cat_h/4;
-                break;
-            case SDLK_DOWN:
-                y_val -= cat_h/4;
-                break;
-            case SDLK_LEFT:
-                x_val += cat_w/5;
-                break;
-            case SDLK_RIGHT:
-                x_val -= cat_w/5;
-                break;
-            default:
-                break;
-        }
-    }*/
 }
 
 void Cat::ControlBullet(SDL_Renderer* g_renderer)
@@ -197,21 +181,10 @@ void Cat::ControlBullet(SDL_Renderer* g_renderer)
 
 void Cat::HandleMove()
 {
-    rect_.x = x_val;
-    rect_.y = y_val;
-    /**if (rect_.x < 0) {
-        rect_.x = 0;
-    }
-    if (rect_.x + cat_w > SCREEN_WIDTH) {
-        rect_.x = SCREEN_WIDTH - cat_w;
-    }
-    rect_.y = y_val;
-    if (rect_.y < 0) {
-        rect_.y = 0;
-    }
-    if (rect_.y + cat_h > SCREEN_HEIGHT) {
-            rect_.y = SCREEN_HEIGHT - cat_h;
-    }*/
+    rect_.x = x_pos;
+    rect_.y = y_pos;
+
+    SetWidth(cat_w, cat_h);
     if (rect_.x < 0) rect_.x = 0;
     if (rect_.y < 10) rect_.y = 10 ;
     if (rect_.x + cat_w > SCREEN_WIDTH - 50)
@@ -222,7 +195,7 @@ void Cat::HandleMove()
 
 void Cat::ShowAnimation(SDL_Renderer* des)
 {
-    LoadImg("img_cat_idle.png", des);
+    LoadImg("img//cat_idle.png", des);
 	frame_ ++;
     if (frame_>=10)
         frame_ = 0;
@@ -235,7 +208,7 @@ void Cat::ShowAnimation(SDL_Renderer* des)
 
 void Cat::ShowInjuredAnimation(SDL_Renderer* des)
 {
-    if (LoadImg("img_cat_hurt.png", des)){
+    if (LoadImg("img//cat_hurt.png", des)){
 
     frame_injured_++;
     SDL_Rect cat_rect = { rect_.x, rect_.y, cat_w,cat_h };

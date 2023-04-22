@@ -57,7 +57,7 @@ void Shark::SetAnimation()
 }
 void Shark::ShowSharkAnimation(SDL_Renderer* des)
 {
-    LoadImg("img_sharksheet.png", des);
+    LoadImg("img//sharksheet.png", des);
     frame_++;
     if (frame_>=7) frame_= 0;
 
@@ -73,11 +73,6 @@ void Shark::HandleMove()
 
     rect_.w = shark_w;
     rect_.h = shark_h;
-    if (rect_.x < -shark_w)
-    {
-        rect_.x = SCREEN_WIDTH + x_val*3;
-        rect_.y = rand() % (SCREEN_HEIGHT -shark_h );
-    }
 }
 
 void Shark::Reset(const int &x_border)
@@ -89,3 +84,4 @@ void Shark::Reset(const int &x_border)
     }
 
 }
+
