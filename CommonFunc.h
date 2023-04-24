@@ -13,41 +13,43 @@
 #include <string>
 
 #include"LTexture.h"
-#include "SDL_utils.h"
 using namespace std;
 static SDL_Window* g_window = NULL;
 static SDL_Renderer* g_screen = NULL;
 static SDL_Event g_event;
 static SDL_Rect rect_screen;
 
-static Mix_Chunk* background_ = NULL;
-static Mix_Chunk* intro_ = NULL;
+static Mix_Music* background_ = NULL;
+static Mix_Music* intro_ = NULL;
+static Mix_Chunk* selected_ = NULL;
 static Mix_Chunk* injured_ = NULL;
 static Mix_Chunk* success_eat = NULL;
 static Mix_Chunk* cat_bullet = NULL;
-static Mix_Chunk* game_over = NULL;
+static Mix_Chunk* s_game_over = NULL;
 
 static TTF_Font* g_font = NULL;
 static TTF_Font* g_font_intro = NULL;
 static TTF_Font* g_font_end = NULL;
+static TTF_Font* g_font_choose = NULL;
 
-const SDL_Color text_color = {243, 143, 10};// orange
-const SDL_Color text_intro = {50, 50, 200}; // blue
-const SDL_Color text_end = {244, 10, 10};
+const SDL_Color color_text = {242, 226, 224};
+const SDL_Color color_intro = {0, 119, 179};
+const SDL_Color color_end = {244, 10, 10};
+const SDL_Color color_select = {192, 66, 138};
+const SDL_Color color_exit = {255, 0, 0};
 
 const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 500;
 const int SHARK_NUM = 30;
 const int FPS = 20;
 
-const int AVOID_SHARK_SCORE = 1;
-const int INJURED_SCORE = - 200;
+const int INJURED_SCORE = - 150;
 const int KILL_SHARK_SCORE = 100;
 const int GET_BONUS_YELLOW_SCORE = 20;
 const int GET_BONUS_RED_SCORE = 40;
 const int GET_BONUS_BLUE_SCORE = 60;
 
-const int LIFES = 5;
+const int LIFES = 3;
 const int MAX_INJURED = LIFES;
 
 const int SPEED_THREAT1 = 10;

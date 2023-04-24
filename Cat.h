@@ -3,6 +3,7 @@
 
 #include "BaseObject.h"
 #include "Bullet.h"
+#include "GameText.h"
 
 class Cat : public BaseObject
 {
@@ -25,9 +26,6 @@ public:
     bool GetShowInjured() {return is_shown_injured;};
     void SetShownInjured(bool x) {is_shown_injured = x;};
 
-    int GetLifes() {return life_;};
-    void DecreaseLife(){life_--;};
-    void IncreaseLife(){life_++;};
 private:
     int x_pos; // vi tri cua vat sau khi di chuyen
     int y_pos;
@@ -42,7 +40,6 @@ private:
     int frame_ = 0;
     int frame_injured_;
     int count_injured_times = 0;
-    int life_ = LIFES;
     bool is_shown_injured = false;
 
 };

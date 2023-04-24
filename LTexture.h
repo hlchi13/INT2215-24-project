@@ -12,7 +12,7 @@ public:
     void free();
     void setColor( Uint8 red, Uint8 green, Uint8 blue );
     void setAlpha( Uint8 alpha );
-    void renderCopy ();
+    void render ();
     int getWidth() {return width;};
     int getHeight() {return height;};
 private:

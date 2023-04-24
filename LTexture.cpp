@@ -42,7 +42,7 @@ void LTexture::setAlpha( Uint8 alpha )
 	SDL_SetTextureAlphaMod( gTexture, alpha );
 }
 
-void LTexture::renderCopy()
+void LTexture::render()
 {
-    SDL_RenderCopy(gRen, gTexture, NULL, &rect);
+    SDL_RenderCopy(gRen, gTexture,NULL, &rect);
 }

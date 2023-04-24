@@ -27,7 +27,7 @@ private:
 
     int shark_w;
     int shark_h;
-    int num_of_shark = 0;
+    int num;
 };
 
 #endif // SHARK_H_INCLUDED

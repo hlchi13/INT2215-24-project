@@ -21,10 +21,9 @@
 
 1680764459 ated upstream
 
-1682180620 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\main.cpp
+1682337232 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\main.cpp
 	<chrono>
-	"SDL_utils.h"
-	"Game.h"
+	"GameFunctions.h"
 
 1680879532 shed changes
 	<iostream>
@@ -48,7 +47,7 @@
 
 1678627201 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\texture.cpp
 
-1682089955 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\cat.cpp
+1682225843 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\cat.cpp
 	"Cat.h"
 
 1680700300 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\commonfuntions.cpp
@@ -73,24 +72,25 @@
 1679998374 c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\gamebase.h
 	"commonFuntions.h"
 
-1681814505 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\ltexture.cpp
+1682344811 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\ltexture.cpp
 	"LTexture.h"
 	"CommonFunc.h"
 
-1682146169 c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\ltexture.h
+1682344811 c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\ltexture.h
 	"CommonFunc.h"
 
 1681978058 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\baseobject.cpp
 	"BaseObject.h"
 
-1682181583 c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\baseobject.h
+1682344395 c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\baseobject.h
 	"CommonFunc.h"
 
-1682003800 c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\cat.h
+1682225843 c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\cat.h
 	"BaseObject.h"
 	"Bullet.h"
+	"GameText.h"
 
-1682094588 c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\commonfunc.h
+1682343774 c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\commonfunc.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_mixer.h>
@@ -101,15 +101,14 @@
 	<vector>
 	<string>
 	"LTexture.h"
-	"SDL_utils.h"
 
 1682142803 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\commonfunc.cpp
 	"CommonFunc.h"
 
-1681993532 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\shark.cpp
+1682334080 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\shark.cpp
 	"Shark.h"
 
-1681971614 c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\shark.h
+1682266735 c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\shark.h
 	"CommonFunc.h"
 	"BaseObject.h"
 
@@ -133,7 +132,7 @@
 	"Cat.h"
 	"Shark.h"
 
-1682157081 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\gametext.cpp
+1682205566 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\gametext.cpp
 	"GameText.h"
 
 1682003801 c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\playerpower.h
@@ -151,4 +150,103 @@
 1682157069 c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\gametext.h
 	"CommonFunc.h"
 	"BaseObject.h"
+
+1682347095 c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\gamefunctions.h
+	<fstream>
+	"CommonFunc.h"
+	"BaseObject.h"
+	"LTexture.h"
+	"Cat.h"
+	"Shark.h"
+	"Bonus.h"
+	"Bullet.h"
+	"GameText.h"
+
+1681978058 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\btl-ltnc24\baseobject.cpp
+	"BaseObject.h"
+
+1682181583 c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\btl-ltnc24\baseobject.h
+	"CommonFunc.h"
+
+1682334590 c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\btl-ltnc24\commonfunc.h
+	<SDL.h>
+	<SDL_image.h>
+	<SDL_mixer.h>
+	<SDL_ttf.h>
+	<iostream>
+	<ctime>
+	<stdlib.h>
+	<vector>
+	<string>
+	"LTexture.h"
+	"SDL_utils.h"
+
+1682264754 c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\btl-ltnc24\ltexture.h
+	"CommonFunc.h"
+
+1680883011 c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\btl-ltnc24\sdl_utils.h
+	"CommonFunc.h"
+
+1681993532 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\btl-ltnc24\bonus.cpp
+	"Bonus.h"
+
+1681916440 c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\btl-ltnc24\bonus.h
+	"Cat.h"
+	"Shark.h"
+
+1682225843 c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\btl-ltnc24\cat.h
+	"BaseObject.h"
+	"Bullet.h"
+	"GameText.h"
+
+1681889261 c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\btl-ltnc24\bullet.h
+	"BaseObject.h"
+
+1682157069 c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\btl-ltnc24\gametext.h
+	"CommonFunc.h"
+	"BaseObject.h"
+
+1682266735 c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\btl-ltnc24\shark.h
+	"CommonFunc.h"
+	"BaseObject.h"
+
+1681981409 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\btl-ltnc24\bullet.cpp
+	"Bullet.h"
+
+1682225843 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\btl-ltnc24\cat.cpp
+	"Cat.h"
+
+1682142803 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\btl-ltnc24\commonfunc.cpp
+	"CommonFunc.h"
+
+1682205566 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\btl-ltnc24\gametext.cpp
+	"GameText.h"
+
+1682264754 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\btl-ltnc24\ltexture.cpp
+	"LTexture.h"
+	"CommonFunc.h"
+
+1682330822 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\btl-ltnc24\main.cpp
+	<chrono>
+	"GameFunctions.h"
+
+1682332301 c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\btl-ltnc24\gamefunctions.h
+	<fstream>
+	"CommonFunc.h"
+	"BaseObject.h"
+	"LTexture.h"
+	"Cat.h"
+	"Shark.h"
+	"Bonus.h"
+	"Bullet.h"
+	"GameText.h"
+
+1682334080 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\btl-ltnc24\shark.cpp
+	"Shark.h"
+
+1682335003 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\btl-ltnc24\gamefunctions.cpp
+	"GameFunctions.h"
+
+1682347816 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\gamefunctions.cpp
+	"GameFunctions.h"
 

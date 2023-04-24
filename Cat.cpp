@@ -165,7 +165,7 @@ void Cat::HandleInputAction(SDL_Event event, SDL_Renderer* src, Mix_Chunk* cat_b
 
 void Cat::ControlBullet(SDL_Renderer* g_renderer)
 {
-    for ( int i=0; i< bullet_list.size(); i++ )
+    for ( int i=0; i< (int)bullet_list.size(); i++ )
     {
             if( bullet_list[i]->GetIsMove() )
             {
@@ -239,3 +239,4 @@ void Cat::RemoveBullet(const int& idx)
 		}
 	}
 }
+

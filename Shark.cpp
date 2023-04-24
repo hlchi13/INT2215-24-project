@@ -10,6 +10,9 @@ Shark::Shark()
     shark_w = 2.5*64;
     shark_h = 2.5*37;
 
+    rect_.w = shark_w;
+    rect_.h = shark_h;
+    num = rand()%2;
 }
 
 
@@ -57,31 +60,40 @@ void Shark::SetAnimation()
 }
 void Shark::ShowSharkAnimation(SDL_Renderer* des)
 {
-    LoadImg("img//sharksheet.png", des);
+    bool ret =LoadImg("img//sharksheet.png", des);
+    if (!ret) cout << "fail";
+    else {
     frame_++;
     if (frame_>=7) frame_= 0;
 
     SDL_Rect* current_clip = &frame_shark[frame_];
     SDL_Rect shark_rect = { rect_.x, rect_.y, shark_w,shark_h }; // o toa do nao voi chieu dai chieu rong
     SDL_RenderCopy(des, p_object, current_clip, &shark_rect);
+    }
 }
 
 void Shark::HandleMove()
 {
     rect_.x -= x_val;
+    if (rect_.x < -shark_w) {
+        rect_.x = SCREEN_WIDTH + 2*shark_w;
+    }
     rect_.y += y_val;
-
+    if (rect_.y < 20) {
+        rect_.y = 20;
+        rect_.y += y_val;
+    } else if (rect_.y + shark_h > SCREEN_HEIGHT)
+    {
+        rect_.y = SCREEN_HEIGHT - shark_h;
+        rect_.y -= y_val;
+    }
     rect_.w = shark_w;
     rect_.h = shark_h;
 }
 
 void Shark::Reset(const int &x_border)
 {
-    num_of_shark++;
-    if (num_of_shark <= SHARK_NUM/2) {
-        rect_.x = x_border;
-        rect_.y = rand()%400;
-    }
-
+    rect_.x = x_border;
+    rect_.y = rand()%400;
 }
 

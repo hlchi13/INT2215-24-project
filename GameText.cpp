@@ -41,7 +41,7 @@ string GameText::ConvertIntToString(){
     string stringText ;
     if(v<=0) stringText = '0' ;
     while(v){
-        stringText =(char)(v%10+48) + stringText ;
+        stringText =(char)(v%10+'0') + stringText ;
         v/=10;
     }
     return stringText ;
@@ -49,7 +49,7 @@ string GameText::ConvertIntToString(){
 
 void GameText::ShowNum (TTF_Font *gFont, SDL_Color textColor, SDL_Renderer *gRenderer)
 {
-    if (LoadText(gFont,ConvertIntToString(),textColor,gRenderer ) )
+    if (LoadText(gFont,ConvertIntToString(),textColor,gRenderer))
     {
         SDL_RenderCopy(gRenderer,p_object,NULL,&rect_);;
     }
