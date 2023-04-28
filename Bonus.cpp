@@ -2,29 +2,35 @@
 
 Bonus::Bonus()
 {
-    rect_.x = SCREEN_WIDTH + 10;
-    rect_.y = rand()%400 + 20;
+    rect_.x = SCREEN_WIDTH;
+    rect_.y = rand()%400+20;
     rect_.w = BONUS_WIDTH;
-    rect_.h = BONUS_HEIGHT;
-
-
-    switch(num)
-    {
-    case 1:
-        random_fish = "img//fish1.png";
-        break;
-    case 2:
-        random_fish = "img//fish2.png";
-        break;
-    case 3:
-        random_fish = "img//fish3.png";
-        break;
-    }
+    rect_.h = BONUS_WIDTH;
 }
 
+void Bonus::SetType(int type)
+{
+    type_ = type;
+    switch(type_)
+    {
+    case 1:
+        random_fish = "img//fish_pink.png";
+        break;
+    case 2:
+        random_fish = "img//fish_blue.png";
+        break;
+    case 3:
+        random_fish = "img//fish_yellow.png";
+        break;
+    }
+
+}
 void Bonus::HandleMove()
 {
-    rect_.x -= 10;
+    rect_.x -= 15;
+    //if(rect_.x < - BONUS_WIDTH) rect_.x = SCREEN_WIDTH + 10;
+    rect_.w = BONUS_WIDTH;
+    rect_.h = BONUS_HEIGHT;
 }
 void Bonus::ShowBonus(SDL_Renderer* des)
 {
@@ -33,5 +39,12 @@ void Bonus::ShowBonus(SDL_Renderer* des)
     SDL_RenderCopy(des, p_object, NULL, &fish_rect);
 }
 
+void Bonus::HandleCount()
+{
+    count_++;
+    if (count_ >= MAX_COUNT) {
+        is_shown = false;
+    }
+}
 
 

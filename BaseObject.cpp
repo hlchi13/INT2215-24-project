@@ -13,20 +13,20 @@ BaseObject::~BaseObject()
     Free();
 }
 
-bool BaseObject::LoadImg(string path, SDL_Renderer* screen){
+bool BaseObject::LoadImg(std::string path, SDL_Renderer* screen){
     Free();
 	SDL_Texture* new_texture = NULL;
 
 	SDL_Surface* load_surface = IMG_Load(path.c_str());
 	if (load_surface == NULL) {
-        cout << "fail";
+        cout << "Unable to load image " << path << " SDL_image Error: " << IMG_GetError();
         return false;
 	}
 	{
 		new_texture = SDL_CreateTextureFromSurface(screen, load_surface);
 		if (new_texture == NULL)
 		{
-		    cout << "Fail to load img";
+		    cout << "Unable to create texture from " << path << " SDL Error: " << SDL_GetError();
 			return false;
 		}
 		SDL_FreeSurface(load_surface);
@@ -38,11 +38,6 @@ bool BaseObject::LoadImg(string path, SDL_Renderer* screen){
 
 void BaseObject::ShowBackground(SDL_Renderer* des)
 {
-    rect_screen.x = 0;
-    rect_screen.y = 0;
-    rect_screen.w = SCREEN_WIDTH;
-    rect_screen.h = SCREEN_HEIGHT;
-
     SDL_RenderCopy(des, p_object,NULL, &rect_screen);
 }
 void BaseObject::Free() {

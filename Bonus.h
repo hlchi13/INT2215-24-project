@@ -4,9 +4,7 @@
 #include "Cat.h"
 #include "Shark.h"
 
-#define BONUS_WIDTH 60
-#define BONUS_HEIGHT 30
-
+const int MAX_COUNT = 3;
 class Bonus : public BaseObject
 {
 public:
@@ -14,14 +12,16 @@ public:
     //~Bonus();
     void HandleMove();
     void ShowBonus(SDL_Renderer* des);
+    void SetType(int type);
+    int GetType() {return type_;};
+    void SetIsShown(bool x) {is_shown = x;};
+    bool GetIsShown() {return is_shown;};
+    void HandleCount();
 private:
     int x_val;
-    int y_val;
-
-    int width_ = 110;
-    int height_= 50;
-
-    int num = rand()%3+1;
+    bool is_shown = true;
+    int type_;
+    int count_= 0;
     string random_fish;
 
 };

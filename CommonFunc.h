@@ -14,10 +14,13 @@
 
 #include"LTexture.h"
 using namespace std;
+const int SCREEN_WIDTH = 800;
+const int SCREEN_HEIGHT = 500;
+
 static SDL_Window* g_window = NULL;
 static SDL_Renderer* g_screen = NULL;
 static SDL_Event g_event;
-static SDL_Rect rect_screen;
+static SDL_Rect rect_screen = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
 
 static Mix_Music* background_ = NULL;
 static Mix_Music* intro_ = NULL;
@@ -38,29 +41,29 @@ const SDL_Color color_end = {244, 10, 10};
 const SDL_Color color_select = {192, 66, 138};
 const SDL_Color color_exit = {255, 0, 0};
 
-const int SCREEN_WIDTH = 800;
-const int SCREEN_HEIGHT = 500;
 const int SHARK_NUM = 30;
-const int FPS = 20;
-
+const int FPS = 25;
 const int INJURED_SCORE = - 150;
 const int KILL_SHARK_SCORE = 100;
-const int GET_BONUS_YELLOW_SCORE = 20;
-const int GET_BONUS_RED_SCORE = 40;
-const int GET_BONUS_BLUE_SCORE = 60;
-
-const int LIFES = 3;
+const int GET_BONUS_SCORE_PINK = 10;
+const int GET_BONUS_SCORE = 20;
+const int LIFES = 5;
 const int MAX_INJURED = LIFES;
 
-const int SPEED_THREAT1 = 10;
-const int SPEED_THREAT2 = 15;
-const int SPEED_THREAT3 = 20;
-const int SPEED_THREAT4 = 30;
+const int CAT_WIDTH = 64*1.5;
+const int CAT_HEIGHT = 48*1.5;
+const int SHARK_WIDTH = 160;
+const int SHARK_HEIGHT = 92;
+const int BONUS_WIDTH = 60;
+const int BONUS_HEIGHT = 30;
+
+const int SHARK_SPEED1 = 10;
+const int SHARK_SPEED2 = 15;
+const int SHARK_SPEED3 = 20;
 
 namespace CommonFunc
 {
     SDL_Texture* LoadImage (std::string path, SDL_Renderer* ren);
-	void ApplySurface(SDL_Renderer *renderer, SDL_Texture *src, int x, int y, int w, int h);
 	bool CheckCollision (const SDL_Rect &obj1, const SDL_Rect &obj2);
 	void CleanUp();
 }

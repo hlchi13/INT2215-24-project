@@ -5,6 +5,7 @@
 #include "Bullet.h"
 #include "GameText.h"
 
+const int MAX_INJURED_TIMES = LIFES;
 class Cat : public BaseObject
 {
 public:
@@ -22,7 +23,8 @@ public:
 	vector <Bullet*> GetBulletList() {  return bullet_list; } ;
 	void RemoveBullet(const int& idx);
 
-    void ShowInjuredAnimation(SDL_Renderer* des);
+	bool LoadInjured(string path, SDL_Renderer* ren);
+    void ShowInjured(SDL_Renderer* des);
     bool GetShowInjured() {return is_shown_injured;};
     void SetShownInjured(bool x) {is_shown_injured = x;};
 
@@ -33,13 +35,11 @@ private:
     vector <Bullet*> bullet_list;
     SDL_Rect frame_idle[10];
     SDL_Rect frame_injured[10];
-
-    int cat_w;
-    int cat_h;
+    SDL_Texture* injured;
 
     int frame_ = 0;
     int frame_injured_;
-    int count_injured_times = 0;
+    int count_injured_times_ = 0;
     bool is_shown_injured = false;
 
 };

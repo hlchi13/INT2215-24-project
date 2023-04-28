@@ -2,7 +2,7 @@
 #define LTEXTURE_H_INCLUDED
 
 #include "CommonFunc.h"
-
+#include "BaseObject.h"
 class LTexture
 {
 public:

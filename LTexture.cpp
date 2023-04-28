@@ -1,5 +1,4 @@
 #include "LTexture.h"
-#include "CommonFunc.h"
 
 LTexture::LTexture(SDL_Renderer* gRenderer, SDL_Rect rect_)
 {
@@ -39,7 +38,7 @@ void LTexture::setColor( Uint8 red, Uint8 green, Uint8 blue )
 }
 void LTexture::setAlpha( Uint8 alpha )
 {
-	SDL_SetTextureAlphaMod( gTexture, alpha );
+	SDL_SetTextureAlphaMod(gTexture, alpha);
 }
 
 void LTexture::render()

@@ -3,14 +3,13 @@
 Cat::Cat()
 {
 	frame_ = 0;
-
-    cat_w = 64*1.5;
-    cat_h = 48*1.5;
-
     rect_.x = 0;
-    rect_.y = SCREEN_HEIGHT/2 - cat_h/2;
+    rect_.y = SCREEN_HEIGHT/2 - CAT_HEIGHT/2;
+    rect_.w = CAT_WIDTH;
+    rect_.h = CAT_HEIGHT;
 
-	count_injured_times = 0;
+	count_injured_times_ = 0;
+	is_shown_injured = false;
 
 	x_pos = rect_.x;
 	y_pos = rect_.y;
@@ -115,6 +114,7 @@ Cat::Cat()
     frame_injured[9].y = 0;
     frame_injured[9].w = 64;
     frame_injured[9].h = 48;
+
 }
 Cat::~Cat()
 {
@@ -126,16 +126,16 @@ void Cat::HandleInputAction(SDL_Event event, SDL_Renderer* src, Mix_Chunk* cat_b
     if (event.type == SDL_KEYDOWN) {
         switch(event.key.keysym.sym) {
             case SDLK_UP:
-                y_pos -= cat_h/4;
+                y_pos -= CAT_HEIGHT/4;
                 break;
             case SDLK_DOWN:
-                y_pos += cat_h/4;
+                y_pos += CAT_HEIGHT/4;
                 break;
             case SDLK_LEFT:
-                x_pos -= cat_w/5;
+                x_pos -= CAT_WIDTH/5;
                 break;
             case SDLK_RIGHT:
-                x_pos += cat_w/5;
+                x_pos += CAT_WIDTH/5;
                 break;
             case SDLK_SPACE: {
                 Mix_PlayChannel(-1, cat_bullet, 0);
@@ -143,23 +143,16 @@ void Cat::HandleInputAction(SDL_Event event, SDL_Renderer* src, Mix_Chunk* cat_b
                 Bullet* bullet_ = new Bullet();
                 bool ret = bullet_->LoadImg("img//bullet.png", src);
                 if(ret) {
-                bullet_->SetRect(this->GetRect().x + 60, this->GetRect().y+cat_h/2);
+                bullet_->SetRect(this->GetRect().x + 60, this->GetRect().y+CAT_HEIGHT/2);
                 bullet_->SetIsMove(true);
                 bullet_list.push_back(bullet_);
                 }
                 else cout << "Fail";
-        }
+            }
                 break;
             default:
                 break;
         }
-    }
-    if (event.type == SDL_KEYDOWN) {
-        if (event.key.keysym.sym == SDLK_SPACE) {
-
-
-
-            }
     }
 }
 
@@ -184,44 +177,47 @@ void Cat::HandleMove()
     rect_.x = x_pos;
     rect_.y = y_pos;
 
-    SetWidth(cat_w, cat_h);
+    //SetWidth(CAT_WIDTH, CAT_HEIGHT);
     if (rect_.x < 0) rect_.x = 0;
-    if (rect_.y < 10) rect_.y = 10 ;
-    if (rect_.x + cat_w > SCREEN_WIDTH - 50)
-        rect_.x = SCREEN_WIDTH - 64;
-    if (rect_.y + cat_h > SCREEN_HEIGHT)
-        rect_.y = SCREEN_HEIGHT - 50;
+    if (rect_.y < 25) rect_.y = 25 ;
+    if (rect_.x + CAT_WIDTH > SCREEN_WIDTH)
+        rect_.x = SCREEN_WIDTH - CAT_WIDTH;
+    if (rect_.y + CAT_HEIGHT > SCREEN_HEIGHT)
+        rect_.y = SCREEN_HEIGHT -CAT_HEIGHT;
 }
 
 void Cat::ShowAnimation(SDL_Renderer* des)
 {
-    LoadImg("img//cat_idle.png", des);
-	frame_ ++;
-    if (frame_>=10)
-        frame_ = 0;
-
-    SDL_Rect* current_clip = &frame_idle[frame_];// trang thai hien tai o frame thu frame
-    SDL_Rect cat_rect = { rect_.x, rect_.y, cat_w,cat_h };
-    SDL_RenderCopy(des, p_object, current_clip, &cat_rect);
-    frame_injured_ = frame_;
+    SDL_RenderCopy(des, p_object, &frame_idle[frame_], &rect_);
+    frame_ = (frame_+1)%10; // tra ve so nho hon 10 va tang them 1 sau moi lan
 }
 
-void Cat::ShowInjuredAnimation(SDL_Renderer* des)
+bool Cat::LoadInjured(string path, SDL_Renderer* ren)
 {
-    if (LoadImg("img//cat_hurt.png", des)){
-
-    frame_injured_++;
-    SDL_Rect cat_rect = { rect_.x, rect_.y, cat_w,cat_h };
-    SDL_RenderCopy(des, p_object, &frame_injured[frame_injured_], &cat_rect);
-    count_injured_times++;
-    /**if (frame_injured_>=10) {
-        ShowAnimation(des);
-        return ;
-    }*/
-    if (count_injured_times > MAX_INJURED) {
-        count_injured_times = 0;
-        is_shown_injured = false;
+    injured = CommonFunc::LoadImage(path.c_str(), ren);
+    if (injured == NULL) {
+        return false;
     }
+    return true;
+}
+void Cat::ShowInjured(SDL_Renderer* des)
+{
+    /**
+    frame_injured_++;
+    if (frame_injured_>= 10) {
+        frame_injured_ = 0;
+        //is_shown_injured = false;
+    }
+    SDL_Rect cat_rect = { rect_.x, rect_.y, cat_w,cat_h };
+    SDL_RenderCopy(des, p_object, &frame_injured[1], &cat_rect);*/
+     SDL_RenderCopy(des,injured,&frame_injured[frame_] , &rect_);
+     //frame_ = (frame_+1)%10;
+    //SDL_RenderPresent(des);
+    count_injured_times_++;
+    if ( count_injured_times_ >= MAX_INJURED_TIMES )
+    {
+        is_shown_injured = false ;
+        count_injured_times_ = 0 ;
     }
 }
 

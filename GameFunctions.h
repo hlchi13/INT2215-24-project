@@ -24,24 +24,25 @@ public:
     void InitLife();
     void ShowLife();
     void CreateThreatList ();
-    std::vector<Shark*> MakeThreatList();
+    void MakeBonusList();
+    void ManageBonusObjectList();
     void Run();
     void close();
 
 private:
-    int frameDelay = 1000/FPS;
-    Uint32 frameStart;
-    int frameTime;
     bool is_quit;
     GameText text_g_o, textX, Your_Score, High_ScoreText ;
     Cat cat_obj;
     Cat cat_injured;
-    vector<Shark*> SharksList;
     Cat heart;
-    Bonus* fish;
+
+    vector<Shark*> SharksList;
+    vector<Bonus*> BonusObjectList;
+    Bonus fish;
     GameText Score, number_life, High_Score;// number
 
     BaseObject g_background;
+    SDL_Texture* background_g;
     int high_score;
 
 };

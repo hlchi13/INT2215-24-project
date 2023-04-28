@@ -16,16 +16,6 @@ SDL_Texture* CommonFunc::LoadImage(std::string path, SDL_Renderer* ren)
     return newTexture;
 }
 
-void CommonFunc::ApplySurface(SDL_Renderer* renderer, SDL_Texture* src, int x, int y, int w, int h)
-{
-    SDL_Rect obj;
-    obj.x = x;
-    obj.y = y;
-    obj.w = w;
-    obj.h = h;
-    SDL_RenderCopy(renderer, src, NULL, &obj);
-    SDL_RenderPresent(renderer);
-}
 void CommonFunc::CleanUp() {
 	SDL_DestroyWindow(g_window);
 	SDL_DestroyRenderer(g_screen);
@@ -34,10 +24,10 @@ void CommonFunc::CleanUp() {
 
 bool CommonFunc::CheckCollision(const SDL_Rect &obj1, const SDL_Rect &obj2) // 1 main 2 threat
 {
-    int left_1 = obj1.x - 9;
-    int right_1 = obj1.x + obj1.w - 8; // chieu dai that cua vat
-    int top_1 = obj1.y - 4;
-    int bot_1 = obj1.y + obj1.h - 8;
+    int left_1 = obj1.x;
+    int right_1 = obj1.x + obj1.w; // chieu dai that cua vat
+    int top_1 = obj1.y;
+    int bot_1 = obj1.y + obj1.h;
 
     int left_2 = obj2.x;
     int right_2 = obj2.x + obj2.w;

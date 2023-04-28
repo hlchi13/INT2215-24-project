@@ -13,8 +13,7 @@ public:
     void SetValue(int val) {value_ = val ;} ;
     int GetValue(){return value_ ;} ;
     void IncreaseValue(int x) {   value_+=x;
-                                  if (value_<=0) value_ = 0; } ;//score
-
+                                  if (value_<=0) value_ = 0; } ;//score va life
 private:
     string ConvertIntToString();
     int value_ = 0;

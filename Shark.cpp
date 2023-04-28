@@ -7,22 +7,12 @@ Shark::Shark()
     x_val = 0;
     y_val = 0;
 
-    shark_w = 2.5*64;
-    shark_h = 2.5*37;
-
-    rect_.w = shark_w;
-    rect_.h = shark_h;
+    rect_.x = SCREEN_WIDTH + 10;
+    rect_.y = rand()%(SCREEN_HEIGHT - SHARK_HEIGHT) + 25;
+    rect_.w = SHARK_WIDTH;
+    rect_.h = SHARK_HEIGHT;
     num = rand()%2;
-}
 
-
-Shark::~Shark()
-{
-
-}
-
-void Shark::SetAnimation()
-{
     frame_shark[0].x = 0;
     frame_shark[0].y = 0;
     frame_shark[0].w = 64;
@@ -58,42 +48,38 @@ void Shark::SetAnimation()
     frame_shark[6].w = 64;
     frame_shark[6].h = 37;
 }
+
+
+Shark::~Shark()
+{
+
+}
+
 void Shark::ShowSharkAnimation(SDL_Renderer* des)
 {
-    bool ret =LoadImg("img//sharksheet.png", des);
-    if (!ret) cout << "fail";
-    else {
-    frame_++;
-    if (frame_>=7) frame_= 0;
-
-    SDL_Rect* current_clip = &frame_shark[frame_];
-    SDL_Rect shark_rect = { rect_.x, rect_.y, shark_w,shark_h }; // o toa do nao voi chieu dai chieu rong
-    SDL_RenderCopy(des, p_object, current_clip, &shark_rect);
-    }
+    //SDL_Rect shark_rect = { rect_.x, rect_.y, shark_w,shark_h }; // o toa do nao voi chieu dai chieu rong
+    SDL_RenderCopy(des, p_object, &frame_shark[frame_], &rect_);
+    frame_ = (frame_+1)%7;
 }
 
 void Shark::HandleMove()
 {
     rect_.x -= x_val;
-    if (rect_.x < -shark_w) {
-        rect_.x = SCREEN_WIDTH + 2*shark_w;
-    }
-    rect_.y += y_val;
-    if (rect_.y < 20) {
+    /*if (rect_.y < 20) {
         rect_.y = 20;
         rect_.y += y_val;
-    } else if (rect_.y + shark_h > SCREEN_HEIGHT)
+    } */
+    if (rect_.y + SHARK_HEIGHT > SCREEN_HEIGHT)
     {
-        rect_.y = SCREEN_HEIGHT - shark_h;
-        rect_.y -= y_val;
+        rect_.y = SCREEN_HEIGHT - SHARK_HEIGHT;
     }
-    rect_.w = shark_w;
-    rect_.h = shark_h;
+    rect_.y += y_val;
+    SetWidth(SHARK_WIDTH, SHARK_HEIGHT);
 }
 
 void Shark::Reset(const int &x_border)
 {
     rect_.x = x_border;
-    rect_.y = rand()%400;
+    rect_.y = rand()%400 + 25;
 }
 
