@@ -65,10 +65,6 @@ void Shark::ShowSharkAnimation(SDL_Renderer* des)
 void Shark::HandleMove()
 {
     rect_.x -= x_val;
-    /*if (rect_.y < 20) {
-        rect_.y = 20;
-        rect_.y += y_val;
-    } */
     if (rect_.y + SHARK_HEIGHT > SCREEN_HEIGHT)
     {
         rect_.y = SCREEN_HEIGHT - SHARK_HEIGHT;

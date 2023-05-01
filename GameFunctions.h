@@ -14,36 +14,40 @@
 class GameFunctions : public BaseObject
 {
 public:
+    GameFunctions();
+    ~GameFunctions();
     bool InitData();
     bool CheckMouse(int &x, int &y, SDL_Rect rect_mouse);
-    int ShowIntro();
+    bool CheckToIncreaseScore(SDL_Rect cat, SDL_Rect shark);
+    void ShowIntro();
     int ChooseBackGround();
     bool LoadBackGround(const int& num);
-    void GetHighScore();
-    void InitEnd();
     void InitLife();
     void ShowLife();
     void CreateThreatList ();
     void MakeBonusList();
     void ManageBonusObjectList();
+    void GetHighScore();
+    void Reset();
+    void InitEnd();
     void Run();
     void close();
 
 private:
-    bool is_quit;
-    GameText text_g_o, textX, Your_Score, High_ScoreText ;
+    bool is_quit, running;
+    GameText Game_over, textX, Your_Score, High_ScoreText;
     Cat cat_obj;
-    Cat cat_injured;
     Cat heart;
 
     vector<Shark*> SharksList;
-    vector<Bonus*> BonusObjectList;
-    Bonus fish;
+    vector<Bonus*> BonusList;
     GameText Score, number_life, High_Score;// number
 
     BaseObject g_background;
     SDL_Texture* background_g;
     int high_score;
+    enum Menu {INTRO, HTP, CHOOSE};
+    Menu menu_num;
 
 };
 #endif // GAME_H_INCLUDED

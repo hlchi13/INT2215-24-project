@@ -3,6 +3,8 @@
 Cat::Cat()
 {
 	frame_ = 0;
+	x_val_ = 0;
+	y_val_ = 0;
     rect_.x = 0;
     rect_.y = SCREEN_HEIGHT/2 - CAT_HEIGHT/2;
     rect_.w = CAT_WIDTH;
@@ -10,10 +12,6 @@ Cat::Cat()
 
 	count_injured_times_ = 0;
 	is_shown_injured = false;
-
-	x_pos = rect_.x;
-	y_pos = rect_.y;
-
     frame_idle[0].x = 0;
     frame_idle[0].y = 0;
     frame_idle[0].w = 64;
@@ -121,23 +119,42 @@ Cat::~Cat()
 
 }
 
-void Cat::HandleInputAction(SDL_Event event, SDL_Renderer* src, Mix_Chunk* cat_bullet)
+void Cat::HandleInputAction(SDL_Event event, SDL_Renderer* src, Mix_Chunk* cat_bullet,
+                            GameText &Score, GameText &number_life)
 {
-    if (event.type == SDL_KEYDOWN) {
-        switch(event.key.keysym.sym) {
-            case SDLK_UP:
-                y_pos -= CAT_HEIGHT/4;
+    if(event.type==SDL_KEYUP && event.key.repeat==0){
+
+      switch(event.key.keysym.sym){
+         case SDLK_UP:
+             y_val_+= CAT_SPEED;
+             break;
+         case SDLK_DOWN:
+            y_val_-= CAT_SPEED;
+            break;
+         case SDLK_LEFT:
+             x_val_+= CAT_SPEED;
+             break;
+         case SDLK_RIGHT:
+            x_val_-= CAT_SPEED;
+             break;
+        }
+       }
+      else if(event.type==SDL_KEYDOWN && event.key.repeat==0){
+          switch(event.key.keysym.sym){
+             case SDLK_UP:
+                 y_val_-=CAT_SPEED;
+                 break;
+             case SDLK_DOWN:
+                 y_val_+=CAT_SPEED;
                 break;
-            case SDLK_DOWN:
-                y_pos += CAT_HEIGHT/4;
-                break;
-            case SDLK_LEFT:
-                x_pos -= CAT_WIDTH/5;
-                break;
-            case SDLK_RIGHT:
-                x_pos += CAT_WIDTH/5;
-                break;
-            case SDLK_SPACE: {
+             case SDLK_LEFT:
+                 x_val_-=CAT_SPEED;
+                 break;
+             case SDLK_RIGHT:
+                x_val_+=CAT_SPEED;
+                 break;
+             case SDLK_SPACE:
+                if (Score.GetValue() >= 100 || number_life.GetValue() <= 3) {
                 Mix_PlayChannel(-1, cat_bullet, 0);
 
                 Bullet* bullet_ = new Bullet();
@@ -148,12 +165,10 @@ void Cat::HandleInputAction(SDL_Event event, SDL_Renderer* src, Mix_Chunk* cat_b
                 bullet_list.push_back(bullet_);
                 }
                 else cout << "Fail";
-            }
-                break;
-            default:
-                break;
-        }
-    }
+                 }
+             break;
+          }
+      }
 }
 
 void Cat::ControlBullet(SDL_Renderer* g_renderer)
@@ -174,10 +189,8 @@ void Cat::ControlBullet(SDL_Renderer* g_renderer)
 
 void Cat::HandleMove()
 {
-    rect_.x = x_pos;
-    rect_.y = y_pos;
-
-    //SetWidth(CAT_WIDTH, CAT_HEIGHT);
+    rect_.x +=x_val_;
+    rect_.y += y_val_;
     if (rect_.x < 0) rect_.x = 0;
     if (rect_.y < 25) rect_.y = 25 ;
     if (rect_.x + CAT_WIDTH > SCREEN_WIDTH)
@@ -202,17 +215,8 @@ bool Cat::LoadInjured(string path, SDL_Renderer* ren)
 }
 void Cat::ShowInjured(SDL_Renderer* des)
 {
-    /**
-    frame_injured_++;
-    if (frame_injured_>= 10) {
-        frame_injured_ = 0;
-        //is_shown_injured = false;
-    }
-    SDL_Rect cat_rect = { rect_.x, rect_.y, cat_w,cat_h };
-    SDL_RenderCopy(des, p_object, &frame_injured[1], &cat_rect);*/
-     SDL_RenderCopy(des,injured,&frame_injured[frame_] , &rect_);
-     //frame_ = (frame_+1)%10;
-    //SDL_RenderPresent(des);
+    SDL_RenderCopy(des,injured,&frame_injured[frame_] , &rect_);
+    frame_ = (frame_+1)%10;
     count_injured_times_++;
     if ( count_injured_times_ >= MAX_INJURED_TIMES )
     {

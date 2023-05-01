@@ -5,13 +5,15 @@
 #include "Bullet.h"
 #include "GameText.h"
 
-const int MAX_INJURED_TIMES = LIFES;
+const int MAX_INJURED_TIMES = 10;
+const int MAIN_SPEED = 15;
 class Cat : public BaseObject
 {
 public:
     Cat();
     ~Cat();
-    void HandleInputAction(SDL_Event event, SDL_Renderer* src, Mix_Chunk* cat_bullet);
+    void HandleInputAction(SDL_Event event, SDL_Renderer* src, Mix_Chunk* cat_bullet,
+                           GameText &Score, GameText &number_life);
     void HandleMove();
     void ShowAnimation(SDL_Renderer* des);
 
@@ -29,16 +31,14 @@ public:
     void SetShownInjured(bool x) {is_shown_injured = x;};
 
 private:
-    int x_pos; // vi tri cua vat sau khi di chuyen
-    int y_pos;
-
+    int x_val_;
+    int y_val_;
     vector <Bullet*> bullet_list;
     SDL_Rect frame_idle[10];
     SDL_Rect frame_injured[10];
     SDL_Texture* injured;
 
-    int frame_ = 0;
-    int frame_injured_;
+    int frame_;
     int count_injured_times_ = 0;
     bool is_shown_injured = false;
 

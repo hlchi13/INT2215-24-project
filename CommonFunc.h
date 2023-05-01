@@ -43,12 +43,12 @@ const SDL_Color color_exit = {255, 0, 0};
 
 const int SHARK_NUM = 30;
 const int FPS = 25;
-const int INJURED_SCORE = - 150;
-const int KILL_SHARK_SCORE = 100;
-const int GET_BONUS_SCORE_PINK = 10;
-const int GET_BONUS_SCORE = 20;
+const int AVOID_SCORE = 10;
+const int INJURED_SCORE = -100;
+const int KILL_SHARK_SCORE = 50;
+const int GET_BONUS_SCORE_PINK = 5;
+const int GET_BONUS_SCORE = 10;
 const int LIFES = 5;
-const int MAX_INJURED = LIFES;
 
 const int CAT_WIDTH = 64*1.5;
 const int CAT_HEIGHT = 48*1.5;
@@ -57,7 +57,8 @@ const int SHARK_HEIGHT = 92;
 const int BONUS_WIDTH = 60;
 const int BONUS_HEIGHT = 30;
 
-const int SHARK_SPEED1 = 10;
+const int CAT_SPEED = 10;
+const int SHARK_SPEED1 = 15;
 const int SHARK_SPEED2 = 15;
 const int SHARK_SPEED3 = 20;
 
