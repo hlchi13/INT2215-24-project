@@ -154,7 +154,7 @@ void Cat::HandleInputAction(SDL_Event event, SDL_Renderer* src, Mix_Chunk* cat_b
                 x_val_+=CAT_SPEED;
                  break;
              case SDLK_SPACE:
-                if (Score.GetValue() >= 100 || number_life.GetValue() <= 3) {
+                if (Score.GetValue() >= 500 || number_life.GetValue() <=3) {
                 Mix_PlayChannel(-1, cat_bullet, 0);
 
                 Bullet* bullet_ = new Bullet();

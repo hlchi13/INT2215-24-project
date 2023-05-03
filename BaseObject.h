@@ -11,7 +11,6 @@ public:
     bool LoadImg (std::string path, SDL_Renderer* screen);
     void SetRect (const int& x, const int& y) {rect_.x = x; rect_.y = y;};
     SDL_Rect GetRect() { return rect_;	}
-	void ShowBackground(SDL_Renderer* des);
 	void Show(SDL_Renderer* src);
 	void Free();
 

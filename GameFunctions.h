@@ -10,44 +10,46 @@
 #include "Bonus.h"
 #include "Bullet.h"
 #include "GameText.h"
-
+enum Menu {INTRO, HTP, CHOOSE};
+enum Gameplay {PLAY, GAMEOVER};
 class GameFunctions : public BaseObject
 {
 public:
     GameFunctions();
     ~GameFunctions();
     bool InitData();
+    void SetIsQuit (bool x) {is_quit = x;};
     bool CheckMouse(int &x, int &y, SDL_Rect rect_mouse);
-    bool CheckToIncreaseScore(SDL_Rect cat, SDL_Rect shark);
-    void ShowIntro();
-    int ChooseBackGround();
+    bool ShowIntro();
     bool LoadBackGround(const int& num);
-    void InitLife();
     void ShowLife();
     void CreateThreatList ();
     void MakeBonusList();
-    void ManageBonusObjectList();
+    void ManageBonusList();
     void GetHighScore();
-    void Reset();
     void InitEnd();
+    void Replay();
     void Run();
+    bool ShowEnd();
     void close();
 
 private:
     bool is_quit, running;
-    GameText Game_over, textX, Your_Score, High_ScoreText;
+    GameText Game_over, textX, Your_Score, High_ScoreText, show_bullet;
     Cat cat_obj;
     Cat heart;
 
+    SDL_Texture* g_background;
     vector<Shark*> SharksList;
     vector<Bonus*> BonusList;
     GameText Score, number_life, High_Score;// number
 
-    BaseObject g_background;
-    SDL_Texture* background_g;
     int high_score;
-    enum Menu {INTRO, HTP, CHOOSE};
-    Menu menu_num;
+    Menu menu;
+    Gameplay game;
+    int frameDelay = 1000/FPS;
+    Uint32 frameStart;
+    int frameTime;
 
 };
 #endif // GAME_H_INCLUDED

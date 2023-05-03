@@ -65,17 +65,20 @@ void Shark::ShowSharkAnimation(SDL_Renderer* des)
 void Shark::HandleMove()
 {
     rect_.x -= x_val;
+    int num = rand()%2;
+    switch(num) {
+        case 0:
+            rect_.y +=y_val;
+            break;
+        case 1:
+            rect_.y -= y_val;
+            break;
+    }
     if (rect_.y + SHARK_HEIGHT > SCREEN_HEIGHT)
     {
         rect_.y = SCREEN_HEIGHT - SHARK_HEIGHT;
     }
-    rect_.y += y_val;
+    if (rect_.y < 40) rect_.y = 40;
     SetWidth(SHARK_WIDTH, SHARK_HEIGHT);
-}
-
-void Shark::Reset(const int &x_border)
-{
-    rect_.x = x_border;
-    rect_.y = rand()%400 + 25;
 }
 

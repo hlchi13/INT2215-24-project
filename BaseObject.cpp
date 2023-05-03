@@ -36,10 +36,6 @@ bool BaseObject::LoadImg(std::string path, SDL_Renderer* screen){
 	return p_object != NULL;
 }
 
-void BaseObject::ShowBackground(SDL_Renderer* des)
-{
-    SDL_RenderCopy(des, p_object,NULL, &rect_screen);
-}
 void BaseObject::Free() {
     if (p_object != NULL)
     {

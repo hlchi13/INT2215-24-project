@@ -39,12 +39,6 @@ void Bonus::ShowBonus(SDL_Renderer* des)
     SDL_RenderCopy(des, p_object, NULL, &fish_rect);
 }
 
-void Bonus::HandleCount()
-{
-    count_++;
-    if (count_ >= MAX_COUNT) {
-        is_shown = false;
-    }
-}
+
 
 

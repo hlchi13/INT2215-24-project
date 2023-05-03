@@ -8,6 +8,17 @@ int main(int argc, char* argv[])
     GameFunctions game;
     if (game.InitData() == false)
 		return 0;
-    game.Run();
+    bool re_play = 1;
+    while(re_play) {
+        game.Replay();
+        bool show = game.ShowIntro();
+        if (!show)
+        {
+            break;
+        }
+        game.Run();
+        re_play = game.ShowEnd();
+    }
+
     return 0;
 }
