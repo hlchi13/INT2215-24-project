@@ -43,9 +43,9 @@ const SDL_Color color_exit = {255, 0, 0};
 
 const int SHARK_NUM = 30;
 const int FPS = 25;
-const int AVOID_SCORE = 50;
+const int AVOID_SCORE = 30;
 const int INJURED_SCORE = -100;
-const int KILL_SHARK_SCORE = 30;
+const int KILL_SHARK_SCORE = 50;
 const int GET_BONUS_SCORE_PINK = 10;
 const int GET_BONUS_SCORE = 20;
 const int LIFES = 5;

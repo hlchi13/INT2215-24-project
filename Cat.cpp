@@ -5,6 +5,7 @@ Cat::Cat()
 	frame_ = 0;
 	x_val_ = 0;
 	y_val_ = 0;
+
     rect_.x = 0;
     rect_.y = SCREEN_HEIGHT/2 - CAT_HEIGHT/2;
     rect_.w = CAT_WIDTH;
@@ -122,7 +123,7 @@ Cat::~Cat()
 void Cat::HandleInputAction(SDL_Event event, SDL_Renderer* src, Mix_Chunk* cat_bullet,
                             GameText &Score, GameText &number_life)
 {
-    if(event.type==SDL_KEYUP && event.key.repeat==0){
+    if(event.type==SDL_KEYUP){
 
       switch(event.key.keysym.sym){
          case SDLK_UP:
@@ -139,7 +140,7 @@ void Cat::HandleInputAction(SDL_Event event, SDL_Renderer* src, Mix_Chunk* cat_b
              break;
         }
        }
-      else if(event.type==SDL_KEYDOWN && event.key.repeat==0){
+      if(event.type==SDL_KEYDOWN && event.key.repeat == 0){
           switch(event.key.keysym.sym){
              case SDLK_UP:
                  y_val_-=CAT_SPEED;
@@ -154,7 +155,7 @@ void Cat::HandleInputAction(SDL_Event event, SDL_Renderer* src, Mix_Chunk* cat_b
                 x_val_+=CAT_SPEED;
                  break;
              case SDLK_SPACE:
-                if (Score.GetValue() >= 500 || number_life.GetValue() <=3) {
+                if (Score.GetValue() >= 300 || number_life.GetValue() <=3) {
                 Mix_PlayChannel(-1, cat_bullet, 0);
 
                 Bullet* bullet_ = new Bullet();
@@ -175,7 +176,7 @@ void Cat::ControlBullet(SDL_Renderer* g_renderer)
 {
     for ( int i=0; i< (int)bullet_list.size(); i++ )
     {
-            if( bullet_list[i]->GetIsMove() )
+            if(bullet_list[i]->GetIsMove())
             {
                 bullet_list[i]->Show(g_renderer);
                 bullet_list[i]->HandleMove(SCREEN_WIDTH,SCREEN_HEIGHT);
@@ -227,16 +228,12 @@ void Cat::ShowInjured(SDL_Renderer* des)
 
 void Cat::RemoveBullet(const int& idx)
 {
-	int size = bullet_list.size();
-	if (size > 0 && idx < size)
-	{
-		Bullet* p_bullet = bullet_list.at(idx);
-		bullet_list.erase(bullet_list.begin() + idx);
-		if (p_bullet)
-		{
-			delete p_bullet;
-			p_bullet = NULL;
-		}
-	}
+	Bullet* p_bullet = bullet_list.at(idx);
+    bullet_list.erase(bullet_list.begin() + idx);
+    if (p_bullet)
+    {
+        delete p_bullet;
+        p_bullet = NULL;
+    }
 }
 

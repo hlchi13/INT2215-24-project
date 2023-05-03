@@ -23,7 +23,7 @@ public:
 	void ControlBullet(SDL_Renderer* g_renderer);
 	vector <Bullet*> GetBulletList() {  return bullet_list; } ;
 	void RemoveBullet(const int& idx);
-
+    void set_0_val() {x_val_ = 0; y_val_ = 0;};
 	bool LoadInjured(string path, SDL_Renderer* ren);
     void ShowInjured(SDL_Renderer* des);
     bool GetShowInjured() {return is_shown_injured;};
@@ -39,7 +39,7 @@ private:
 
     int frame_;
     int count_injured_times_ = 0;
-    bool is_shown_injured = false;
+    bool is_shown_injured;
 
 };
 

@@ -12,6 +12,7 @@ public:
     void ShowSharkAnimation (SDL_Renderer* des);
     void SetWidth(const int w, const int h) {rect_.w = w; rect_.h = h;};
     void HandleMove();
+    void Reset(const int &x_border);
     void set_x_val(const int &val) {x_val = val;};
     void set_y_val(const int &val) {y_val = val;};
 

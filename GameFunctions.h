@@ -40,8 +40,9 @@ private:
     Cat heart;
 
     SDL_Texture* g_background;
-    vector<Shark*> SharksList;
+    vector<Shark*> SharkList;
     vector<Bonus*> BonusList;
+    vector<Bullet*> BulletList;
     GameText Score, number_life, High_Score;// number
 
     int high_score;

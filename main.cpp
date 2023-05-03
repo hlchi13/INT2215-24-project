@@ -7,9 +7,9 @@ int main(int argc, char* argv[])
     srand(time(0));
     GameFunctions game;
     if (game.InitData() == false)
-		return 0;
+        return 0;
     bool re_play = 1;
-    while(re_play) {
+    do {
         game.Replay();
         bool show = game.ShowIntro();
         if (!show)
@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
         }
         game.Run();
         re_play = game.ShowEnd();
-    }
+    } while(re_play);
 
     return 0;
 }
