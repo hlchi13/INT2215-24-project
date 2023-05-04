@@ -18,16 +18,13 @@ public:
     GameFunctions();
     ~GameFunctions();
     bool InitData();
-    void SetIsQuit (bool x) {is_quit = x;};
     bool CheckMouse(int &x, int &y, SDL_Rect rect_mouse);
     bool ShowIntro();
     bool LoadBackGround(const int& num);
     void ShowLife();
     void CreateThreatList ();
-    void MakeBonusList();
-    void ManageBonusList();
+    void CreateBonusList();
     void GetHighScore();
-    void InitEnd();
     void Replay();
     void Run();
     bool ShowEnd();

@@ -23,15 +23,15 @@ public:
 	void ControlBullet(SDL_Renderer* g_renderer);
 	vector <Bullet*> GetBulletList() {  return bullet_list; } ;
 	void RemoveBullet(const int& idx);
-    void set_0_val() {x_val_ = 0; y_val_ = 0;};
+    void set_0_val() {x_val = 0; y_val = 0;};
 	bool LoadInjured(string path, SDL_Renderer* ren);
     void ShowInjured(SDL_Renderer* des);
     bool GetShowInjured() {return is_shown_injured;};
     void SetShownInjured(bool x) {is_shown_injured = x;};
 
 private:
-    int x_val_;
-    int y_val_;
+    int x_val;
+    int y_val;
     vector <Bullet*> bullet_list;
     SDL_Rect frame_idle[10];
     SDL_Rect frame_injured[10];

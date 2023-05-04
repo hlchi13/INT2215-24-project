@@ -82,9 +82,3 @@ void Shark::HandleMove()
     SetWidth(SHARK_WIDTH, SHARK_HEIGHT);
 }
 
-void Shark::Reset(const int &x_border)
-{
-    rect_.x = x_border;
-    rect_.y = rand()%400 + 25;
-}
-

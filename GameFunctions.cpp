@@ -66,7 +66,7 @@ bool GameFunctions::InitData()
     textX.SetRect(SCREEN_WIDTH/2 - heart.GetRect().w + 50, heart.GetRect().h/2-textX.GetRect().h/2);
     number_life.SetValue(LIFES);
     number_life.SetRect(SCREEN_WIDTH/2 - heart.GetRect().w+50+heart.GetRect().w, heart.GetRect().h/2-textX.GetRect().h/2);
-    show_bullet.LoadText(g_font, "PRESS SPACE TO SHOUT",color_text, g_screen);
+    show_bullet.LoadText(g_font, "PRESS SPACE TO SHOOT",color_text, g_screen);
     show_bullet.SetRect(SCREEN_WIDTH/2 - show_bullet.GetRect().w/2, 25);
 	return true;
 }
@@ -116,30 +116,27 @@ bool GameFunctions::ShowIntro()
     shark_intro.SetWidth(192, 111);
     Mix_PlayMusic(intro_ , 10);
 
-    const int text_n = 3;
-    GameText intro_t[text_n];
-    string text[text_n] = {"Play", "How To Play", "Quit" };
-    SDL_Rect rect_intro[text_n];
-    bool selected[text_n] = {0, 0, 0};
-    for (int i = 0; i < text_n; i++) {
+    GameText intro_t[3];
+    string text[3] = {"Play", "How To Play", "Quit" };
+    SDL_Rect rect_intro[3];
+    bool selected[3] = {0, 0, 0};
+    for (int i = 0; i < 3; i++) {
         intro_t[i].LoadText(g_font_intro, text[i], color_intro, g_screen);
         intro_t[i].SetRect(70, 220 + 70*i);
         rect_intro[i] = intro_t[i].GetRect();
     }
+
     GameText back_;
     back_.LoadText(g_font, "Back", color_intro, g_screen);
     back_.SetRect(SCREEN_WIDTH/2 - back_.GetRect().w/2, 450);
 
-     SDL_Rect rect_bg = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
-    LTexture bg(g_screen, rect_bg);
+    LTexture bg(g_screen, rect_screen);
     bg.loadFromFile("img//bg.jpg");
-
     GameText chooseBgText;
-    chooseBgText.LoadText(g_font_choose, "CHOOSE GAME BACKGROUND", color_intro, g_screen);
+    chooseBgText.LoadText(g_font_choose, "CHOOSE BACKGROUND", color_intro, g_screen);
     chooseBgText.SetRect(SCREEN_WIDTH/2 - chooseBgText.GetRect().w/2, 100);
-
     GameText choose_bg[5];
-    string c_text[5] = {"Underwater", "Sky", "Universe", "Ground", "Back"};
+    string c_text[5] = {"Underwater", "Sky", "Universe", "City", "Back"};
     SDL_Rect rect_choose[5];
     bool c_selected[5] = {0, 0, 0, 0 ,0};
     for (int i = 0; i < 5; i++) {
@@ -157,7 +154,7 @@ bool GameFunctions::ShowIntro()
             cat_intro.ShowAnimation(g_screen);
             shark_intro.ShowSharkAnimation(g_screen);
             sound_.render();
-            for (int i = 0; i < text_n; i++)
+            for (int i = 0; i < 3; i++)
             {
                 intro_t[i].Present(g_screen);
             }
@@ -188,7 +185,7 @@ bool GameFunctions::ShowIntro()
                     x = g_event.motion.x;
                     y = g_event.motion.y;
                     if (menu == INTRO) {
-                        for (int i = 0; i < text_n; i++)
+                        for (int i = 0; i < 3; i++)
                         {
                             if (CheckMouse(x, y, rect_intro[i]))
                             {
@@ -231,7 +228,7 @@ bool GameFunctions::ShowIntro()
                             if (!c_selected[i]) {
                                 Mix_PlayChannel(-1, selected_, 0);
                                 c_selected[i] = 1;
-                                choose_bg[i].LoadText(g_font_intro, c_text[i], color_select, g_screen);
+                                choose_bg[i].LoadText(g_font, c_text[i], color_select, g_screen);
                             }
 
                         }
@@ -272,7 +269,7 @@ bool GameFunctions::ShowIntro()
                         }
                     }
                     if (menu == INTRO) {
-                        for (int i = 0; i < text_n; i++)
+                        for (int i = 0; i < 3; i++)
                         {
 
                             if (CheckMouse(x, y, rect_intro[i])) {
@@ -327,6 +324,8 @@ bool GameFunctions::ShowIntro()
                 case SDL_KEYDOWN:
                     if (g_event.key.keysym.sym == SDLK_ESCAPE)
                     {
+                        running = false;
+                        is_quit = true;
                         return 0;
                     }
                 default:
@@ -356,7 +355,7 @@ bool GameFunctions::LoadBackGround(const int& num)
             img_background = "img//universe.jpg";
             break;
         case 3:
-            img_background = "img//ground.png";
+            img_background = "img//city.png";
             break;
     }
     g_background = CommonFunc::LoadImage( img_background, g_screen);
@@ -370,14 +369,10 @@ void GameFunctions::CreateThreatList ()
     SharkList[SharkList.size()-1]->LoadImg("img//sharksheet.png", g_screen);
 }
 
-void GameFunctions::MakeBonusList()
+void GameFunctions::CreateBonusList()
 {
     BonusList.push_back(new Bonus);
     BonusList[BonusList.size()-1]->SetType(rand()%3+1);
-}
-void GameFunctions::ManageBonusList()
-{
-
 }
 
 void GameFunctions::Replay()
@@ -391,7 +386,7 @@ void GameFunctions::Replay()
     cat_obj.SetShownInjured(false);
     SharkList.clear();
     BonusList.clear();
-    for (int i = 0; i < BulletList.size(); i++)
+    for (int i = 0; i < (int) BulletList.size(); i++)
     {
         BulletList[i]->SetIsMove(false);
     }
@@ -435,25 +430,23 @@ void GameFunctions::Run()
         }
         SDL_RenderClear(g_screen);
         SDL_RenderCopy(g_screen, g_background, NULL, &rect_screen);
+
         number_life.ShowNum(g_font, color_text, g_screen);
         heart.Show(g_screen);
         textX.Present(g_screen);
-        cat_obj.ControlBullet(g_screen);
-
-        cat_obj.HandleMove();
-        cout << cat_obj.GetRect().x << " " << cat_obj.GetRect().y << endl;
-        if(cat_obj.GetShowInjured()) {
-            cat_obj.ShowInjured(g_screen);
-        } else cat_obj.ShowAnimation(g_screen);
         Score.ShowNum(g_font, color_text, g_screen);
         if (Score.GetValue() >= 300 || number_life.GetValue() <= 3)
         {
             show_bullet.Present(g_screen);
-
         }
+        //Show cat
+        cat_obj.ControlBullet(g_screen);
+        cat_obj.HandleMove();
+        if(cat_obj.GetShowInjured()) {
+            cat_obj.ShowInjured(g_screen);
+        } else cat_obj.ShowAnimation(g_screen);
         //make bonus
-        if (rand() %200 == 1) MakeBonusList();
-        ManageBonusList();
+        if (rand() %200 == 1) CreateBonusList();
 		// Show Shark and Check Collision cat and shark
 		if (rand()%30 == 1) CreateThreatList();
         for(int i=0;i < (int)SharkList.size();i++)
@@ -461,41 +454,32 @@ void GameFunctions::Run()
             if (Score.GetValue() <= 800) {
                 SharkList[i]->set_x_val(SHARK_SPEED1);
             }
-            else if(Score.GetValue() > 800 && Score.GetValue() <= 1500)
+            else if(Score.GetValue() > 800 && Score.GetValue() <= 2000)
             {
                 SharkList[i]->set_x_val(SHARK_SPEED2);
 
-            } else if (Score.GetValue() > 1500)
+            } else
             {
-                if (rand()%40 == 1) {
-                    SharkList[i]->set_x_val(SHARK_SPEED2);
-                    SharkList[i]->set_y_val(10);
-                }
-                else {
-                    SharkList[i]->set_x_val(SHARK_SPEED3);
-                }
+                SharkList[i]->set_x_val(SHARK_SPEED3);
+                SharkList[i]->set_y_val(5);
+            }
+            int num_score =(SharkList[i]->GetRect().x+SharkList[i]->GetRect().w)-(SharkList[i]->GetRect().x+SharkList[i]->GetRect().w)%CAT_SPEED;
+            if (cat_obj.GetRect().x == num_score)
+            {
+                Score.IncreaseValue(AVOID_SCORE);
             }
             SharkList[i]->ShowSharkAnimation(g_screen);
             SharkList[i]->HandleMove();
-            int num_score = (SharkList[i]->GetRect().x + SharkList[i]->GetRect().w)
-            - (SharkList[i]->GetRect().x + SharkList[i]->GetRect().w) % CAT_SPEED;
-            if (cat_obj.GetRect().x == num_score)
-                {
-                    Score.IncreaseValue(AVOID_SCORE);
-                }
             //check collision main and threat
             bool check_coll = CommonFunc::CheckCollision(cat_obj.GetRect(), SharkList[i]->GetRect());
             if (check_coll) {
-                SharkList[i]->Free();
                 cat_obj.SetShownInjured(true);
-
                 number_life.IncreaseValue(-1);
                 Score.IncreaseValue(INJURED_SCORE);
                 Mix_PlayChannel(-1, injured_, 0);
                 delete SharkList[i];
                 SharkList.erase(SharkList.begin()+i);
             }
-
         }
         // check collision cat bullet and shark
         BulletList = cat_obj.GetBulletList();
@@ -507,9 +491,9 @@ void GameFunctions::Run()
                 if (check)
                 {
                     Score.IncreaseValue(KILL_SHARK_SCORE);
+                    cat_obj.RemoveBullet(b);
                     delete SharkList[s];
                     SharkList.erase(SharkList.begin()+s);
-                    cat_obj.RemoveBullet(b);
                 }
             }
 		}
@@ -602,7 +586,7 @@ bool GameFunctions::ShowEnd() {
                 case SDL_KEYDOWN:
                     if (g_event.key.keysym.sym == SDLK_ESCAPE) {
                         is_quit = true;
-                        return false;
+                        return 0;
                     }
                 case SDL_MOUSEMOTION:
                     x = g_event.motion.x;
@@ -634,13 +618,13 @@ bool GameFunctions::ShowEnd() {
                     if (CheckMouse(x, y, quit.GetRect()))
                     {
                         is_quit = true;
-                        return false;
+                        return 0;
 
                     }
                     if (CheckMouse(x, y, home.GetRect()))
                     {
                         is_quit = true;
-                        return true;
+                        return 1;
                     }
             }
         }
@@ -655,6 +639,6 @@ bool GameFunctions::ShowEnd() {
         SDL_RenderPresent(g_screen);
         SDL_Delay(35);
     }
-	SharkList.clear();
+	close();
 	return 0;
 }

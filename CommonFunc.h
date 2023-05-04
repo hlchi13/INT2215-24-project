@@ -47,7 +47,7 @@ const int AVOID_SCORE = 30;
 const int INJURED_SCORE = -100;
 const int KILL_SHARK_SCORE = 50;
 const int GET_BONUS_SCORE_PINK = 10;
-const int GET_BONUS_SCORE = 20;
+const int GET_BONUS_SCORE = 15;
 const int LIFES = 5;
 
 const int CAT_WIDTH = 64*1.5;

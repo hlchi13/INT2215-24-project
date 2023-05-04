@@ -3,8 +3,8 @@
 Cat::Cat()
 {
 	frame_ = 0;
-	x_val_ = 0;
-	y_val_ = 0;
+	x_val = 0;
+	y_val = 0;
 
     rect_.x = 0;
     rect_.y = SCREEN_HEIGHT/2 - CAT_HEIGHT/2;
@@ -123,36 +123,36 @@ Cat::~Cat()
 void Cat::HandleInputAction(SDL_Event event, SDL_Renderer* src, Mix_Chunk* cat_bullet,
                             GameText &Score, GameText &number_life)
 {
-    if(event.type==SDL_KEYUP){
+    if(event.type==SDL_KEYUP && event.key.repeat == 0){
 
       switch(event.key.keysym.sym){
          case SDLK_UP:
-             y_val_+= CAT_SPEED;
+             y_val+= CAT_SPEED;
              break;
          case SDLK_DOWN:
-            y_val_-= CAT_SPEED;
+            y_val-= CAT_SPEED;
             break;
          case SDLK_LEFT:
-             x_val_+= CAT_SPEED;
+             x_val+= CAT_SPEED;
              break;
          case SDLK_RIGHT:
-            x_val_-= CAT_SPEED;
+            x_val-= CAT_SPEED;
              break;
         }
        }
       if(event.type==SDL_KEYDOWN && event.key.repeat == 0){
           switch(event.key.keysym.sym){
              case SDLK_UP:
-                 y_val_-=CAT_SPEED;
+                 y_val-=CAT_SPEED;
                  break;
              case SDLK_DOWN:
-                 y_val_+=CAT_SPEED;
+                 y_val+=CAT_SPEED;
                 break;
              case SDLK_LEFT:
-                 x_val_-=CAT_SPEED;
+                 x_val-=CAT_SPEED;
                  break;
              case SDLK_RIGHT:
-                x_val_+=CAT_SPEED;
+                x_val+=CAT_SPEED;
                  break;
              case SDLK_SPACE:
                 if (Score.GetValue() >= 300 || number_life.GetValue() <=3) {
@@ -190,8 +190,8 @@ void Cat::ControlBullet(SDL_Renderer* g_renderer)
 
 void Cat::HandleMove()
 {
-    rect_.x +=x_val_;
-    rect_.y += y_val_;
+    rect_.x += x_val;
+    rect_.y += y_val;
     if (rect_.x < 0) rect_.x = 0;
     if (rect_.y < 25) rect_.y = 25 ;
     if (rect_.x + CAT_WIDTH > SCREEN_WIDTH)
