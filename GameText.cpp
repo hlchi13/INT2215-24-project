@@ -54,3 +54,9 @@ void GameText::ShowNum (TTF_Font *gFont, SDL_Color textColor, SDL_Renderer *gRen
         SDL_RenderCopy(gRenderer,p_object,NULL,&rect_);;
     }
 }
+
+void GameText::IncreaseValue(int x)
+{
+    value_+=x;
+    if (value_<=0) value_ = 0;
+}

@@ -57,7 +57,6 @@ Shark::~Shark()
 
 void Shark::ShowSharkAnimation(SDL_Renderer* des)
 {
-    //SDL_Rect shark_rect = { rect_.x, rect_.y, shark_w,shark_h }; // o toa do nao voi chieu dai chieu rong
     SDL_RenderCopy(des, p_object, &frame_shark[frame_], &rect_);
     frame_ = (frame_+1)%7;
 }

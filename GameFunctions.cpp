@@ -52,7 +52,7 @@ bool GameFunctions::InitData()
         g_font_intro = TTF_OpenFont("PressStart2P.ttf", 30);
         g_font_end = TTF_OpenFont("PressStart2P.ttf", 77);
         g_font_choose = TTF_OpenFont("Quantico.ttf", 50);
-        if (g_font == NULL) {
+        if (g_font == NULL || g_font_intro == NULL || g_font_end == NULL ||g_font_choose == NULL) {
             cout << "Fail to load font";
             return false;
         }
@@ -140,7 +140,6 @@ bool GameFunctions::ShowIntro()
     SDL_Rect rect_choose[5];
     bool c_selected[5] = {0, 0, 0, 0 ,0};
     for (int i = 0; i < 5; i++) {
-
         choose_bg[i].LoadText(g_font, c_text[i], color_intro, g_screen );
         choose_bg[i].SetRect(100, 200+i*50);
         rect_choose[i] = choose_bg[i].GetRect();
@@ -162,6 +161,7 @@ bool GameFunctions::ShowIntro()
 	    else if (menu == HTP) {
             bg_htp.render();
             back_.Present(g_screen);
+            sound_.render();
 	    }
 	    else if (menu == CHOOSE)
         {
@@ -170,6 +170,7 @@ bool GameFunctions::ShowIntro()
             for (int i = 0; i < 5; i++) {
                 choose_bg[i].Present(g_screen);
             }
+            sound_.render();
         }
 		while (SDL_PollEvent(&g_event))
 		{
@@ -178,7 +179,6 @@ bool GameFunctions::ShowIntro()
                 case SDL_QUIT:
                 {
                     running = false;
-                    is_quit = true;
                     return 0;
                 }
                 case SDL_MOUSEMOTION:
@@ -222,25 +222,24 @@ bool GameFunctions::ShowIntro()
                     else if (menu == CHOOSE)
                     {
                         for (int i = 0; i < 5; i++)
-                    {
-                        if (CheckMouse(x, y, rect_choose[i]))
                         {
-                            if (!c_selected[i]) {
-                                Mix_PlayChannel(-1, selected_, 0);
-                                c_selected[i] = 1;
-                                choose_bg[i].LoadText(g_font, c_text[i], color_select, g_screen);
-                            }
+                            if (CheckMouse(x, y, rect_choose[i]))
+                            {
+                                if (!c_selected[i]) {
+                                    Mix_PlayChannel(-1, selected_, 0);
+                                    c_selected[i] = 1;
+                                    choose_bg[i].LoadText(g_font, c_text[i], color_select, g_screen);
+                                }
 
-                        }
-                        else
-                        {
-                            if (c_selected[i]) {
-                                c_selected[i] = 0;
-                                choose_bg[i].LoadText(g_font, c_text[i], color_intro, g_screen);
                             }
-
+                            else
+                            {
+                                if (c_selected[i]) {
+                                    c_selected[i] = 0;
+                                    choose_bg[i].LoadText(g_font, c_text[i], color_intro, g_screen);
+                                }
+                            }
                         }
-                    }
                     }
                     break;
                 case SDL_MOUSEBUTTONDOWN: {
@@ -280,7 +279,6 @@ bool GameFunctions::ShowIntro()
                                     menu = HTP;
                                 } else if (i == 2)
                                 {
-                                    is_quit = true;
                                     running = false;
                                     return 0;
                                 }
@@ -325,7 +323,6 @@ bool GameFunctions::ShowIntro()
                     if (g_event.key.keysym.sym == SDLK_ESCAPE)
                     {
                         running = false;
-                        is_quit = true;
                         return 0;
                     }
                 default:
@@ -435,16 +432,10 @@ void GameFunctions::Run()
         heart.Show(g_screen);
         textX.Present(g_screen);
         Score.ShowNum(g_font, color_text, g_screen);
-        if (Score.GetValue() >= 300 || number_life.GetValue() <= 3)
+        if (Score.GetValue() >= 450 || number_life.GetValue() <= 3)
         {
             show_bullet.Present(g_screen);
         }
-        //Show cat
-        cat_obj.ControlBullet(g_screen);
-        cat_obj.HandleMove();
-        if(cat_obj.GetShowInjured()) {
-            cat_obj.ShowInjured(g_screen);
-        } else cat_obj.ShowAnimation(g_screen);
         //make bonus
         if (rand() %200 == 1) CreateBonusList();
 		// Show Shark and Check Collision cat and shark
@@ -453,20 +444,25 @@ void GameFunctions::Run()
         {
             if (Score.GetValue() <= 800) {
                 SharkList[i]->set_x_val(SHARK_SPEED1);
+                int num_score =(SharkList[i]->GetRect().x+SharkList[i]->GetRect().w)-(SharkList[i]->GetRect().x+SharkList[i]->GetRect().w)%CAT_SPEED;
+                if (cat_obj.GetRect().x == num_score)
+                {
+                    Score.IncreaseValue(AVOID_SCORE);
+                }
             }
             else if(Score.GetValue() > 800 && Score.GetValue() <= 2000)
             {
                 SharkList[i]->set_x_val(SHARK_SPEED2);
+                int num_score =(SharkList[i]->GetRect().x+SharkList[i]->GetRect().w)-(SharkList[i]->GetRect().x+SharkList[i]->GetRect().w)%CAT_SPEED;
+                if (cat_obj.GetRect().x == num_score)
+                {
+                    Score.IncreaseValue(AVOID_SCORE);
+                }
 
             } else
             {
                 SharkList[i]->set_x_val(SHARK_SPEED3);
                 SharkList[i]->set_y_val(5);
-            }
-            int num_score =(SharkList[i]->GetRect().x+SharkList[i]->GetRect().w)-(SharkList[i]->GetRect().x+SharkList[i]->GetRect().w)%CAT_SPEED;
-            if (cat_obj.GetRect().x == num_score)
-            {
-                Score.IncreaseValue(AVOID_SCORE);
             }
             SharkList[i]->ShowSharkAnimation(g_screen);
             SharkList[i]->HandleMove();
@@ -527,7 +523,13 @@ void GameFunctions::Run()
             is_quit= true;
             break;
 		}
-		 SDL_RenderPresent(g_screen);
+		//Show cat
+        cat_obj.ControlBullet(g_screen);
+        cat_obj.HandleMove();
+        if(cat_obj.GetShowInjured()) {
+            cat_obj.ShowInjured(g_screen);
+        } else cat_obj.ShowAnimation(g_screen);
+        SDL_RenderPresent(g_screen);
         frameTime = SDL_GetTicks() - frameStart;
         if (frameDelay > frameTime) {
             SDL_Delay(frameDelay - frameTime);

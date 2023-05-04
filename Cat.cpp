@@ -155,7 +155,7 @@ void Cat::HandleInputAction(SDL_Event event, SDL_Renderer* src, Mix_Chunk* cat_b
                 x_val+=CAT_SPEED;
                  break;
              case SDLK_SPACE:
-                if (Score.GetValue() >= 300 || number_life.GetValue() <=3) {
+                if (Score.GetValue() >= 450 || number_life.GetValue() <=3) {
                 Mix_PlayChannel(-1, cat_bullet, 0);
 
                 Bullet* bullet_ = new Bullet();
@@ -166,7 +166,7 @@ void Cat::HandleInputAction(SDL_Event event, SDL_Renderer* src, Mix_Chunk* cat_b
                 bullet_list.push_back(bullet_);
                 }
                 else cout << "Fail";
-                 }
+                }
              break;
           }
       }

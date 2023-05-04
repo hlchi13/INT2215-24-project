@@ -27,8 +27,7 @@ void Bonus::SetType(int type)
 }
 void Bonus::HandleMove()
 {
-    rect_.x -= 15;
-    //if(rect_.x < - BONUS_WIDTH) rect_.x = SCREEN_WIDTH + 10;
+    rect_.x -= 20;
     rect_.w = BONUS_WIDTH;
     rect_.h = BONUS_HEIGHT;
 }

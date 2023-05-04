@@ -60,7 +60,7 @@ const int BONUS_HEIGHT = 30;
 const int CAT_SPEED = 10;
 const int SHARK_SPEED1 = 10;
 const int SHARK_SPEED2 = 15;
-const int SHARK_SPEED3 = 25;
+const int SHARK_SPEED3 = 20;
 
 namespace CommonFunc
 {

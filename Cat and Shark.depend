@@ -47,7 +47,7 @@
 
 1678627201 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\texture.cpp
 
-1683212108 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\cat.cpp
+1683217584 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\cat.cpp
 	"Cat.h"
 
 1680700300 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\commonfuntions.cpp
@@ -90,7 +90,7 @@
 	"Bullet.h"
 	"GameText.h"
 
-1683193595 c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\commonfunc.h
+1683216225 c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\commonfunc.h
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_mixer.h>
@@ -105,7 +105,7 @@
 1682991982 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\commonfunc.cpp
 	"CommonFunc.h"
 
-1683189121 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\shark.cpp
+1683218077 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\shark.cpp
 	"Shark.h"
 
 1683189121 c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\shark.h
@@ -125,14 +125,14 @@
 	"Bullet.h"
 	"GameText.h"
 
-1683102942 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\bonus.cpp
+1683215819 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\bonus.cpp
 	"Bonus.h"
 
 1683102936 c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\bonus.h
 	"Cat.h"
 	"Shark.h"
 
-1682205566 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\gametext.cpp
+1683218077 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\gametext.cpp
 	"GameText.h"
 
 1682003801 c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\playerpower.h
@@ -147,7 +147,7 @@
 1682612430 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\bullet.cpp
 	"Bullet.h"
 
-1682642075 c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\gametext.h
+1683218077 c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\gametext.h
 	"CommonFunc.h"
 	"BaseObject.h"
 
@@ -247,7 +247,7 @@
 1682335003 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\btl-ltnc24\gamefunctions.cpp
 	"GameFunctions.h"
 
-1683213689 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\gamefunctions.cpp
+1683218322 source:c:\users\user\onedrive - vnu.edu.vn\desktop\project ltnc\int2215-24-project\gamefunctions.cpp
 	"GameFunctions.h"
 
 1683016131 source:c:\users\user\onedrive - vnu.edu.vn\desktop\btl\baseobject.cpp
