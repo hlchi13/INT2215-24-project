@@ -36,10 +36,6 @@ void LTexture::setColor( Uint8 red, Uint8 green, Uint8 blue )
 {
 	SDL_SetTextureColorMod( gTexture, red, green, blue );
 }
-void LTexture::setAlpha( Uint8 alpha )
-{
-	SDL_SetTextureAlphaMod(gTexture, alpha);
-}
 
 void LTexture::render()
 {

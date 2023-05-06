@@ -6,6 +6,7 @@
 #include "GameText.h"
 
 const int MAX_INJURED_TIMES = 15;
+const int MAX_SHOWN_TIMES = 20;
 class Cat : public BaseObject
 {
 public:
@@ -15,7 +16,8 @@ public:
                            GameText &Score, GameText &number_life);
     void HandleMove();
     void ShowAnimation(SDL_Renderer* des);
-
+    bool GetShowFoward() {return is_forward;};
+    void ShowFor(SDL_Renderer* des);
     void SetBulletList(vector<Bullet*> _bullet_list_){
         bullet_list = _bullet_list_ ;
     }
@@ -35,11 +37,19 @@ private:
     vector <Bullet*> bullet_list;
     SDL_Rect frame_idle[10];
     SDL_Rect frame_injured[10];
-    SDL_Texture* injured;
+    SDL_Rect frame_forward[2];
+    SDL_Rect frame_backward[4];
 
+    SDL_Texture* injured;
     int frame_;
     int count_injured_times_ = 0;
+    int count_times = 0;
+    bool is_idle;
     bool is_shown_injured;
+    bool is_forward;
+    bool is_backward;
+    int mouseX, mouseY;
+    int preX, preY;
 
 };
 

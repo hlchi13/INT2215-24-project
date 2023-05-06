@@ -43,11 +43,11 @@ const SDL_Color color_exit = {255, 0, 0};
 
 const int SHARK_NUM = 30;
 const int FPS = 25;
-const int AVOID_SCORE = 30;
-const int INJURED_SCORE = -100;
-const int KILL_SHARK_SCORE = 50;
-const int GET_BONUS_SCORE_PINK = 10;
-const int GET_BONUS_SCORE = 15;
+const int AVOID_SCORE = 20;
+const int INJURED_SCORE = -50;
+const int KILL_SHARK_SCORE = 40;
+const int GET_BONUS_SCORE_PINK = 5;
+const int GET_BONUS_SCORE = 10;
 const int LIFES = 5;
 
 const int CAT_WIDTH = 64*1.5;
@@ -61,6 +61,7 @@ const int CAT_SPEED = 10;
 const int SHARK_SPEED1 = 10;
 const int SHARK_SPEED2 = 15;
 const int SHARK_SPEED3 = 20;
+const int SHARK_SPEED4 = 30;
 
 namespace CommonFunc
 {

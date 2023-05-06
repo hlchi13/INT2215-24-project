@@ -1,20 +1,60 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
-	<ActiveTarget name="Debug" />
+	<ActiveTarget name="Release" />
+	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="435" topLine="0" />
+		</Cursor>
+	</File>
 	<File name="Shark.h" open="1" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="326" topLine="1" />
+			<Cursor1 position="568" topLine="3" />
+		</Cursor>
+	</File>
+	<File name="CommonFunc.cpp" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="621" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="GameText.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="27" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="GameText.cpp" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="802" topLine="1" />
 		</Cursor>
 	</File>
 	<File name="CommonFunc.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1739" topLine="40" />
+			<Cursor1 position="1247" topLine="38" />
 		</Cursor>
 	</File>
-	<File name="GameFunctions.cpp" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Bullet.h" open="1" top="0" tabpos="17" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="16987" topLine="475" />
+			<Cursor1 position="346" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="GameFunctions.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="702" topLine="28" />
+		</Cursor>
+	</File>
+	<File name="Cat.h" open="1" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1316" topLine="20" />
+		</Cursor>
+	</File>
+	<File name="Cat.cpp" open="1" top="1" tabpos="3" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="6184" topLine="189" />
+		</Cursor>
+	</File>
+	<File name="BaseObject.cpp" open="1" top="0" tabpos="18" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="798" topLine="27" />
 		</Cursor>
 	</File>
 	<File name="LTexture.h" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -22,14 +62,24 @@
 			<Cursor1 position="108" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="GameText.cpp" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Shark.cpp" open="1" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1517" topLine="37" />
+			<Cursor1 position="262" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="LTexture.cpp" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="643" topLine="18" />
 		</Cursor>
 	</File>
 	<File name="Bullet.cpp" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="293" topLine="1" />
+		</Cursor>
+	</File>
+	<File name="GameFunctions.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2726" topLine="45" />
 		</Cursor>
 	</File>
 	<File name="Bonus.h" open="1" top="0" tabpos="16" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -42,62 +92,12 @@
 			<Cursor1 position="523" topLine="18" />
 		</Cursor>
 	</File>
-	<File name="BaseObject.cpp" open="1" top="0" tabpos="18" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="798" topLine="27" />
-		</Cursor>
-	</File>
-	<File name="Cat.h" open="1" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1056" topLine="21" />
-		</Cursor>
-	</File>
-	<File name="LTexture.cpp" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="727" topLine="22" />
-		</Cursor>
-	</File>
-	<File name="Shark.cpp" open="1" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1363" topLine="56" />
-		</Cursor>
-	</File>
-	<File name="GameText.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="552" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="Cat.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="4235" topLine="172" />
-		</Cursor>
-	</File>
-	<File name="Bullet.h" open="1" top="0" tabpos="17" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="346" topLine="0" />
-		</Cursor>
-	</File>
 	<File name="BaseObject.h" open="1" top="0" tabpos="19" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="362" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="GameFunctions.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="431" topLine="13" />
-		</Cursor>
-	</File>
-	<File name="CommonFunc.cpp" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="621" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="427" topLine="0" />
-		</Cursor>
-	</File>
-	<Target name="Debug" top="GameFunctions.cpp">
+	<Target name="Debug" top="Cat.cpp">
 		<File name="main.cpp" />
 		<File name="GameFunctions.cpp" />
 		<File name="Cat.cpp" />
@@ -118,7 +118,7 @@
 		<File name="BaseObject.cpp" />
 		<File name="BaseObject.h" />
 	</Target>
-	<Target name="Release" top="GameFunctions.cpp">
+	<Target name="Release" top="Cat.cpp">
 		<File name="main.cpp" />
 		<File name="GameFunctions.cpp" />
 		<File name="Cat.cpp" />

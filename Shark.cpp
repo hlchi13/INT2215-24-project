@@ -11,6 +11,7 @@ Shark::Shark()
     rect_.y = rand()%(SCREEN_HEIGHT - SHARK_HEIGHT) + 25;
     rect_.w = SHARK_WIDTH;
     rect_.h = SHARK_HEIGHT;
+    score_ = true;
     num = rand()%2;
 
     frame_shark[0].x = 0;

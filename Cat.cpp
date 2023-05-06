@@ -13,6 +13,12 @@ Cat::Cat()
 
 	count_injured_times_ = 0;
 	is_shown_injured = false;
+	is_idle = true;
+	is_forward = false;
+	is_backward = false;
+	preX = 0;
+	preY = 0;
+	//cat idle
     frame_idle[0].x = 0;
     frame_idle[0].y = 0;
     frame_idle[0].w = 64;
@@ -62,8 +68,37 @@ Cat::Cat()
     frame_idle[9].y = 0;
     frame_idle[9].w = 64;
     frame_idle[9].h = 48;
+    //cat forward
+    frame_forward[0].x = 0;
+    frame_forward[0].y = 47;
+    frame_forward[0].w = 64;
+    frame_forward[0].h = 48;
 
+    frame_forward[1].x = 64;
+    frame_forward[1].y = 47;
+    frame_forward[1].w = 64;
+    frame_forward[1].h = 47;
+    //backward
+    frame_backward[0].x = 0;
+    frame_backward[0].y = 144;
+    frame_backward[0].w = 64;
+    frame_backward[0].h = 48;
 
+    frame_backward[1].x = 64;
+    frame_backward[1].y = 144;
+    frame_backward[1].w = 64;
+    frame_backward[1].h = 48;
+
+    frame_backward[2].x = 64*2;
+    frame_backward[2].y = 144;
+    frame_backward[2].w = 64;
+    frame_backward[2].h = 48;
+
+    frame_backward[3].x = 64*3;
+    frame_backward[3].y = 144;
+    frame_backward[3].w = 64;
+    frame_backward[3].h = 48;
+    //injured
     frame_injured[0].x = 0;
     frame_injured[0].y = 0;
     frame_injured[0].w = 64;
@@ -123,75 +158,69 @@ Cat::~Cat()
 void Cat::HandleInputAction(SDL_Event event, SDL_Renderer* src, Mix_Chunk* cat_bullet,
                             GameText &Score, GameText &number_life)
 {
-    if(event.type==SDL_KEYUP && event.key.repeat == 0){
-
-      switch(event.key.keysym.sym){
-         case SDLK_UP:
-             y_val+= CAT_SPEED;
-             break;
-         case SDLK_DOWN:
-            y_val-= CAT_SPEED;
-            break;
-         case SDLK_LEFT:
-             x_val+= CAT_SPEED;
-             break;
-         case SDLK_RIGHT:
-            x_val-= CAT_SPEED;
-             break;
+    if (event.type == SDL_MOUSEMOTION) {
+        frame_ = 0;
+        SDL_GetMouseState(&mouseX, &mouseY);
+        SetRect(mouseX - CAT_WIDTH, mouseY);
+        if (preX < mouseX ) {
+            is_forward = true;
+            is_backward = false;
+            is_idle = false;
         }
-       }
-      if(event.type==SDL_KEYDOWN && event.key.repeat == 0){
-          switch(event.key.keysym.sym){
-             case SDLK_UP:
-                 y_val-=CAT_SPEED;
-                 break;
-             case SDLK_DOWN:
-                 y_val+=CAT_SPEED;
-                break;
-             case SDLK_LEFT:
-                 x_val-=CAT_SPEED;
-                 break;
-             case SDLK_RIGHT:
-                x_val+=CAT_SPEED;
-                 break;
-             case SDLK_SPACE:
-                if (Score.GetValue() >= 450 || number_life.GetValue() <=3) {
-                Mix_PlayChannel(-1, cat_bullet, 0);
+        else if (preX > mouseX)
+        {
+            is_backward = true;
+            is_forward = false;
+            is_idle = false;
+        }
+        else
+        {
+            is_idle = true;
+            is_backward = false;
+            is_forward = false;
+        }
+        cout << preX << ' ' << preY << " p"  << endl;
+        preX = mouseX;
+        preY = mouseY;
+        cout << mouseX << ' ' << mouseY << endl;
+    }
+      if(event.type==SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT){
+            if (Score.GetValue() >= 300 || number_life.GetValue() <=3) {
+            is_idle = true;
+            is_backward = false;
+            is_forward = false;
+            Mix_PlayChannel(-1, cat_bullet, 0);
 
-                Bullet* bullet_ = new Bullet();
-                bool ret = bullet_->LoadImg("img//bullet.png", src);
-                if(ret) {
+            Bullet* bullet_ = new Bullet();
+            bool ret = bullet_->LoadImg("img//bullet.png", src);
+            if(ret) {
                 bullet_->SetRect(this->GetRect().x + 60, this->GetRect().y+CAT_HEIGHT/2);
                 bullet_->SetIsMove(true);
                 bullet_list.push_back(bullet_);
-                }
-                else cout << "Fail";
-                }
-             break;
+            }
+            else cout << "Fail";
+            }
           }
-      }
 }
 
 void Cat::ControlBullet(SDL_Renderer* g_renderer)
 {
     for ( int i=0; i< (int)bullet_list.size(); i++ )
     {
-            if(bullet_list[i]->GetIsMove())
-            {
-                bullet_list[i]->Show(g_renderer);
-                bullet_list[i]->HandleMove(SCREEN_WIDTH,SCREEN_HEIGHT);
+        if(bullet_list[i]->GetIsMove())
+        {
+            bullet_list[i]->Show(g_renderer);
+            bullet_list[i]->HandleMove(SCREEN_WIDTH,SCREEN_HEIGHT);
 
-            } else {
-                delete bullet_list[i];
-                bullet_list.erase(bullet_list.begin()+i);
-            }
+        } else {
+            delete bullet_list[i];
+            bullet_list.erase(bullet_list.begin()+i);
+        }
     }
 }
 
 void Cat::HandleMove()
 {
-    rect_.x += x_val;
-    rect_.y += y_val;
     if (rect_.x < 0) rect_.x = 0;
     if (rect_.y < 25) rect_.y = 25 ;
     if (rect_.x + CAT_WIDTH > SCREEN_WIDTH)
@@ -202,8 +231,37 @@ void Cat::HandleMove()
 
 void Cat::ShowAnimation(SDL_Renderer* des)
 {
-    SDL_RenderCopy(des, p_object, &frame_idle[frame_], &rect_);
-    frame_ = (frame_+1)%10; // tra ve so nho hon 10 va tang them 1 sau moi lan
+    if (is_forward) {
+        SDL_RenderCopy(des, p_object, &frame_forward[frame_], &rect_);
+        frame_ = (frame_+1)%2;
+        count_times++;
+        if (count_times >= MAX_SHOWN_TIMES) {
+            count_times = 0;
+            is_forward = false;
+            is_idle = true;
+        }
+        SDL_Delay(30);
+    }
+    else if (is_backward) {
+        SDL_RenderCopy(des, p_object, &frame_backward[frame_], &rect_);
+        frame_ = (frame_+1)%4;
+        count_times++;
+        if (count_times >= MAX_SHOWN_TIMES) {
+            count_times = 0;
+            is_backward = false;
+            is_idle = true;
+        }
+    }
+    else if (is_idle)
+    {
+        SDL_RenderCopy(des, p_object, &frame_idle[frame_], &rect_);
+        frame_ = (frame_+1)%10; // tra ve so nho hon 10 va tang them 1 sau moi lan
+    }
+}
+
+void Cat::ShowFor(SDL_Renderer* des)
+{
+
 }
 
 bool Cat::LoadInjured(string path, SDL_Renderer* ren)

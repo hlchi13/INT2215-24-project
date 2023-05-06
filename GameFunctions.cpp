@@ -48,16 +48,16 @@ bool GameFunctions::InitData()
             return false;
         }
         if (TTF_Init() == -1) return false;
-        g_font = TTF_OpenFont("PressStart2P.ttf", 20);
-        g_font_intro = TTF_OpenFont("PressStart2P.ttf", 30);
-        g_font_end = TTF_OpenFont("PressStart2P.ttf", 77);
-        g_font_choose = TTF_OpenFont("Quantico.ttf", 50);
+        g_font = TTF_OpenFont("font//PressStart2P.ttf", 20);
+        g_font_intro = TTF_OpenFont("font//PressStart2P.ttf", 30);
+        g_font_end = TTF_OpenFont("font//PressStart2P.ttf", 77);
+        g_font_choose = TTF_OpenFont("font//Quantico.ttf", 50);
         if (g_font == NULL || g_font_intro == NULL || g_font_end == NULL ||g_font_choose == NULL) {
             cout << "Fail to load font";
             return false;
         }
     }
-    cat_obj.LoadImg("img//cat_idle.png", g_screen);
+    cat_obj.LoadImg("img//catsheet.png", g_screen);
     cat_obj.LoadInjured("img//cat_hurt1.png", g_screen);
     heart.LoadImg("img//heart.png", g_screen);
     heart.SetWidth(40, 25);
@@ -66,7 +66,7 @@ bool GameFunctions::InitData()
     textX.SetRect(SCREEN_WIDTH/2 - heart.GetRect().w + 50, heart.GetRect().h/2-textX.GetRect().h/2);
     number_life.SetValue(LIFES);
     number_life.SetRect(SCREEN_WIDTH/2 - heart.GetRect().w+50+heart.GetRect().w, heart.GetRect().h/2-textX.GetRect().h/2);
-    show_bullet.LoadText(g_font, "PRESS SPACE TO SHOOT",color_text, g_screen);
+    show_bullet.LoadText(g_font, "USE LEFT MOUSE BUTTON TO SHOOT",color_text, g_screen);
     show_bullet.SetRect(SCREEN_WIDTH/2 - show_bullet.GetRect().w/2, 25);
 	return true;
 }
@@ -91,7 +91,7 @@ bool GameFunctions::ShowIntro()
     Mix_VolumeChunk(injured_, MIX_MAX_VOLUME);
     running = true;
     SDL_Surface* surface = IMG_Load("img//cursor.png");
-    SDL_Cursor* cursor = SDL_CreateColorCursor(surface, 0, 0);
+    SDL_Cursor* cursor = SDL_CreateColorCursor(surface, 0,0);
     SDL_SetCursor(cursor);
 
     LTexture bg_intro(g_screen, rect_screen);
@@ -301,10 +301,8 @@ bool GameFunctions::ShowIntro()
                                     }
                                     else {
                                         LoadBackGround(i);
-                                        is_quit = true;
                                         running = false;
                                     }
-
                                 }
                                 else
                                 {
@@ -312,7 +310,6 @@ bool GameFunctions::ShowIntro()
                                         c_selected[i] = 0;
                                         choose_bg[i].LoadText(g_font, c_text[i], color_intro, g_screen);
                                     }
-
                                 }
                             }
                         }
@@ -409,7 +406,6 @@ void GameFunctions::Run()
     Mix_PlayMusic(background_, 10);
     is_quit = false;
     Score.SetRect(0, 0);
-    SDL_ShowCursor(SDL_DISABLE);
     while(!is_quit) {
         frameStart = SDL_GetTicks();
         while(SDL_PollEvent(&g_event))
@@ -432,40 +428,58 @@ void GameFunctions::Run()
         heart.Show(g_screen);
         textX.Present(g_screen);
         Score.ShowNum(g_font, color_text, g_screen);
-        if (Score.GetValue() >= 450 || number_life.GetValue() <= 3)
+        if (Score.GetValue() >= 300 || number_life.GetValue() <= 3)
         {
             show_bullet.Present(g_screen);
         }
         //make bonus
         if (rand() %200 == 1) CreateBonusList();
 		// Show Shark and Check Collision cat and shark
-		if (rand()%30 == 1) CreateThreatList();
+		if (Score.GetValue() <= 800) {
+                if (rand()%50 == 1) CreateThreatList();
+            }
+            else if(Score.GetValue() > 800 && Score.GetValue() <= 2000)
+            {
+                if (rand()%20 == 1) CreateThreatList();
+
+            } else if (Score.GetValue() >= 2000 && Score.GetValue() <= 3000)
+            {
+                if (rand()%15 == 1) CreateThreatList();
+            }
+            else {
+                if (rand()%10 == 1) CreateThreatList();
+            }
+		//if (rand()%30 == 1) CreateThreatList();
         for(int i=0;i < (int)SharkList.size();i++)
         {
             if (Score.GetValue() <= 800) {
                 SharkList[i]->set_x_val(SHARK_SPEED1);
-                int num_score =(SharkList[i]->GetRect().x+SharkList[i]->GetRect().w)-(SharkList[i]->GetRect().x+SharkList[i]->GetRect().w)%CAT_SPEED;
-                if (cat_obj.GetRect().x == num_score)
-                {
-                    Score.IncreaseValue(AVOID_SCORE);
-                }
             }
             else if(Score.GetValue() > 800 && Score.GetValue() <= 2000)
             {
                 SharkList[i]->set_x_val(SHARK_SPEED2);
-                int num_score =(SharkList[i]->GetRect().x+SharkList[i]->GetRect().w)-(SharkList[i]->GetRect().x+SharkList[i]->GetRect().w)%CAT_SPEED;
-                if (cat_obj.GetRect().x == num_score)
-                {
-                    Score.IncreaseValue(AVOID_SCORE);
-                }
 
-            } else
+
+            } else if (Score.GetValue() >= 2000 && Score.GetValue() <= 3000)
             {
                 SharkList[i]->set_x_val(SHARK_SPEED3);
                 SharkList[i]->set_y_val(5);
             }
+            else
+            {
+                SharkList[i]->set_x_val(SHARK_SPEED4);
+                SharkList[i]->set_y_val(10);
+            }
             SharkList[i]->ShowSharkAnimation(g_screen);
             SharkList[i]->HandleMove();
+            int num_score =SharkList[i]->GetRect().x+SharkList[i]->GetRect().w;
+            if (SharkList[i]->GetToIncreaseScore()) {
+                if (cat_obj.GetRect().x - cat_obj.GetRect().x%SharkList[i]->get_x_val() == num_score - num_score%SharkList[i]->get_x_val())
+                    {
+                        Score.IncreaseValue(AVOID_SCORE);
+                        SharkList[i]->SetToIncreaseScore(false);
+                    }
+            }
             //check collision main and threat
             bool check_coll = CommonFunc::CheckCollision(cat_obj.GetRect(), SharkList[i]->GetRect());
             if (check_coll) {
@@ -475,6 +489,9 @@ void GameFunctions::Run()
                 Mix_PlayChannel(-1, injured_, 0);
                 delete SharkList[i];
                 SharkList.erase(SharkList.begin()+i);
+            }
+            if (SharkList[i]->GetRect().x < -SHARK_WIDTH) {
+                SharkList[i]->Free();
             }
         }
         // check collision cat bullet and shark

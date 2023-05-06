@@ -14,6 +14,9 @@ public:
     void HandleMove();
     void set_x_val(const int &val) {x_val = val;};
     void set_y_val(const int &val) {y_val = val;};
+    int get_x_val() {return x_val;};
+    bool GetToIncreaseScore() {return score_;};
+    void SetToIncreaseScore(bool x) {score_  = x;};
 
 private:
     SDL_Rect frame_shark[7];
@@ -21,6 +24,7 @@ private:
     int x_val;
     int y_val;
     int num;
+    bool score_;
 };
 
 #endif // SHARK_H_INCLUDED
