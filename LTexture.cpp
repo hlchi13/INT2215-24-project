@@ -17,24 +17,19 @@ LTexture::~LTexture()
 
 bool LTexture::loadFromFile(std::string path)
 {
-    gTexture = CommonFunc::LoadImage (path, gRen);
+    gTexture = CommonFunc::LoadImage(path, gRen);
     return gTexture!=NULL;
 }
 
 void LTexture::free()
 {
-	if( gTexture != NULL )
+	if(gTexture != NULL)
 	{
-		SDL_DestroyTexture( gTexture );
+		SDL_DestroyTexture(gTexture);
 		gTexture = NULL;
 		width = 0;
 		height = 0;
 	}
-}
-
-void LTexture::setColor( Uint8 red, Uint8 green, Uint8 blue )
-{
-	SDL_SetTextureColorMod( gTexture, red, green, blue );
 }
 
 void LTexture::render()

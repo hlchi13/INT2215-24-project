@@ -11,7 +11,6 @@
 #include "Bullet.h"
 #include "GameText.h"
 enum Menu {INTRO, HTP, CHOOSE};
-enum Gameplay {PLAY, GAMEOVER};
 class GameFunctions : public BaseObject
 {
 public:
@@ -41,10 +40,10 @@ private:
     vector<Bonus*> BonusList;
     vector<Bullet*> BulletList;
     GameText Score, number_life, High_Score;// number
-
+    GameText num_bullet;
+    int bullet_;
     int high_score;
     Menu menu;
-    Gameplay game;
     int frameDelay = 1000/FPS;
     Uint32 frameStart;
     int frameTime;

@@ -17,7 +17,7 @@ Bullet::~Bullet()
 
 }
 
-void Bullet::HandleMove(const int x_border, const int y_border)
+void Bullet::HandleMove(const int x_border)
 {
     rect_.x += 25;
     if (rect_.x + rect_.w > x_border) {

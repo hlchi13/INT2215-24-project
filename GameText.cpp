@@ -2,8 +2,8 @@
 bool GameText::LoadText(TTF_Font *gFont, std::string textureText, SDL_Color textColor, SDL_Renderer *gRenderer )
 {
 	//Render text surface
-	SDL_Surface* textSurface = TTF_RenderText_Solid( gFont, textureText.c_str(), textColor );
-	if( textSurface == NULL )
+	SDL_Surface* textSurface = TTF_RenderText_Solid(gFont, textureText.c_str(), textColor);
+	if(textSurface == NULL)
 	{
 		cout << "Unable to render text surface! SDL_ttf Error\n";
         TTF_GetError();
@@ -26,7 +26,6 @@ bool GameText::LoadText(TTF_Font *gFont, std::string textureText, SDL_Color text
 		//Get rid of old surface
 		SDL_FreeSurface(textSurface);
 	}
-
 	//Return success
 	return p_object != NULL;
 }
@@ -37,26 +36,26 @@ void GameText::Present(SDL_Renderer *ren)
 }
 
 string GameText::ConvertIntToString(){
-    int v = value_ ;
-    string stringText ;
-    if(v<=0) stringText = '0' ;
+    int v = value_;
+    string stringText;
+    if(v<=0) stringText = '0';
     while(v){
-        stringText =(char)(v%10+'0') + stringText ;
+        stringText =(char)(v%10+'0') + stringText;
         v/=10;
     }
-    return stringText ;
+    return stringText;
 }
 
 void GameText::ShowNum (TTF_Font *gFont, SDL_Color textColor, SDL_Renderer *gRenderer)
 {
     if (LoadText(gFont,ConvertIntToString(),textColor,gRenderer))
     {
-        SDL_RenderCopy(gRenderer,p_object,NULL,&rect_);;
+        SDL_RenderCopy(gRenderer,p_object,NULL,&rect_);
     }
 }
 
 void GameText::IncreaseValue(int x)
 {
-    value_+=x;
+    value_ += x;
     if (value_<=0) value_ = 0;
 }

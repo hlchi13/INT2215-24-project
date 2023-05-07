@@ -14,13 +14,13 @@ GameFunctions::~GameFunctions()
 
 bool GameFunctions::InitData()
 {
-	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) return false;
-	g_window = SDL_CreateWindow("Cat and Shark", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-								SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-	if (g_window == NULL)
-	{
-		return false;
-	}
+    if (SDL_Init(SDL_INIT_EVERYTHING) != 0) return false;
+    g_window = SDL_CreateWindow("Cat and Shark", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+                                SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+    if (g_window == NULL)
+    {
+        return false;
+    }
     g_screen = SDL_CreateRenderer(g_window, -1, SDL_RENDERER_ACCELERATED);
     if (g_screen == NULL) return false;
     else
@@ -68,7 +68,7 @@ bool GameFunctions::InitData()
     number_life.SetRect(SCREEN_WIDTH/2 - heart.GetRect().w+50+heart.GetRect().w, heart.GetRect().h/2-textX.GetRect().h/2);
     show_bullet.LoadText(g_font, "USE LEFT MOUSE BUTTON TO SHOOT",color_text, g_screen);
     show_bullet.SetRect(SCREEN_WIDTH/2 - show_bullet.GetRect().w/2, 25);
-	return true;
+    return true;
 }
 
 bool GameFunctions::CheckMouse(int &x, int &y, SDL_Rect rect_mouse)
@@ -106,7 +106,7 @@ bool GameFunctions::ShowIntro()
     bool select_sound = 0;
 
     Cat cat_intro;
-    cat_intro.LoadImg("img//cat_idle.png", g_screen);
+    cat_intro.LoadImg("img//catsheet.png", g_screen);
     cat_intro.SetWidth(160, 120);
     cat_intro.SetRect(400, 100);
 
@@ -162,7 +162,7 @@ bool GameFunctions::ShowIntro()
             bg_htp.render();
             back_.Present(g_screen);
             sound_.render();
-	    }
+        }
 	    else if (menu == CHOOSE)
         {
             bg.render();
@@ -313,7 +313,6 @@ bool GameFunctions::ShowIntro()
                                 }
                             }
                         }
-
                     }
                     break;
                 case SDL_KEYDOWN:
@@ -372,10 +371,11 @@ void GameFunctions::CreateBonusList()
 void GameFunctions::Replay()
 {
     is_quit = false;
+    bullet_ = rand()% 7 + 30;
     menu = INTRO;
     Score.SetValue(0);
     number_life.SetValue(LIFES);
-    cat_obj.set_0_val();
+    num_bullet.SetValue(bullet_);
     cat_obj.SetRect(0, SCREEN_HEIGHT/2 - CAT_HEIGHT/2);
     cat_obj.SetShownInjured(false);
     SharkList.clear();
@@ -405,7 +405,13 @@ void GameFunctions::Run()
     //Game play
     Mix_PlayMusic(background_, 10);
     is_quit = false;
-    Score.SetRect(0, 0);
+    Bullet g_bullet;
+    g_bullet.LoadImg("img//bullet.png", g_screen);
+    g_bullet.SetRect(SCREEN_WIDTH-g_bullet.GetRect().w, 0);
+    Your_Score.LoadText(g_font, "Score:", color_text, g_screen);
+    Your_Score.SetRect(0,0);
+    Score.SetRect(120, 0);
+    num_bullet.SetRect(g_bullet.GetRect().x - 40, 0);
     while(!is_quit) {
         frameStart = SDL_GetTicks();
         while(SDL_PollEvent(&g_event))
@@ -419,15 +425,20 @@ void GameFunctions::Run()
                     is_quit = true;
                     break;
             }
-            cat_obj.HandleInputAction(g_event, g_screen, cat_bullet, Score, number_life);
+            cat_obj.HandleInputAction(g_event, g_screen, cat_bullet, Score, number_life, num_bullet);
         }
         SDL_RenderClear(g_screen);
         SDL_RenderCopy(g_screen, g_background, NULL, &rect_screen);
-
         number_life.ShowNum(g_font, color_text, g_screen);
         heart.Show(g_screen);
         textX.Present(g_screen);
+        Your_Score.Present(g_screen);
         Score.ShowNum(g_font, color_text, g_screen);
+        if (num_bullet.GetValue() >= 50) {
+            num_bullet.SetValue(50);
+        }
+        num_bullet.ShowNum(g_font, color_text, g_screen);
+        g_bullet.Show(g_screen);
         if (Score.GetValue() >= 300 || number_life.GetValue() <= 3)
         {
             show_bullet.Present(g_screen);
@@ -476,7 +487,7 @@ void GameFunctions::Run()
             if (SharkList[i]->GetToIncreaseScore()) {
                 if (cat_obj.GetRect().x - cat_obj.GetRect().x%SharkList[i]->get_x_val() == num_score - num_score%SharkList[i]->get_x_val())
                     {
-                        Score.IncreaseValue(AVOID_SCORE);
+                        Score.IncreaseValue(AVOID_SHARK_SCORE);
                         SharkList[i]->SetToIncreaseScore(false);
                     }
             }
@@ -527,8 +538,12 @@ void GameFunctions::Run()
                         }
                         break;
                     case 2:
+                        Score.IncreaseValue(GET_BONUS_SCORE);
+                        num_bullet.IncreaseValue(1);
+                        break;
                     case 3:
                         Score.IncreaseValue(GET_BONUS_SCORE);
+                        num_bullet.IncreaseValue(2);
                         break;
                 }
                 Mix_PlayChannel(-1,success_eat,0);
@@ -576,7 +591,6 @@ bool GameFunctions::ShowEnd() {
     Mix_PlayChannel(-1, s_game_over, 10);
     Game_over.LoadText(g_font_end, "GAME OVER", color_end, g_screen);
     Game_over.SetRect(SCREEN_WIDTH/2 - Game_over.GetRect().w/2 ,100);
-
     Your_Score.LoadText(g_font, "SCORE:  ", color_text, g_screen);
     Your_Score.SetRect(SCREEN_WIDTH/2-Your_Score.GetRect().w, Game_over.GetRect().y+ Game_over.GetRect().h+ 30);
     Score.SetRect(Your_Score.GetRect().x+Your_Score.GetRect().w+37, Your_Score.GetRect().y);
