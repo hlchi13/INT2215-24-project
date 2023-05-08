@@ -238,7 +238,7 @@ void Cat::HandleInputAction(SDL_Event event, SDL_Renderer* src, Mix_Chunk* cat_b
         preY = mouseY;
     }
       if(event.type==SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT){
-            if (Score.GetValue() >= 300 || number_life.GetValue() <=3) {
+            if (Score.GetValue() >= 500 || number_life.GetValue() <=2) {
                 is_idle = true;
                 is_backward = false;
                 is_forward = false;

@@ -39,7 +39,7 @@ bool GameFunctions::InitData()
         selected_ = Mix_LoadWAV("sound//meow.mp3");
         injured_ = Mix_LoadWAV("sound//injured.wav");
         cat_bullet = Mix_LoadWAV("sound//meow.mp3");
-        success_eat = Mix_LoadWAV("sound//eat_fish.mp3");
+        success_eat = Mix_LoadWAV("sound//get_bonus.mp3");
         s_game_over = Mix_LoadWAV("sound//game_over.mp3");
         if (background_ == NULL || intro_ == NULL || injured_ == NULL||cat_bullet == NULL
             ||success_eat == NULL|| s_game_over == NULL)
@@ -371,7 +371,7 @@ void GameFunctions::CreateBonusList()
 void GameFunctions::Replay()
 {
     is_quit = false;
-    bullet_ = rand()% 7 + 30;
+    bullet_ = rand()% 7 + 20;
     menu = INTRO;
     Score.SetValue(0);
     number_life.SetValue(LIFES);
@@ -434,22 +434,22 @@ void GameFunctions::Run()
         textX.Present(g_screen);
         Your_Score.Present(g_screen);
         Score.ShowNum(g_font, color_text, g_screen);
-        if (num_bullet.GetValue() >= 50) {
-            num_bullet.SetValue(50);
+        if (num_bullet.GetValue() >= 40) {
+            num_bullet.SetValue(40);
         }
         num_bullet.ShowNum(g_font, color_text, g_screen);
         g_bullet.Show(g_screen);
-        if (Score.GetValue() >= 300 || number_life.GetValue() <= 3)
+        if (Score.GetValue() >= 500 || number_life.GetValue() <= 2)
         {
             show_bullet.Present(g_screen);
         }
         //make bonus
         if (rand() %200 == 1) CreateBonusList();
 		// Show Shark and Check Collision cat and shark
-		if (Score.GetValue() <= 800) {
+		if (Score.GetValue() <= 900) {
                 if (rand()%50 == 1) CreateThreatList();
             }
-            else if(Score.GetValue() > 800 && Score.GetValue() <= 2000)
+            else if(Score.GetValue() > 900 && Score.GetValue() <= 2000)
             {
                 if (rand()%20 == 1) CreateThreatList();
 
@@ -463,10 +463,10 @@ void GameFunctions::Run()
 		//if (rand()%30 == 1) CreateThreatList();
         for(int i=0;i < (int)SharkList.size();i++)
         {
-            if (Score.GetValue() <= 800) {
+            if (Score.GetValue() <= 900) {
                 SharkList[i]->set_x_val(SHARK_SPEED1);
             }
-            else if(Score.GetValue() > 800 && Score.GetValue() <= 2000)
+            else if(Score.GetValue() > 900 && Score.GetValue() <= 2000)
             {
                 SharkList[i]->set_x_val(SHARK_SPEED2);
 
@@ -532,7 +532,7 @@ void GameFunctions::Run()
                 switch (BonusList[i]->GetType())
                 {
                     case 1: {
-                        Score.IncreaseValue(GET_BONUS_SCORE_PINK);
+                        Score.IncreaseValue(GET_BONUS_SCORE);
                         number_life.IncreaseValue(1);
                         if (number_life.GetValue() >= LIFES) number_life.SetValue(LIFES);
                         }
@@ -542,7 +542,6 @@ void GameFunctions::Run()
                         num_bullet.IncreaseValue(1);
                         break;
                     case 3:
-                        Score.IncreaseValue(GET_BONUS_SCORE);
                         num_bullet.IncreaseValue(2);
                         break;
                 }

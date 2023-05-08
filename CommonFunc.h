@@ -35,19 +35,18 @@ static TTF_Font* g_font_intro = NULL;
 static TTF_Font* g_font_end = NULL;
 static TTF_Font* g_font_choose = NULL;
 
-const SDL_Color color_text = {255, 255, 255}; //
-const SDL_Color color_intro = {0, 119, 179}; // blue
-const SDL_Color color_end = {244, 10, 10}; // red
-const SDL_Color color_select = {245, 103, 51}; //
+const SDL_Color color_text = {255, 255, 255};
+const SDL_Color color_intro = {0, 119, 179};
+const SDL_Color color_end = {244, 10, 10};
+const SDL_Color color_select = {245, 103, 51};
 const SDL_Color color_exit = {255, 0, 0};
 
 const int SHARK_NUM = 30;
 const int FPS = 25;
 const int AVOID_SHARK_SCORE = 20;
 const int INJURED_SCORE = -50;
-const int KILL_SHARK_SCORE = 30;
-const int GET_BONUS_SCORE_PINK = 5;
-const int GET_BONUS_SCORE = 10;
+const int KILL_SHARK_SCORE = 20;
+const int GET_BONUS_SCORE = 5;
 const int LIFES = 5;
 
 const int CAT_WIDTH = 64*1.5;
