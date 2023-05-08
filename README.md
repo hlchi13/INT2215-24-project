@@ -20,7 +20,7 @@ Di chuyển chú mèo sao cho không va chạm cá mập. Chú mèo được tra
 - Có âm thanh
 - Người chơi có thể chơi lại khi hết mạng
 ## **Cài đặt:**
-- Tải file tại
+- Tải file tại https://drive.google.com/file/d/1uwBFMVdQIpxpTOZy9WPQJU-nt91jq_pT/view?usp=sharing
 - Giải nén và chạy file Cat and Shark.exe
 ## **Tham khảo:**
 ### Source code:
