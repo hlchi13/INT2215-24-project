@@ -6,7 +6,7 @@ Bài tập lớn lớp Lập trình nâng cao INT2215 24
 - Lớp môn học: INT2215 24
 ## **Mô tả:**
 ### Nội dung game:
-Di chuyển chú mèo sao cho không va chạm cá mập. Chú mèo được trang bị đạn một cách ngẫu nhiên nhưng chỉ khi điểm của bạn lớn hơn 400 hoặc mạng sống của chú nhỏ hơn 3. Chú mèo có thể ăn thêm cá để tăng số đạn (tối đa 50 đạn) và mạng sống (tối đa 5 mạng).
+Di chuyển chú mèo sao cho không va chạm cá mập. Chú mèo được trang bị đạn một cách ngẫu nhiên nhưng chỉ khi điểm của bạn lớn hơn 500 hoặc mạng sống của chú nhỏ hơn 3. Chú mèo có thể ăn thêm cá để tăng số đạn (tối đa 50 đạn) và mạng sống (tối đa 5 mạng).
 
 ### Di chuyển:
 - Dùng chuột để di chuyển chú mèo
@@ -15,12 +15,12 @@ Di chuyển chú mèo sao cho không va chạm cá mập. Chú mèo được tra
 - Di chuyển bằng chuột
 - Có animation cho mèo và cá mập
 - Được chọn background cho game
-- Chỉ được sử dụng đạn khi điểm lớn hơn 400 và mạng sống nhỏ hơn 3
+- Chỉ được sử dụng đạn khi điểm lớn hơn 500 và mạng sống nhỏ hơn 3
 - Tốc độ của cá mập thay đổi theo điểm của người chơi
 - Có âm thanh
 - Người chơi có thể chơi lại khi hết mạng
 ## **Cài đặt:**
-- Tải file tại https://drive.google.com/file/d/1uwBFMVdQIpxpTOZy9WPQJU-nt91jq_pT/view?usp=sharing
+- Tải file tại https://drive.google.com/file/d/1iF1UZH6ozFj33I3lnfa4SAgzZeROt51e/view?usp=sharing
 - Giải nén và chạy file Cat and Shark.exe
 ## **Tham khảo:**
 ### Source code:
