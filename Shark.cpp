@@ -3,7 +3,6 @@
 Shark::Shark()
 {
     frame_ = 0;
-
     x_val = 0;
     y_val = 0;
 

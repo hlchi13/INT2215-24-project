@@ -24,7 +24,6 @@ static SDL_Rect rect_screen = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
 
 static Mix_Music* background_ = NULL;
 static Mix_Music* intro_ = NULL;
-static Mix_Chunk* selected_ = NULL;
 static Mix_Chunk* injured_ = NULL;
 static Mix_Chunk* success_eat = NULL;
 static Mix_Chunk* cat_bullet = NULL;
@@ -45,7 +44,7 @@ const int SHARK_NUM = 30;
 const int FPS = 25;
 const int AVOID_SHARK_SCORE = 20;
 const int INJURED_SCORE = -50;
-const int KILL_SHARK_SCORE = 20;
+const int KILL_SHARK_SCORE = 30;
 const int GET_BONUS_SCORE = 5;
 const int LIFES = 5;
 

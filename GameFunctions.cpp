@@ -36,7 +36,6 @@ bool GameFunctions::InitData()
         }
         background_ = Mix_LoadMUS("sound//background.mp3");
         intro_ = Mix_LoadMUS("sound//intro.mp3");
-        selected_ = Mix_LoadWAV("sound//meow.mp3");
         injured_ = Mix_LoadWAV("sound//injured.wav");
         cat_bullet = Mix_LoadWAV("sound//meow.mp3");
         success_eat = Mix_LoadWAV("sound//get_bonus.mp3");
@@ -84,7 +83,6 @@ bool GameFunctions::ShowIntro()
     Mix_HaltChannel(-1);
     Mix_HaltMusic();
     Mix_VolumeMusic(MIX_MAX_VOLUME);
-    Mix_VolumeChunk(selected_, MIX_MAX_VOLUME);
     Mix_VolumeChunk(cat_bullet, MIX_MAX_VOLUME);
     Mix_VolumeChunk(s_game_over, MIX_MAX_VOLUME);
     Mix_VolumeChunk(success_eat, MIX_MAX_VOLUME);
@@ -191,7 +189,6 @@ bool GameFunctions::ShowIntro()
                             {
                                 if (!selected[i])
                                 {
-                                    Mix_PlayChannel(-1, cat_bullet, 0);
                                     selected[i] = 1;
                                     if (i == 2) {
                                         intro_t[i].LoadText(g_font_intro, text[i], color_exit, g_screen);
@@ -226,7 +223,6 @@ bool GameFunctions::ShowIntro()
                             if (CheckMouse(x, y, rect_choose[i]))
                             {
                                 if (!c_selected[i]) {
-                                    Mix_PlayChannel(-1, selected_, 0);
                                     c_selected[i] = 1;
                                     choose_bg[i].LoadText(g_font, c_text[i], color_select, g_screen);
                                 }
@@ -249,7 +245,6 @@ bool GameFunctions::ShowIntro()
                         if (!select_sound) {
                             select_sound = 1;
                             Mix_VolumeMusic(0);
-                            Mix_VolumeChunk(selected_, 0);
                             Mix_VolumeChunk(cat_bullet, 0);
                             Mix_VolumeChunk(s_game_over, 0);
                             Mix_VolumeChunk(success_eat, 0);
@@ -259,7 +254,6 @@ bool GameFunctions::ShowIntro()
                         else{
                             select_sound = 0;
                             Mix_VolumeMusic(MIX_MAX_VOLUME);
-                            Mix_VolumeChunk(selected_, MIX_MAX_VOLUME);
                             Mix_VolumeChunk(cat_bullet, MIX_MAX_VOLUME);
                             Mix_VolumeChunk(s_game_over, MIX_MAX_VOLUME);
                             Mix_VolumeChunk(success_eat, MIX_MAX_VOLUME);
@@ -270,7 +264,6 @@ bool GameFunctions::ShowIntro()
                     if (menu == INTRO) {
                         for (int i = 0; i < 3; i++)
                         {
-
                             if (CheckMouse(x, y, rect_intro[i])) {
                                 if (i == 0) {
                                     menu = CHOOSE;
@@ -302,13 +295,6 @@ bool GameFunctions::ShowIntro()
                                     else {
                                         LoadBackGround(i);
                                         running = false;
-                                    }
-                                }
-                                else
-                                {
-                                    if (c_selected[i]) {
-                                        c_selected[i] = 0;
-                                        choose_bg[i].LoadText(g_font, c_text[i], color_intro, g_screen);
                                     }
                                 }
                             }
@@ -371,7 +357,7 @@ void GameFunctions::CreateBonusList()
 void GameFunctions::Replay()
 {
     is_quit = false;
-    bullet_ = rand()% 7 + 20;
+    bullet_ = rand()% 5 + 30;
     menu = INTRO;
     Score.SetValue(0);
     number_life.SetValue(LIFES);
@@ -408,10 +394,13 @@ void GameFunctions::Run()
     Bullet g_bullet;
     g_bullet.LoadImg("img//bullet.png", g_screen);
     g_bullet.SetRect(SCREEN_WIDTH-g_bullet.GetRect().w, 0);
+    GameText max_bullet;
+    max_bullet.LoadText(g_font, "/40", color_text, g_screen);
+    max_bullet.SetRect(g_bullet.GetRect().x - 60, 0);
+    num_bullet.SetRect(max_bullet.GetRect().x - 40, 0);
     Your_Score.LoadText(g_font, "Score:", color_text, g_screen);
     Your_Score.SetRect(0,0);
     Score.SetRect(120, 0);
-    num_bullet.SetRect(g_bullet.GetRect().x - 40, 0);
     while(!is_quit) {
         frameStart = SDL_GetTicks();
         while(SDL_PollEvent(&g_event))
@@ -439,6 +428,7 @@ void GameFunctions::Run()
         }
         num_bullet.ShowNum(g_font, color_text, g_screen);
         g_bullet.Show(g_screen);
+        max_bullet.Present(g_screen);
         if (Score.GetValue() >= 500 || number_life.GetValue() <= 2)
         {
             show_bullet.Present(g_screen);
@@ -446,10 +436,10 @@ void GameFunctions::Run()
         //make bonus
         if (rand() %200 == 1) CreateBonusList();
 		// Show Shark and Check Collision cat and shark
-		if (Score.GetValue() <= 900) {
+		if (Score.GetValue() < 800) {
                 if (rand()%50 == 1) CreateThreatList();
             }
-            else if(Score.GetValue() > 900 && Score.GetValue() <= 2000)
+            else if(Score.GetValue() >= 800 && Score.GetValue() < 2000)
             {
                 if (rand()%20 == 1) CreateThreatList();
 
@@ -463,10 +453,10 @@ void GameFunctions::Run()
 		//if (rand()%30 == 1) CreateThreatList();
         for(int i=0;i < (int)SharkList.size();i++)
         {
-            if (Score.GetValue() <= 900) {
+            if (Score.GetValue() < 800) {
                 SharkList[i]->set_x_val(SHARK_SPEED1);
             }
-            else if(Score.GetValue() > 900 && Score.GetValue() <= 2000)
+            else if(Score.GetValue() >= 800 && Score.GetValue() < 2000)
             {
                 SharkList[i]->set_x_val(SHARK_SPEED2);
 
@@ -531,10 +521,11 @@ void GameFunctions::Run()
                 //update score and life
                 switch (BonusList[i]->GetType())
                 {
-                    case 1: {
+                    case 1:
                         Score.IncreaseValue(GET_BONUS_SCORE);
                         number_life.IncreaseValue(1);
-                        if (number_life.GetValue() >= LIFES) number_life.SetValue(LIFES);
+                        if (number_life.GetValue() >= LIFES) {
+                            number_life.SetValue(LIFES);
                         }
                         break;
                     case 2:
@@ -542,7 +533,9 @@ void GameFunctions::Run()
                         num_bullet.IncreaseValue(1);
                         break;
                     case 3:
-                        num_bullet.IncreaseValue(2);
+                        if (num_bullet.GetValue() < 40) {
+                            num_bullet.IncreaseValue(2);
+                        } else Score.IncreaseValue(GET_BONUS_SCORE);
                         break;
                 }
                 Mix_PlayChannel(-1,success_eat,0);
@@ -570,13 +563,13 @@ void GameFunctions::Run()
 
 void GameFunctions::GetHighScore()
 {
-    ifstream read("HighScore.txt");// mo file HighScore de doc
+    ifstream read("text//HighScore.txt");// mo file HighScore de doc
     read >> high_score; // doc score trong file
     read.close(); // dong file
     if (Score.GetValue() > high_score) // neu score moi lon hon score cu duoc ghi trong file
     {
         high_score = Score.GetValue();// thi gan score trong file bang score moi
-        ofstream file("HighScore.txt"); // mo file de ghi
+        ofstream file("text//HighScore.txt"); // mo file de ghi
         file << Score.GetValue(); // ghi lai score moi
         file.close();
     }

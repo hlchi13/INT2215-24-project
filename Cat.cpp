@@ -2,23 +2,23 @@
 
 Cat::Cat()
 {
-	frame_ = 0;
-	x_val = 0;
-	y_val = 0;
+    frame_ = 0;
+    x_val = 0;
+    y_val = 0;
 
     rect_.x = 0;
     rect_.y = SCREEN_HEIGHT/2 - CAT_HEIGHT/2;
     rect_.w = CAT_WIDTH;
     rect_.h = CAT_HEIGHT;
 
-	count_injured_times_ = 0;
-	is_shown_injured = false;
-	is_idle = true;
-	is_forward = false;
-	is_backward = false;
-	preX = 0;
-	preY = 0;
-	//cat idle
+    count_times = 0;
+    is_shown_injured = false;
+    is_idle = true;
+    is_forward = false;
+    is_backward = false;
+    preX = 0;
+    preY = 0;
+    //cat idle
     frame_idle[0].x = 0;
     frame_idle[0].y = 0;
     frame_idle[0].w = 64;
@@ -53,21 +53,6 @@ Cat::Cat()
     frame_idle[6].y = 0;
     frame_idle[6].w = 64;
     frame_idle[6].h = 48;
-
-    /**frame_idle[7].x = 7*64;
-    frame_idle[7].y = 0;
-    frame_idle[7].w = 64;
-    frame_idle[7].h = 48;
-
-    frame_idle[8].x = 8*64;
-    frame_idle[8].y = 0;
-    frame_idle[8].w = 64;
-    frame_idle[8].h = 48;
-
-    frame_idle[9].x = 9*64;
-    frame_idle[9].y = 0;
-    frame_idle[9].w = 64;
-    frame_idle[9].h = 48;*/
     //cat forward
     frame_forward[0].x = 0;
     frame_forward[0].y = 47;
@@ -138,21 +123,6 @@ Cat::Cat()
     frame_backward[6].y = 144;
     frame_backward[6].w = 64;
     frame_backward[6].h = 48;
-
-    /**frame_backward[7].x = 64;
-    frame_backward[7].y = 144;
-    frame_backward[7].w = 64;
-    frame_backward[7].h = 48;
-
-    frame_backward[8].x = 64*2;
-    frame_backward[8].y = 144;
-    frame_backward[8].w = 64;
-    frame_backward[8].h = 48;
-
-    frame_backward[9].x = 0;
-    frame_backward[9].y = 144;
-    frame_backward[9].w = 64;
-    frame_backward[9].h = 48;*/
     //injured
     frame_injured[0].x = 0;
     frame_injured[0].y = 0;
@@ -188,22 +158,6 @@ Cat::Cat()
     frame_injured[6].y = 0;
     frame_injured[6].w = 64;
     frame_injured[6].h = 48;
-
-    /**frame_injured[7].x = 7*64;
-    frame_injured[7].y = 0;
-    frame_injured[7].w = 64;
-    frame_injured[7].h = 48;
-
-    frame_injured[8].x = 8*64;
-    frame_injured[8].y = 0;
-    frame_injured[8].w = 64;
-    frame_injured[8].h = 48;
-
-    frame_injured[9].x = 9*64;
-    frame_injured[9].y = 0;
-    frame_injured[9].w = 64;
-    frame_injured[9].h = 48;*/
-
 }
 Cat::~Cat()
 {
@@ -322,11 +276,11 @@ void Cat::ShowInjured(SDL_Renderer* des)
 {
     SDL_RenderCopy(des,injured,&frame_injured[frame_] , &rect_);
     frame_ = (frame_+1)%7;
-    count_injured_times_++;
-    if (count_injured_times_ >= MAX_SHOWN_TIMES)
+    count_times++;
+    if (count_times >= MAX_SHOWN_TIMES)
     {
         is_shown_injured = false;
-        count_injured_times_ = 0;
+        count_times = 0;
     }
 }
 

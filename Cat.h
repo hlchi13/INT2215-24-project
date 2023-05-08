@@ -32,11 +32,9 @@ private:
     SDL_Rect frame_injured[7];
     SDL_Rect frame_forward[7];
     SDL_Rect frame_backward[7];
-
     SDL_Texture* injured;
     int frame_;
-    int count_injured_times_ = 0;
-    int count_times = 0;
+    int count_times;
     bool is_idle;
     bool is_shown_injured;
     bool is_forward;
