@@ -126,7 +126,7 @@ bool GameFunctions::ShowIntro()
 
     GameText back_;
     back_.LoadText(g_font, "Back", color_intro, g_screen);
-    back_.SetRect(SCREEN_WIDTH/2 - back_.GetRect().w/2, 450);
+    back_.SetRect(10, SCREEN_HEIGHT/2);
 
     LTexture bg(g_screen, rect_screen);
     bg.loadFromFile("img//bg.jpg");
