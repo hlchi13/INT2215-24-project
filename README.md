@@ -1,5 +1,5 @@
-# CAT AND SHARK
 Bài tập lớn lớp Lập trình nâng cao INT2215 24
+# CAT AND SHARK
 ## **Giới thiệu:**
 - Họ tên: Hoàng Linh Chi
 - Mã sinh viên: 22028132
@@ -20,7 +20,7 @@ Di chuyển chú mèo sao cho không va chạm cá mập. Chú mèo được tra
 - Có âm thanh
 - Người chơi có thể chơi lại khi hết mạng
 ## **Cài đặt:**
-- Tải file tại https://drive.google.com/file/d/1iF1UZH6ozFj33I3lnfa4SAgzZeROt51e/view?usp=sharing
+- Tải file tại https://drive.google.com/file/d/1FWSAvKcHZd3ENJqYPa0uz5Qg4XOukH2P/view?usp=sharing
 - Giải nén và chạy file Cat and Shark.exe
 ## **Tham khảo:**
 ### Source code:
