@@ -23,7 +23,7 @@ Di chuyển chú mèo sao cho không va chạm cá mập. Chú mèo được tra
 - Tải file tại
 - Giải nén và chạy file Cat and Shark.exe
 ## **Tham khảo:**
-### Sourcode:
+### Source code:
  - https://github.com/ConstantSun/Aircraft-Battle-2.6
  - https://phattrienphanmem123az.com/lap-trinh-game-cpp
  - https://lazyfoo.net/tutorials/SDL/index.php
