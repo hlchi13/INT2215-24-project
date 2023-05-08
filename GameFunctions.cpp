@@ -80,6 +80,7 @@ bool GameFunctions::CheckMouse(int &x, int &y, SDL_Rect rect_mouse)
 
 bool GameFunctions::ShowIntro()
 {
+    cout << "NEW GAME!\n";
     Mix_HaltChannel(-1);
     Mix_HaltMusic();
     Mix_VolumeMusic(MIX_MAX_VOLUME);
@@ -126,7 +127,7 @@ bool GameFunctions::ShowIntro()
 
     GameText back_;
     back_.LoadText(g_font, "Back", color_intro, g_screen);
-    back_.SetRect(10, SCREEN_HEIGHT/2);
+    back_.SetRect(SCREEN_WIDTH/2 - 20, 470);
 
     LTexture bg(g_screen, rect_screen);
     bg.loadFromFile("img//bg.jpg");
@@ -429,39 +430,38 @@ void GameFunctions::Run()
         num_bullet.ShowNum(g_font, color_text, g_screen);
         g_bullet.Show(g_screen);
         max_bullet.Present(g_screen);
-        if (Score.GetValue() >= 500 || number_life.GetValue() <= 2)
+        if (Score.GetValue() >= 200 || number_life.GetValue() <= 2)
         {
             show_bullet.Present(g_screen);
         }
         //make bonus
         if (rand() %200 == 1) CreateBonusList();
 		// Show Shark and Check Collision cat and shark
-		if (Score.GetValue() < 800) {
+		if (Score.GetValue() < 500) {
                 if (rand()%50 == 1) CreateThreatList();
             }
-            else if(Score.GetValue() >= 800 && Score.GetValue() < 2000)
+            else if(Score.GetValue() >= 500 && Score.GetValue() < 1600)
             {
                 if (rand()%20 == 1) CreateThreatList();
 
-            } else if (Score.GetValue() >= 2000 && Score.GetValue() <= 3000)
+            } else if (Score.GetValue() >= 1600 && Score.GetValue() <= 2500)
             {
                 if (rand()%15 == 1) CreateThreatList();
             }
             else {
                 if (rand()%10 == 1) CreateThreatList();
             }
-		//if (rand()%30 == 1) CreateThreatList();
         for(int i=0;i < (int)SharkList.size();i++)
         {
-            if (Score.GetValue() < 800) {
+            if (Score.GetValue() < 500) {
                 SharkList[i]->set_x_val(SHARK_SPEED1);
             }
-            else if(Score.GetValue() >= 800 && Score.GetValue() < 2000)
+            else if(Score.GetValue() >= 500 && Score.GetValue() < 1600)
             {
                 SharkList[i]->set_x_val(SHARK_SPEED2);
 
 
-            } else if (Score.GetValue() >= 2000 && Score.GetValue() <= 3000)
+            } else if (Score.GetValue() >= 1600 && Score.GetValue() <= 2500)
             {
                 SharkList[i]->set_x_val(SHARK_SPEED3);
                 SharkList[i]->set_y_val(5);
@@ -473,13 +473,12 @@ void GameFunctions::Run()
             }
             SharkList[i]->ShowSharkAnimation(g_screen);
             SharkList[i]->HandleMove();
-            int num_score =SharkList[i]->GetRect().x+SharkList[i]->GetRect().w;
             if (SharkList[i]->GetToIncreaseScore()) {
-                if (cat_obj.GetRect().x - cat_obj.GetRect().x%SharkList[i]->get_x_val() == num_score - num_score%SharkList[i]->get_x_val())
-                    {
-                        Score.IncreaseValue(AVOID_SHARK_SCORE);
-                        SharkList[i]->SetToIncreaseScore(false);
-                    }
+                if (cat_obj.GetRect().x >= SharkList[i]->GetRect().x+SharkList[i]->GetRect().w)
+                {
+                    Score.IncreaseValue(AVOID_SHARK_SCORE);
+                    SharkList[i]->SetToIncreaseScore(false);
+                }
             }
             //check collision main and threat
             bool check_coll = CommonFunc::CheckCollision(cat_obj.GetRect(), SharkList[i]->GetRect());
@@ -577,6 +576,7 @@ void GameFunctions::GetHighScore()
 }
 
 bool GameFunctions::ShowEnd() {
+    cout << "Game Over!\n";
 	is_quit = false;
     Mix_HaltChannel(-1);
     Mix_HaltMusic();

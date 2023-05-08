@@ -19,6 +19,5 @@ int main(int argc, char* argv[])
         game.Run();
         play = game.ShowEnd();
     } while(play);
-
     return 0;
 }

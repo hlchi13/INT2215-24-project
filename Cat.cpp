@@ -168,9 +168,7 @@ void Cat::HandleInputAction(SDL_Event event, SDL_Renderer* src, Mix_Chunk* cat_b
                             GameText &Score, GameText &number_life, GameText &num_bullet)
 {
     if (event.type == SDL_MOUSEMOTION) {
-        //frame_ = 0;
         SDL_GetMouseState(&mouseX, &mouseY);
-        SetRect(mouseX - CAT_WIDTH, mouseY);
         if (preX < mouseX ) {
             is_forward = true;
             is_backward = false;
@@ -190,23 +188,24 @@ void Cat::HandleInputAction(SDL_Event event, SDL_Renderer* src, Mix_Chunk* cat_b
         }
         preX = mouseX;
         preY = mouseY;
+        SetRect(mouseX - CAT_WIDTH, mouseY);
     }
-      if(event.type==SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT){
-            if (Score.GetValue() >= 500 || number_life.GetValue() <=2) {
-                is_idle = true;
-                is_backward = false;
-                is_forward = false;
-                if (num_bullet.GetValue() > 0) {
-                    Bullet* bullet_ = new Bullet();
-                    Mix_PlayChannel(-1, cat_bullet, 0);
-                    bullet_->LoadImg("img//bullet.png", src);
-                    bullet_->SetRect(this->GetRect().x + 60, this->GetRect().y+CAT_HEIGHT/2);
-                    bullet_->SetIsMove(true);
-                    bullet_list.push_back(bullet_);
-                    num_bullet.IncreaseValue(-1);
-                }
+    if(event.type==SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT){
+        if (Score.GetValue() >= 200 || number_life.GetValue() <=2) {
+            is_idle = true;
+            is_backward = false;
+            is_forward = false;
+            if (num_bullet.GetValue() > 0) {
+                Bullet* bullet_ = new Bullet();
+                Mix_PlayChannel(-1, cat_bullet, 0);
+                bullet_->LoadImg("img//bullet.png", src);
+                bullet_->SetRect(this->GetRect().x + 60, this->GetRect().y+CAT_HEIGHT/2);
+                bullet_->SetIsMove(true);
+                bullet_list.push_back(bullet_);
+                num_bullet.IncreaseValue(-1);
             }
         }
+    }
 }
 
 void Cat::ControlBullet(SDL_Renderer* g_renderer)
