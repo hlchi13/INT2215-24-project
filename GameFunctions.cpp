@@ -48,10 +48,12 @@ bool GameFunctions::InitData()
         }
         if (TTF_Init() == -1) return false;
         g_font = TTF_OpenFont("font//PressStart2P.ttf", 20);
+        font_use = TTF_OpenFont("font//PressStart2P.ttf", 15);
         g_font_intro = TTF_OpenFont("font//PressStart2P.ttf", 30);
         g_font_end = TTF_OpenFont("font//PressStart2P.ttf", 77);
         g_font_choose = TTF_OpenFont("font//Quantico.ttf", 50);
-        if (g_font == NULL || g_font_intro == NULL || g_font_end == NULL ||g_font_choose == NULL) {
+        if (g_font == NULL || g_font_intro == NULL ||
+            g_font_end == NULL ||g_font_choose == NULL || font_use == NULL) {
             cout << "Fail to load font";
             return false;
         }
@@ -65,7 +67,7 @@ bool GameFunctions::InitData()
     textX.SetRect(SCREEN_WIDTH/2 - heart.GetRect().w + 50, heart.GetRect().h/2-textX.GetRect().h/2);
     number_life.SetValue(LIFES);
     number_life.SetRect(SCREEN_WIDTH/2 - heart.GetRect().w+50+heart.GetRect().w, heart.GetRect().h/2-textX.GetRect().h/2);
-    show_bullet.LoadText(g_font, "USE LEFT MOUSE BUTTON TO SHOOT",color_text, g_screen);
+    show_bullet.LoadText(font_use, "Click the left mouse button to shoot",color_text, g_screen);
     show_bullet.SetRect(SCREEN_WIDTH/2 - show_bullet.GetRect().w/2, 25);
     return true;
 }

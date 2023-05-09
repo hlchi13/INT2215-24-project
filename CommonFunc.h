@@ -30,6 +30,7 @@ static Mix_Chunk* cat_bullet = NULL;
 static Mix_Chunk* s_game_over = NULL;
 
 static TTF_Font* g_font = NULL;
+static TTF_Font* font_use = NULL;
 static TTF_Font* g_font_intro = NULL;
 static TTF_Font* g_font_end = NULL;
 static TTF_Font* g_font_choose = NULL;
