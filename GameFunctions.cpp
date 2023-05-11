@@ -82,7 +82,7 @@ bool GameFunctions::CheckMouse(int &x, int &y, SDL_Rect rect_mouse)
 
 bool GameFunctions::ShowIntro()
 {
-    cout << "NEW GAME!\n";
+    cout << "NEW GAME?\n";
     Mix_HaltChannel(-1);
     Mix_HaltMusic();
     Mix_VolumeMusic(MIX_MAX_VOLUME);
@@ -132,7 +132,7 @@ bool GameFunctions::ShowIntro()
     back_.SetRect(SCREEN_WIDTH/2 - 20, 470);
 
     LTexture bg(g_screen, rect_screen);
-    bg.loadFromFile("img//bg.jpg");
+    bg.loadFromFile("img//bg.png");
     GameText chooseBgText;
     chooseBgText.LoadText(g_font_choose, "CHOOSE BACKGROUND", color_intro, g_screen);
     chooseBgText.SetRect(SCREEN_WIDTH/2 - chooseBgText.GetRect().w/2, 100);
@@ -334,10 +334,10 @@ bool GameFunctions::LoadBackGround(const int& num)
             img_background = "img//underwater.png";
             break;
         case 1:
-            img_background = "img//sky.jpg";
+            img_background = "img//sky.png";
             break;
         case 2:
-            img_background = "img//universe.jpg";
+            img_background = "img//universe.png";
             break;
         case 3:
             img_background = "img//city.png";
@@ -404,8 +404,8 @@ void GameFunctions::Run()
     max_bullet.LoadText(g_font, "/40", color_text, g_screen);
     max_bullet.SetRect(g_bullet.GetRect().x - 60, 0);
     num_bullet.SetRect(max_bullet.GetRect().x - 40, 0);
-    Your_Score.LoadText(g_font, "Score:", color_text, g_screen);
-    Your_Score.SetRect(0,0);
+    TextScore.LoadText(g_font, "Score:", color_text, g_screen);
+    TextScore.SetRect(0,0);
     Score.SetRect(120, 0);
     while(!is_quit) {
         frameStart = SDL_GetTicks();
@@ -427,7 +427,7 @@ void GameFunctions::Run()
         number_life.ShowNum(g_font, color_text, g_screen);
         heart.Show(g_screen);
         textX.Present(g_screen);
-        Your_Score.Present(g_screen);
+        TextScore.Present(g_screen);
         Score.ShowNum(g_font, color_text, g_screen);
         if (num_bullet.GetValue() >= 40) {
             num_bullet.SetValue(40);
@@ -440,18 +440,18 @@ void GameFunctions::Run()
             show_bullet.Present(g_screen);
         }
         //make bonus
-        if (rand() %200 == 1) CreateBonusList();
+        if (rand()%200 == 1) CreateBonusList();
         if (number_life.GetValue() == 1) {
             if(rand()% 50 == 1) CreateBonusList();
         }
 		if (Score.GetValue() < 400) {
-                if (rand()%50 == 1) CreateThreatList();
+                if (rand()%40 == 1) CreateThreatList();
             }
-            else if(Score.GetValue() >= 400 && Score.GetValue() < 1200)
+            else if(Score.GetValue() >= 400 && Score.GetValue() < 900)
             {
                 if (rand()%20 == 1) CreateThreatList();
 
-            } else if (Score.GetValue() >= 1200 && Score.GetValue() <= 2000)
+            } else if (Score.GetValue() >= 900 && Score.GetValue() <= 1500)
             {
                 if (rand()%15 == 1) CreateThreatList();
             }
@@ -464,12 +464,12 @@ void GameFunctions::Run()
             if (Score.GetValue() < 400) {
                 SharkList[i]->set_x_val(SHARK_SPEED1);
             }
-            else if(Score.GetValue() >= 400 && Score.GetValue() < 1200)
+            else if(Score.GetValue() >= 400 && Score.GetValue() < 1000)
             {
                 SharkList[i]->set_x_val(SHARK_SPEED2);
 
 
-            } else if (Score.GetValue() >= 1200 && Score.GetValue() <= 2000)
+            } else if (Score.GetValue() >= 1000 && Score.GetValue() <= 2000)
             {
                 SharkList[i]->set_x_val(SHARK_SPEED3);
                 SharkList[i]->set_y_val(5);
@@ -497,9 +497,6 @@ void GameFunctions::Run()
                 Mix_PlayChannel(-1, injured_, 0);
                 delete SharkList[i];
                 SharkList.erase(SharkList.begin()+i);
-            }
-            if (SharkList[i]->GetRect().x < -SHARK_WIDTH) {
-                SharkList[i]->Free();
             }
         }
         // check collision cat bullet and shark
@@ -550,7 +547,8 @@ void GameFunctions::Run()
                 BonusList.erase(BonusList.begin()+i);
             }
         }
-		if (number_life.GetValue()<=0) {
+		if (number_life.GetValue()<=0)
+        {
             is_quit = true;
             break;
 		}
@@ -591,9 +589,9 @@ bool GameFunctions::ShowEnd() {
     Mix_PlayChannel(-1, s_game_over, 10);
     Game_over.LoadText(g_font_end, "GAME OVER", color_end, g_screen);
     Game_over.SetRect(SCREEN_WIDTH/2 - Game_over.GetRect().w/2 ,100);
-    Your_Score.LoadText(g_font, "SCORE:  ", color_text, g_screen);
-    Your_Score.SetRect(SCREEN_WIDTH/2-Your_Score.GetRect().w, Game_over.GetRect().y+ Game_over.GetRect().h+ 30);
-    Score.SetRect(Your_Score.GetRect().x+Your_Score.GetRect().w+37, Your_Score.GetRect().y);
+    TextScore.LoadText(g_font, "SCORE:  ", color_text, g_screen);
+    TextScore.SetRect(SCREEN_WIDTH/2-TextScore.GetRect().w, Game_over.GetRect().y+ Game_over.GetRect().h+ 30);
+    Score.SetRect(TextScore.GetRect().x+TextScore.GetRect().w+37, TextScore.GetRect().y);
     High_ScoreText.LoadText(g_font, "HIGH SCORE:  ", color_text, g_screen);
     High_ScoreText.SetRect(SCREEN_WIDTH/2-High_ScoreText.GetRect().w, Score.GetRect().y+Score.GetRect().h + 10);
     GetHighScore();
@@ -663,7 +661,7 @@ bool GameFunctions::ShowEnd() {
         }
         SDL_RenderCopy(g_screen, g_background, NULL, &rect_screen);
         Game_over.Present(g_screen);
-        Your_Score.Present(g_screen);
+        TextScore.Present(g_screen);
         Score.ShowNum(g_font, color_text,g_screen) ;
         High_ScoreText.Present(g_screen);
         High_Score.ShowNum(g_font, color_text, g_screen);

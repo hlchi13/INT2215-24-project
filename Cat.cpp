@@ -276,7 +276,7 @@ void Cat::ShowInjured(SDL_Renderer* des)
     SDL_RenderCopy(des,injured,&frame_injured[frame_] , &rect_);
     frame_ = (frame_+1)%7;
     count_times++;
-    if (count_times >= MAX_SHOWN_TIMES)
+    if (count_times >= MAX_INJURED_TIMES)
     {
         is_shown_injured = false;
         count_times = 0;

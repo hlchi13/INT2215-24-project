@@ -31,7 +31,7 @@ public:
 
 private:
     bool is_quit, running;
-    GameText Game_over, textX, Your_Score, High_ScoreText, show_bullet;
+    GameText Game_over, textX, TextScore, High_ScoreText, show_bullet;
     Cat cat_obj;
     Cat heart;
 
@@ -39,8 +39,7 @@ private:
     vector<Shark*> SharkList;
     vector<Bonus*> BonusList;
     vector<Bullet*> BulletList;
-    GameText Score, number_life, High_Score;// number
-    GameText num_bullet;
+    GameText Score, number_life, High_Score, num_bullet;// number
     int bullet_;
     int high_score;
     Menu menu;

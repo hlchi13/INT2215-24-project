@@ -5,7 +5,8 @@
 #include "Bullet.h"
 #include "GameText.h"
 
-const int MAX_SHOWN_TIMES = 15;
+const int MAX_SHOWN_TIMES = 10;
+const int MAX_INJURED_TIMES = 20;
 class Cat : public BaseObject
 {
 public:
