@@ -21,7 +21,7 @@ Di chuyển chú mèo sao cho không va chạm cá mập. Chú mèo được tra
 - Giải nén và chạy file Cat and Shark.exe
 
 ### Cách 2 (Có code):
-- Vào phần **<>Code** và ấn *Download ZIP*
+- Tải file trong branch CatandShark2.0
 - Giải nén và mở project trên CodeBlocks
 ## **Tham khảo:**
 ### Source code:
