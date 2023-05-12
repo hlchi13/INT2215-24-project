@@ -9,7 +9,7 @@ GameFunctions::GameFunctions()
 
 GameFunctions::~GameFunctions()
 {
-
+    close();
 }
 
 bool GameFunctions::InitData()
@@ -82,7 +82,9 @@ bool GameFunctions::CheckMouse(int &x, int &y, SDL_Rect rect_mouse)
 
 bool GameFunctions::ShowIntro()
 {
+    srand(time(0));
     cout << "NEW GAME?\n";
+    rand_bg = rand()%4;
     Mix_HaltChannel(-1);
     Mix_HaltMusic();
     Mix_VolumeMusic(MIX_MAX_VOLUME);
@@ -135,14 +137,14 @@ bool GameFunctions::ShowIntro()
     bg.loadFromFile("img//bg.png");
     GameText chooseBgText;
     chooseBgText.LoadText(g_font_choose, "CHOOSE BACKGROUND", color_intro, g_screen);
-    chooseBgText.SetRect(SCREEN_WIDTH/2 - chooseBgText.GetRect().w/2, 100);
-    GameText choose_bg[5];
-    string c_text[5] = {"Underwater", "Sky", "Universe", "City", "Back"};
-    SDL_Rect rect_choose[5];
-    bool c_selected[5] = {0, 0, 0, 0 ,0};
-    for (int i = 0; i < 5; i++) {
-        choose_bg[i].LoadText(g_font, c_text[i], color_intro, g_screen );
-        choose_bg[i].SetRect(100, 200+i*50);
+    chooseBgText.SetRect(SCREEN_WIDTH/2 - chooseBgText.GetRect().w/2, 50);
+    GameText choose_bg[6];
+    string c_text[6] = {"Underwater", "Sky", "Universe", "City", "Random", "Back"};
+    SDL_Rect rect_choose[6];
+    bool c_selected[6] = {0, 0, 0, 0 ,0, 0};
+    for (int i = 0; i < 6; i++) {
+        choose_bg[i].LoadText(g_font, c_text[i], color_intro, g_screen);
+        choose_bg[i].SetRect(120, 150+i*50);
         rect_choose[i] = choose_bg[i].GetRect();
     }
 	int x, y;
@@ -168,7 +170,7 @@ bool GameFunctions::ShowIntro()
         {
             bg.render();
             chooseBgText.Present(g_screen);
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 6; i++) {
                 choose_bg[i].Present(g_screen);
             }
             sound_.render();
@@ -221,7 +223,7 @@ bool GameFunctions::ShowIntro()
                     }
                     else if (menu == CHOOSE)
                     {
-                        for (int i = 0; i < 5; i++)
+                        for (int i = 0; i < 6; i++)
                         {
                             if (CheckMouse(x, y, rect_choose[i]))
                             {
@@ -295,8 +297,12 @@ bool GameFunctions::ShowIntro()
                                 choose_bg[i].LoadText(g_font, c_text[i], color_intro, g_screen);
                                 if (CheckMouse(x, y, rect_choose[i]))
                                 {
-                                    if (i == 4) {
+                                    if (i == 5) {
                                         menu = INTRO;
+                                    } else if (i == 4)
+                                    {
+                                        LoadBackGround(rand_bg);
+                                        running = false;
                                     }
                                     else {
                                         LoadBackGround(i);

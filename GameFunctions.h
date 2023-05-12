@@ -46,6 +46,7 @@ private:
     int frameDelay = 1000/FPS;
     Uint32 frameStart;
     int frameTime;
+    int rand_bg;
 
 };
 #endif // GAME_H_INCLUDED

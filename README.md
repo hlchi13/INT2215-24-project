@@ -1,9 +1,5 @@
 # CAT AND SHARK
 Bài tập lớn lớp Lập trình nâng cao INT2215 24
-## **Giới thiệu:**
-- Họ tên: Hoàng Linh Chi
-- Mã sinh viên: 22028132
-- Lớp môn học: INT2215 24
 ## **Mô tả:**
 ### Nội dung game:
 Di chuyển chú mèo sao cho không va chạm cá mập. Chú mèo được trang bị đạn một cách ngẫu nhiên nhưng chỉ khi điểm của bạn lớn hơn 200 hoặc mạng sống của chú mèo nhỏ hơn 3. Chú mèo có thể ăn thêm cá để tăng số đạn (tối đa 40 đạn) và mạng sống (tối đa 5 mạng).
@@ -20,8 +16,13 @@ Di chuyển chú mèo sao cho không va chạm cá mập. Chú mèo được tra
 - Có âm thanh
 - Người chơi có thể chơi lại khi hết mạng
 ## **Cài đặt:**
+### Cách 1 (Không có code):
 - Tải file tại [đây](https://drive.google.com/file/d/1eWwGnp-MSAH3wJ2YFLOiQ7MfFIpFtUIB/view?usp=sharing)
 - Giải nén và chạy file Cat and Shark.exe
+
+### Cách 2 (Có code):
+- Vào phần **<>Code** và ấn *Download ZIP*
+- Giải nén và mở project trên CodeBlocks
 ## **Tham khảo:**
 ### Source code:
  - https://github.com/ConstantSun/Aircraft-Battle-2.6
