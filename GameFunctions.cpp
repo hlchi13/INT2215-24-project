@@ -292,7 +292,7 @@ bool GameFunctions::ShowIntro()
                         }
                         else if (menu == CHOOSE)
                         {
-                            for (int i = 0; i < 5; i++)
+                            for (int i = 0; i < 6; i++)
                             {
                                 choose_bg[i].LoadText(g_font, c_text[i], color_intro, g_screen);
                                 if (CheckMouse(x, y, rect_choose[i]))
