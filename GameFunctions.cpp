@@ -292,7 +292,7 @@ bool GameFunctions::ShowIntro()
                         }
                         else if (menu == CHOOSE)
                         {
-                            for (int i = 0; i < 5; i++)
+                            for (int i = 0; i < 6; i++)
                             {
                                 choose_bg[i].LoadText(g_font, c_text[i], color_intro, g_screen);
                                 if (CheckMouse(x, y, rect_choose[i]))
@@ -413,7 +413,6 @@ void GameFunctions::Run()
     TextScore.LoadText(g_font, "Score:", color_text, g_screen);
     TextScore.SetRect(0,0);
     Score.SetRect(120, 0);
-    int cat_w = 0;
     while(!is_quit) {
         frameStart = SDL_GetTicks();
         while(SDL_PollEvent(&g_event))
@@ -498,20 +497,10 @@ void GameFunctions::Run()
             //check collision main and threat
             bool check_coll = CommonFunc::CheckCollision(cat_obj.GetRect(), SharkList[i]->GetRect());
             if (check_coll) {
-                if (Score.GetValue() >= 200) {
-                    Score.IncreaseValue(10);
-                    cat_obj.SetWidth(64*2,48*2);
-                    cat_w++;
-                    if (cat_w >= 10) {
-                        cat_obj.SetWidth(64*2.2, 48*2.2);
-                    }
-                    Mix_PlayChannel(-1, success_eat, 0);
-                } else {
-                    cat_obj.SetShownInjured(true);
-                    number_life.IncreaseValue(-1);
-                    Score.IncreaseValue(INJURED_SCORE);
-                    Mix_PlayChannel(-1, injured_, 0);
-                }
+                cat_obj.SetShownInjured(true);
+                number_life.IncreaseValue(-1);
+                Score.IncreaseValue(INJURED_SCORE);
+                Mix_PlayChannel(-1, injured_, 0);
                 delete SharkList[i];
                 SharkList.erase(SharkList.begin()+i);
             }
